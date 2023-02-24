@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3.10 -u
 from createserial.connection import CreateConnection
 from kipr import *
+from kipr import push_button
 from createserial.commands import open_create, close_create, reset_create, create_dd
 from createserial.serial import open_serial, close_serial
 
@@ -12,10 +13,11 @@ arm = 3
 
 arm_down = 60
 arm_up = 500
-claw_closed = 1100
-claw_open = 300
+claw_closed = 950
+claw_open = 600
 wrist_down = 500
 wrist_up = 20
+arm_first_cube = 1000
 
 
 def init():
@@ -38,13 +40,13 @@ def power_on_self_test():
     msleep(100)
     move(claw_closed, 5, claw)
     msleep(100)
-    move(claw_open, 5, claw)
+    move(claw_open, 3, claw)
     msleep(100)
-    move(wrist_down, 5, wrist)
+    move(wrist_down, 3, wrist)
     msleep(100)
-    move(wrist_up, 5, wrist)
+    move(wrist_up, 3, wrist)
     msleep(100)
-    move(arm_down, 10, arm)
+    move(arm_down, 2, arm)
 
 
 # def move_arm_down():
@@ -73,13 +75,15 @@ def move(position, time, port):
 
 
 def main():
+    power_on_self_test()
     got_to_first_block()
-    got_to_analysis_lab1()
-    got_to_second_block()
-    gotToAnalysisLab2()
-    gotTothirdblock()
-    gotToAnalysisLab3()
-    gotTofourthblock()
+    arm_resting()
+    # got_to_analysis_lab1()
+    # got_to_second_block()
+    # gotToAnalysisLab2()
+    # gotTothirdblock()
+    # gotToAnalysisLab3()
+    # gotTofourthblock()
 
 
 def drive(lm, rm, time):
@@ -89,15 +93,18 @@ def drive(lm, rm, time):
 
 
 def got_to_first_block():
-    print('firstblock')
+    print('first block')
+    move(arm_first_cube, 1, arm)
+
     # turning
-    drive(0, 20, 400)
+    drive(0, 40, 400)
+    msleep(100)
     drive(80, 80, 3000)
     msleep(2000)
 
 
 def got_to_analysis_lab1():
-    print('analysislab1')
+    print('analysis lab1')
     # backing up
     drive(-20, -20, 1000)
     # turning
@@ -108,7 +115,7 @@ def got_to_analysis_lab1():
 
 
 def got_to_second_block():
-    print('secondblock')
+    print('second block')
     # backup
     drive(-40, -40, 500)
     # turning
@@ -121,8 +128,8 @@ def got_to_second_block():
     msleep(2000)
 
 
-def gotToAnalysisLab2():
-    print('analysislab2')
+def got_to_analysis_lab2():
+    print('analysis lab2')
     # backingup
     drive(-40, -40, 500)
     # turning
@@ -132,8 +139,8 @@ def gotToAnalysisLab2():
     msleep(2000)
 
 
-def gotTothirdblock():
-    print('thirdblock')
+def got_to_third_block():
+    print('third block')
     # backup
     drive(-40, -40, 500)
     # turning
@@ -147,8 +154,8 @@ def gotTothirdblock():
     msleep(5000)
 
 
-def gotToAnalysisLab3():
-    print("analysislab3")
+def got_to_analysis_lab_3():
+    print("analysis lab3")
     # backing up
     drive(-40, -40, 1000)
     # turning
@@ -162,9 +169,21 @@ def gotToAnalysisLab3():
     msleep(2000)
 
 
-def gotTofourthblock():
+def got_to_fourth_block():
     # backup
     drive(-40, -40, 500)
+
+
+def arm_resting():
+    wait_for_button()
+    move(claw_open, 3, claw)
+    move(wrist_up, 3, wrist)
+    move(arm_down, 3, arm)
+
+
+def wait_for_button():
+    while not push_button():
+        pass
 
 
 if __name__ == '__main__':
