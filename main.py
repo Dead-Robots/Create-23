@@ -100,6 +100,7 @@ def got_to_first_block():
     drive(0, 40, 400)
     msleep(100)
     drive(80, 80, 3000)
+    drive(-80, -80, 1000)
     msleep(2000)
 
 
@@ -175,7 +176,7 @@ def got_to_fourth_block():
 
 
 def arm_resting():
-    wait_for_button()
+    #wait_for_button()
     move(claw_open, 3, claw)
     move(wrist_up, 3, wrist)
     move(arm_down, 3, arm)
