@@ -25,6 +25,8 @@ first_wrist = 160
 arm_2 = 820
 wrist_2 = 700
 claw_closed_cube1 = 900
+arm_high = 1400
+wrist_high = 1270
 
 def init():
     print("resetting create...")
@@ -100,7 +102,7 @@ def main():
 
 
 def drive(lm, rm, time):
-    create_dd(-5 * lm, -5 * rm)
+    create_dd(-5 * rm, -5 * lm)
     msleep(time)
     create_dd(0, 0)
 
@@ -112,17 +114,17 @@ def got_to_first_block():
     move(claw_first_cube1, 1, claw)
 
     # turning
-    drive(0, 40, 230)
+    drive(40, 0, 230)
     msleep(100)
     drive(50, 50, 3500)
     msleep(2000)
     #grab cube
 
     #backing up
-    drive(-45, -50, 1000)
-    move(arm_2, 1, arm)
-    msleep(1000)
+    drive(-50, -45, 1000)
     move(wrist_2, 1, wrist)
+    msleep(1000)
+    move(arm_2, 1, arm)
     msleep(1000)
     move(claw_closed_cube1, 1, claw)
     #move(arm_first_cube, 1, arm)
@@ -137,7 +139,7 @@ def got_to_analysis_lab1():
     #backing up
     drive(-25, -25, 500)
     #rotate
-    drive(-30, 30, 1700)
+    drive(30, -30, 1700)
     msleep(500)
     drive(25, 25, 500)
     msleep(500)
@@ -145,9 +147,9 @@ def got_to_analysis_lab1():
 
 
 def put_block():
-    move(arm_down, 1, arm)
-    msleep(100)
     move(wrist_up, 1, wrist)
+    msleep(100)
+    move(arm_down, 1, arm)
     msleep(100)
     move(300, 1, claw)
     msleep(1000)
@@ -158,7 +160,25 @@ def got_to_second_block():
     drive(-25, -25, 750)
     move(1800, 1, arm)
     msleep(500)
-    drive(40, 0, 700)
+    drive(0, 40, 700)
+    drive(40, 40, 2250)
+    move(arm_high, 1, arm)
+    move(wrist_high, 1, wrist)
+    drive(-40, 40, 925)
+    msleep(500)
+    drive(40, 40, 750)
+    msleep(100)
+    move(claw_closed_cube1, 1, claw)
+    msleep(100)
+    move(wrist_up, 1, wrist)
+    msleep(100)
+    drive(-40, 40, 1800)
+    move(600, 1, wrist)
+    move(600, 1, arm)
+    move(claw_open, 1, claw)
+    # grab cube
+
+
     # backup
     # drive(-40, -40, 500)
     # # turning
@@ -176,7 +196,7 @@ def got_to_analysis_lab2():
     # backingup
     drive(-40, -40, 500)
     # turning
-    drive(50, -50, 1500)
+    drive(-50, 50, 1500)
     # going straight
     drive(40, 40, 1500)
     msleep(2000)
@@ -187,11 +207,11 @@ def got_to_third_block():
     # backup
     drive(-40, -40, 500)
     # turning
-    drive(50, -50, 780)
+    drive(-50, 50, 780)
     # drivestraight
     drive(70, 70, 2200)
     # turning again
-    drive(50, 0, 1300)
+    drive(0, 50, 1300)
     # go straight again
     drive(40, 40, 2000)
     msleep(5000)
@@ -202,11 +222,11 @@ def got_to_analysis_lab_3():
     # backing up
     drive(-40, -40, 1000)
     # turning
-    drive(40, -40, 1000)
+    drive(-40, 40, 1000)
     # go straight
     drive(60, 60, 2500)
     # turn again
-    drive(40, -40, 600)
+    drive(-40, 40, 600)
     # go straight
     drive(40, 40, 900)
     msleep(2000)
