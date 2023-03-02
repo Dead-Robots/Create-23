@@ -1,32 +1,31 @@
 #!/usr/local/bin/python3.10 -u
 from createserial.connection import CreateConnection
-from kipr import *
-from kipr import push_button
-from createserial.commands import open_create, close_create, reset_create, create_dd
-from createserial.serial import open_serial, close_serial
+from kipr import push_button, msleep, disable_servos, enable_servos, enable_servo, get_servo_position, set_servo_position
+from createserial.commands import open_create, reset_create, create_dd
+from createserial.serial import open_serial
 from common import ROBOT
+from common.servo import *
+from constants.ports import CLAW, WRIST, ARM
 
-from createserial.shutdown import shutdown_create_in
-
-claw = 0
-wrist = 1
-arm = 3
+# shutdown_position = 75  (what is this?)
 
 arm_down = 150
 arm_up = 1000
+arm_first_cube = 680
+arm_2 = 820
+arm_high = 1400
+
 claw_closed = 950
 claw_open = 600
+claw_first_cube1 = 300
+claw_closed_cube1 = 900
+
 wrist_down = 500
 wrist_up = 0
-arm_first_cube = 680
-shutdown_position = 75
-claw_first_cube1 = 300
 first_wrist = 160
-arm_2 = 820
 wrist_2 = 700
-claw_closed_cube1 = 900
-arm_high = 1400
 wrist_high = 1270
+
 
 def init():
     print("resetting create...")
@@ -38,27 +37,27 @@ def init():
 
 
 def shutdown():
-    move(arm_down, 1, arm)
+    move(arm_down, 1, ARM)
     msleep(100)
-    move(wrist_up, 1, wrist)
+    move(wrist_up, 1, WRIST)
     msleep(100)
-    move(claw_open, 1, claw)
+    move(claw_open, 1, CLAW)
     msleep(1000)
     disable_servos()
 
 def power_on_self_test():
     enable_servos()
-    move(arm_up, 1, arm)
+    move(arm_up, 1, ARM)
     msleep(100)
-    move(claw_closed, 5, claw)
+    move(claw_closed, 5, CLAW)
     msleep(100)
-    move(claw_open, 3, claw)
+    move(claw_open, 3, CLAW)
     msleep(100)
-    move(wrist_down, 3, wrist)
+    move(wrist_down, 3, WRIST)
     msleep(100)
-    move(wrist_up, 3, wrist)
+    move(wrist_up, 3, WRIST)
     msleep(100)
-    move(arm_down, 2, arm)
+    move(arm_down, 2, ARM)
 
 
 # def move_arm_down():
@@ -109,9 +108,9 @@ def drive(lm, rm, time):
 
 def got_to_first_block():
     print('first block')
-    move(arm_up, 1, arm)
-    move(first_wrist, 1, wrist)
-    move(claw_first_cube1, 1, claw)
+    move(arm_up, 1, ARM)
+    move(first_wrist, 1, WRIST)
+    move(claw_first_cube1, 1, CLAW)
 
     # turning
     drive(40, 0, 230)
@@ -122,14 +121,14 @@ def got_to_first_block():
 
     #backing up
     drive(-50, -45, 1000)
-    move(wrist_2, 1, wrist)
+    move(wrist_2, 1, WRIST)
     msleep(1000)
-    move(arm_2, 1, arm)
+    move(arm_2, 1, ARM)
     msleep(1000)
-    move(claw_closed_cube1, 1, claw)
+    move(claw_closed_cube1, 1, CLAW)
     #move(arm_first_cube, 1, arm)
     msleep(2000)
-    move(arm_up, 1, arm)
+    move(arm_up, 1, ARM)
     msleep(1000)
 
 
@@ -147,35 +146,35 @@ def got_to_analysis_lab1():
 
 
 def put_block():
-    move(wrist_up, 1, wrist)
+    move(wrist_up, 1, WRIST)
     msleep(100)
-    move(arm_down, 1, arm)
+    move(arm_down, 1, ARM)
     msleep(100)
-    move(300, 1, claw)
+    move(300, 1, CLAW)
     msleep(1000)
 
 
 def got_to_second_block():
     print('second block')
     drive(-25, -25, 750)
-    move(1800, 1, arm)
+    move(1800, 1, ARM)
     msleep(500)
     drive(0, 40, 700)
     drive(40, 40, 2250)
-    move(arm_high, 1, arm)
-    move(wrist_high, 1, wrist)
+    move(arm_high, 1, ARM)
+    move(wrist_high, 1, WRIST)
     drive(-40, 40, 925)
     msleep(500)
     drive(40, 40, 750)
     msleep(100)
-    move(claw_closed_cube1, 1, claw)
+    move(claw_closed_cube1, 1, CLAW)
     msleep(100)
-    move(wrist_up, 1, wrist)
+    move(wrist_up, 1, WRIST)
     msleep(100)
     drive(-40, 40, 1800)
-    move(600, 1, wrist)
-    move(600, 1, arm)
-    move(claw_open, 1, claw)
+    move(600, 1, WRIST)
+    move(600, 1, ARM)
+    move(claw_open, 1, CLAW)
     # grab cube
 
 
@@ -240,9 +239,9 @@ def got_to_fourth_block():
 
 def arm_resting():
     #wait_for_button()
-    move(claw_open, 3, claw)
-    move(wrist_up, 3, wrist)
-    move(arm_down, 3, arm)
+    move(claw_open, 3, CLAW)
+    move(wrist_up, 3, WRIST)
+    move(arm_down, 3, ARM)
 
 
 def wait_for_button():
