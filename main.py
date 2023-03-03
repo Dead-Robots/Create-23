@@ -8,25 +8,24 @@ from common import ROBOT
 
 from createserial.shutdown import shutdown_create_in
 
-claw = 0
-wrist = 1
-arm = 3
+CLAW = 0
+WRIST = 1
+ARM = 3
 
-arm_down = 150
-arm_up = 1000
-claw_closed = 950
-claw_open = 600
-wrist_down = 500
-wrist_up = 0
-arm_first_cube = 680
-shutdown_position = 75
-claw_first_cube1 = 300
-first_wrist = 160
-arm_2 = 820
-wrist_2 = 700
-claw_closed_cube1 = 900
-arm_high = 1400
-wrist_high = 1270
+ARM_DOWN = 150
+ARM_UP = 1000
+CLAW_CLOSED = 1000
+CLAW_OPEN = 200
+WRIST_DOWN = 500
+ARM_CUBE1 = 760
+WRIST_UP = 0
+ARM_FIRST_CUBE = 680
+WRIST_CUBE1 = 160
+ARM_HIGH = 1400
+WRIST_HIGH = 1270
+ARM_CUBE2 = 600
+WRIST_CUBE2 = 600
+
 
 def init():
     print("resetting create...")
@@ -38,37 +37,38 @@ def init():
 
 
 def shutdown():
-    move(arm_down, 1, arm)
+    move(ARM_DOWN, 1, ARM)
     msleep(100)
-    move(wrist_up, 1, wrist)
+    move(WRIST_UP, 1, WRIST)
     msleep(100)
-    move(claw_open, 1, claw)
+    move(CLAW_OPEN, 1, CLAW)
     msleep(1000)
     disable_servos()
 
 def power_on_self_test():
     enable_servos()
-    move(arm_up, 1, arm)
+    move(ARM_UP, 1, ARM)
     msleep(100)
-    move(claw_closed, 5, claw)
+    move(CLAW_CLOSED, 5, CLAW)
     msleep(100)
-    move(claw_open, 3, claw)
+    move(CLAW_OPEN, 3, CLAW)
     msleep(100)
-    move(wrist_down, 3, wrist)
+    move(WRIST_DOWN, 3, WRIST)
     msleep(100)
-    move(wrist_up, 3, wrist)
+    move(WRIST_UP, 3, WRIST)
     msleep(100)
-    move(arm_down, 2, arm)
+    move(ARM_DOWN, 2, ARM)
+    wait_for_button()
 
 
-# def move_arm_down():
-#     enable_servo(port_arm)
-#     set_servo_position(port_arm, arm_down)
+# def move_ARM_DOWN():
+#     enable_servo(port_ARM)
+#     set_servo_position(port_ARM, ARM_DOWN)
 #
 #
-# def move_arm_up():
-#     enable_servo(port_arm)
-#     set_servo_position(port_arm, arm_up)
+# def move_ARM_UP():
+#     enable_servo(port_ARM)
+#     set_servo_position(port_ARM, ARM_UP)
 
 
 def move(position, time, port):
@@ -87,18 +87,19 @@ def move(position, time, port):
 
 
 def main():
-    #power_on_self_test()
-    got_to_first_block()
-    got_to_analysis_lab1()
-    got_to_second_block()
+    power_on_self_test()
+    go_to_first_block()
+    go_to_analysis_lab1()
+    go_to_second_block()
+    go_to_third_block()
     wait_for_button()
-    arm_resting()
+    ARM_resting()
     shutdown()
 
-    # gotToAnalysisLab2()
-    # gotTothirdblock()
-    # gotToAnalysisLab3()
-    # gotTofourthblock()
+    # goToAnalysisLab2()
+    # goTothirdblock()
+    # goToAnalysisLab3()
+    # goTofourthblock()
 
 
 def drive(lm, rm, time):
@@ -107,11 +108,11 @@ def drive(lm, rm, time):
     create_dd(0, 0)
 
 
-def got_to_first_block():
+def go_to_first_block():
     print('first block')
-    move(arm_up, 1, arm)
-    move(first_wrist, 1, wrist)
-    move(claw_first_cube1, 1, claw)
+    move(ARM_UP, 1, ARM)
+    move(WRIST_CUBE1, 1, WRIST)
+    move(CLAW_OPEN, 1, CLAW)
 
     # turning
     drive(40, 0, 230)
@@ -122,19 +123,18 @@ def got_to_first_block():
 
     #backing up
     drive(-50, -45, 1000)
-    move(wrist_2, 1, wrist)
+    move(WRIST_DOWN, 1, WRIST)
     msleep(1000)
-    move(arm_2, 1, arm)
+    move(ARM_CUBE1, 1, ARM)
     msleep(1000)
-    move(claw_closed_cube1, 1, claw)
-    #move(arm_first_cube, 1, arm)
+    move(CLAW_CLOSED, 1, CLAW)
+    #move(ARM_FIRST_CUBE, 1, ARM)
     msleep(2000)
-    move(arm_up, 1, arm)
+    move(ARM_UP, 1, ARM)
     msleep(1000)
 
 
-
-def got_to_analysis_lab1():
+def go_to_analysis_lab1():
     print('analysis lab1')
     #backing up
     drive(-25, -25, 500)
@@ -147,77 +147,71 @@ def got_to_analysis_lab1():
 
 
 def put_block():
-    move(wrist_up, 1, wrist)
+    move(WRIST_UP, 1, WRIST)
     msleep(100)
-    move(arm_down, 1, arm)
+    move(ARM_DOWN, 1, ARM)
     msleep(100)
-    move(300, 1, claw)
+    move(CLAW_OPEN, 1, CLAW)
     msleep(1000)
 
 
-def got_to_second_block():
+def go_to_second_block():
     print('second block')
     drive(-25, -25, 750)
-    move(1800, 1, arm)
+    move(1800, 1, ARM)
     msleep(500)
     drive(0, 40, 700)
     drive(40, 40, 2250)
-    move(arm_high, 1, arm)
-    move(wrist_high, 1, wrist)
+    move(ARM_HIGH, 1, ARM)
     drive(-40, 40, 925)
+    move(WRIST_HIGH, 1, WRIST)
     msleep(500)
-    drive(40, 40, 750)
+    drive(40, 40, 850)
     msleep(100)
-    move(claw_closed_cube1, 1, claw)
+    move(CLAW_CLOSED, 1, CLAW)
     msleep(100)
-    move(wrist_up, 1, wrist)
+    move(WRIST_UP, 1, WRIST)
     msleep(100)
-    drive(-40, 40, 1800)
-    move(600, 1, wrist)
-    move(600, 1, arm)
-    move(claw_open, 1, claw)
+    drive(-40, 40, 1750)
+    drive(20, 20, 500)
+    # place block
+    move(WRIST_CUBE2, 1, WRIST)
+    move(ARM_CUBE2, 1, ARM)
+    move(CLAW_OPEN, 1, CLAW)
     # grab cube
 
 
-    # backup
-    # drive(-40, -40, 500)
-    # # turning
-    # drive(30, -30, 790)
-    # create_dd(-200, -200)
-    # msleep(850)
-    # # turning
-    # drive(80, 0, 950)
-    # drive(40, 40, 1500)
-    # msleep(2000)
+# def go_to_analysis_lab2():
+#     print('analysis lab2')
+#     # backingup
+#     drive(-40, -40, 500)
+#     # turning
+#     drive(-50, 50, 1500)
+#     # going straight
+#     drive(40, 40, 1500)
+#     msleep(2000)
 
 
-def got_to_analysis_lab2():
-    print('analysis lab2')
-    # backingup
-    drive(-40, -40, 500)
-    # turning
-    drive(-50, 50, 1500)
-    # going straight
-    drive(40, 40, 1500)
-    msleep(2000)
-
-
-def got_to_third_block():
+def go_to_third_block():
     print('third block')
     # backup
     drive(-40, -40, 500)
+
     # turning
-    drive(-50, 50, 780)
-    # drivestraight
-    drive(70, 70, 2200)
-    # turning again
-    drive(0, 50, 1300)
-    # go straight again
-    drive(40, 40, 2000)
-    msleep(5000)
+    # drive(-50, 50, 780)
+    #
+    # # drivestraight
+    # drive(70, 70, 2200)
+    #
+    # # turning again
+    # drive(0, 50, 1300)
+    #
+    # # go straight again
+    # drive(40, 40, 2000)
+    # msleep(5000)
 
 
-def got_to_analysis_lab_3():
+def go_to_analysis_lab_3():
     print("analysis lab3")
     # backing up
     drive(-40, -40, 1000)
@@ -232,20 +226,21 @@ def got_to_analysis_lab_3():
     msleep(2000)
 
 
-def got_to_fourth_block():
+def go_to_fourth_block():
     # backup
     drive(-40, -40, 500)
 
 
 
-def arm_resting():
+def ARM_resting():
     #wait_for_button()
-    move(claw_open, 3, claw)
-    move(wrist_up, 3, wrist)
-    move(arm_down, 3, arm)
+    move(CLAW_OPEN, 3, CLAW)
+    move(WRIST_UP, 3, WRIST)
+    move(ARM_DOWN, 3, ARM)
 
 
 def wait_for_button():
+    print("Push. The. BUTTON.")
     while not push_button():
         pass
 
