@@ -1,13 +1,10 @@
-from kipr import push_button, msleep, disable_servos, enable_servos, enable_servo, get_servo_position, \
-    set_servo_position
+from kipr import msleep, disable_servos, enable_servos, enable_servo, get_servo_position, set_servo_position
 from createserial.commands import open_create, reset_create, create_dd
-from createserial.serial import open_serial
+from createserial.serial import open_serial, close_serial
+from createserial.shutdown import shutdown_create_in
 from common import servo
-from constants.ports import ARM, WRIST, CLAW
+from common.utilities import wait_for_button
 from constants.servos import Claw, Wrist, Arm
-
-from main import arm_down, wrist_up, claw_open, arm_up, claw_closed, wrist_down, first_wrist, claw_first_cube1, \
-    wrist_2, arm_2, claw_closed_cube1, arm_high, wrist_high
 
 
 def init():
@@ -15,7 +12,8 @@ def init():
     open_serial()  # Open a serial port connection to the Create
     reset_create()
     print("initializing...")
-    open_create()  # Initialize the Create
+    open_create()    # Initialize the Create
+    enable_servos()
     # shutdown_create_in(119)
 
 
@@ -35,39 +33,46 @@ def power_on_self_test():
     servo.move(Wrist.DOWN, 3)
     servo.move(Wrist.UP, 3)
     servo.move(Arm.DOWN, 2)
+    wait_for_button()
 
 
-def got_to_first_block():
+def drive(left_speed, right_speed, duration):
+    create_dd(-5 * right_speed, -5 * left_speed)
+    msleep(duration)
+    create_dd(0, 0)
+
+
+def go_to_first_cube():
     print('first block')
-    move(arm_up, 1, ARM)
-    move(first_wrist, 1, WRIST)
-    move(claw_first_cube1, 1, CLAW)
+    servo.move(Arm.UP, 1)
+    servo.move(Wrist.CUBE1, 1)
+    servo.move(Claw.OPEN, 1)
 
     # turning
     drive(40, 0, 230)
     msleep(100)
     drive(50, 50, 3500)
     msleep(2000)
-    #grab cube
+    # grab cube
 
-    #backing up
+    # backing up
     drive(-50, -45, 1000)
-    move(wrist_2, 1, WRIST)
+    servo.move(Wrist.DOWN, 1)
     msleep(1000)
-    move(arm_2, 1, ARM)
+    servo. move(Arm.CUBE1, 1)
     msleep(1000)
-    move(claw_closed_cube1, 1, CLAW)
-    #move(arm_first_cube, 1, arm)
+    servo.move(Claw.CLOSED, 1)
+    # move(680, 1, ARM)
     msleep(2000)
-    move(arm_up, 1, ARM)
+    servo.move(Arm.UP, 1)
     msleep(1000)
 
 
-def got_to_analysis_lab1():
+def go_to_analysis_lab1():
     print('analysis lab1')
-    #backing up
+    # backing up
     drive(-25, -25, 500)
-    #rotate
+    # rotate
     drive(30, -30, 1700)
     msleep(500)
     drive(25, 25, 500)
@@ -76,78 +81,65 @@ def got_to_analysis_lab1():
 
 
 def put_block():
-    move(wrist_up, 1, WRIST)
-    msleep(100)
-    move(arm_down, 1, ARM)
-    msleep(100)
-    move(300, 1, CLAW)
+    servo.move(Wrist.UP, 1)
+    servo.move(Arm.DOWN, 1)
+    servo.move(Claw.OPEN, 1)
     msleep(1000)
 
 
-def got_to_second_block():
+def go_to_second_cube():
     print('second block')
     drive(-25, -25, 750)
-    move(1800, 1, ARM)
-    msleep(500)
+    servo.move(Arm.UNKNOWN, 1)
     drive(0, 40, 700)
     drive(40, 40, 2250)
-    move(arm_high, 1, ARM)
-    move(wrist_high, 1, WRIST)
+    servo.move(Arm.HIGH, 1)
     drive(-40, 40, 925)
-    msleep(500)
-    drive(40, 40, 750)
-    msleep(100)
-    move(claw_closed_cube1, 1, CLAW)
-    msleep(100)
-    move(wrist_up, 1, WRIST)
-    msleep(100)
-    drive(-40, 40, 1800)
-    move(600, 1, WRIST)
-    move(600, 1, ARM)
-    move(claw_open, 1, CLAW)
+    servo.move(Wrist.HIGH, 1)
+    drive(40, 40, 850)
+    servo. move(Claw.CLOSED, 1)
+    servo.move(Wrist.UP, 1)
+    drive(-40, 40, 1750)
+    drive(20, 20, 500)
+    # place block
+    servo.move(Wrist.CUBE2, 1)
+    servo.move(Arm.CUBE2, 1)
+    servo.move(Claw.OPEN, 1)
     # grab cube
 
 
-    # backup
-    # drive(-40, -40, 500)
-    # # turning
-    # drive(30, -30, 790)
-    # create_dd(-200, -200)
-    # msleep(850)
-    # # turning
-    # drive(80, 0, 950)
-    # drive(40, 40, 1500)
-    # msleep(2000)
+# def go_to_analysis_lab2():
+#     print('analysis lab2')
+#     # backing up
+#     drive(-40, -40, 500)
+#     # turning
+#     drive(-50, 50, 1500)
+#     # going straight
+#     drive(40, 40, 1500)
+#     msleep(2000)
 
 
-def got_to_analysis_lab2():
-    print('analysis lab2')
-    # backingup
-    drive(-40, -40, 500)
-    # turning
-    drive(-50, 50, 1500)
-    # going straight
-    drive(40, 40, 1500)
-    msleep(2000)
-
-
-def got_to_third_block():
+def go_to_third_cube():
     print('third block')
     # backup
     drive(-40, -40, 500)
+
     # turning
-    drive(-50, 50, 780)
-    # drivestraight
-    drive(70, 70, 2200)
-    # turning again
-    drive(0, 50, 1300)
-    # go straight again
-    drive(40, 40, 2000)
-    msleep(5000)
+    # drive(-50, 50, 780)
+    #
+    # # drive straight
+    # drive(70, 70, 2200)
+    #
+    # # turning again
+    # drive(0, 50, 1300)
+    #
+    # # go straight again
+    # drive(40, 40, 2000)
+    # msleep(5000)
 
 
-def got_to_analysis_lab_3():
-    print("analysis lab3")
+def go_to_analysis_lab_3():
+    print("analysis lab 3")
     # backing up
     drive(-40, -40, 1000)
     # turning
@@ -161,34 +153,13 @@ def got_to_analysis_lab_3():
     msleep(2000)
 
 
-def got_to_fourth_block():
+def go_to_fourth_block():
     # backup
     drive(-40, -40, 500)
 
 
-def move(position, time, port):
-    enable_servo(port)
-    current_pos = get_servo_position(port)
-    while current_pos > position:
-        current_pos = current_pos - 1
-        set_servo_position(port, current_pos)
-        msleep(time)
-    while current_pos < position:
-        current_pos = current_pos + 1
-        set_servo_position(port, current_pos)
-        msleep(time)
-    if current_pos == position:
-        print("slaaayyyyy!")
-
-
-def drive(lm, rm, time):
-    create_dd(-5 * rm, -5 * lm)
-    msleep(time)
-    create_dd(0, 0)
-
-
 def arm_resting():
-    #wait_for_button()
-    move(claw_open, 3, CLAW)
-    move(wrist_up, 3, WRIST)
-    move(arm_down, 3, ARM)
+    # wait_for_button()
+    servo.move(Claw.OPEN, 3)
+    servo.move(Wrist.UP, 3)
+    servo.move(Arm.DOWN, 3)
