@@ -7,15 +7,15 @@ from common import ROBOT
 
 
 def main():
-    # init()
+    init()
     power_on_self_test()
     go_to_first_cube()
-    go_to_analysis_lab1()
-    go_to_second_cube()
-    go_to_third_cube()
-    wait_for_button()
+    # go_to_analysis_lab1()
+    # go_to_second_cube()
+    # go_to_third_cube()
+    # wait_for_button()
     arm_resting()
-    shutdown()
+    # shutdown()
 
     # go_to_analysis_lab2()
     # go_to_third_cube()
@@ -24,8 +24,7 @@ def main():
 
 
 if __name__ == '__main__':
-    if ROBOT.is_yellow:
-        print("i am yellow")
+    print("i am", ROBOT.value)
     with CreateConnection():
         main()
     shutdown()

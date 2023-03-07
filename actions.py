@@ -8,11 +8,6 @@ from constants.servos import Claw, Wrist, Arm
 
 
 def init():
-    print("resetting create...")
-    open_serial()  # Open a serial port connection to the Create
-    reset_create()
-    print("initializing...")
-    open_create()    # Initialize the Create
     enable_servos()
     # shutdown_create_in(119)
 
@@ -30,8 +25,8 @@ def power_on_self_test():
     servo.move(Arm.UP, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.DOWN, 1)
     servo.move(Wrist.UP, 1)
+    servo.move(Wrist.DOWN, 1)
     servo.move(Arm.DOWN, 1)
     wait_for_button()
 
@@ -44,7 +39,7 @@ def drive(left_speed, right_speed, duration):
 
 def go_to_first_cube():
     print('first block')
-    servo.move(Arm.UNKNOWN, 1)
+    servo.move(Arm.HIGHEST, 1)
     servo.move(Wrist.CUBE1, 1)
     servo.move(Claw.OPEN, 1)
 
@@ -56,9 +51,10 @@ def go_to_first_cube():
     msleep(100)
     drive(-40, 40, 900)
     msleep(100)
-    drive(40, 40, 1100)
+    drive(40, 40, 1300)
     msleep(200)
-    drive(-40, -40, 750)
+    drive(-40, -40, 1350)
+    wait_for_button()
     msleep(100)
     drive(40, -40, 850)
     msleep(100)
@@ -68,7 +64,7 @@ def go_to_first_cube():
     # grab cube
     # backing up
     drive(-50, -45, 1000)
-    servo.move(Wrist.DOWN, 1)
+    servo.move(Wrist.UP, 1)
     servo.move(Arm.UP, 1)
     msleep(1000)
     servo. move(Arm.CUBE1, 1)
@@ -206,6 +202,6 @@ def go_to_fourth_block():
 
 def arm_resting():
     # wait_for_button()
-    servo.move(Claw.OPEN, 3)
-    servo.move(Wrist.UP, 3)
+    servo.move(Claw.OPEN, 1)
+    servo.move(Wrist.DOWN, 1)
     servo.move(Arm.DOWN, 3)
