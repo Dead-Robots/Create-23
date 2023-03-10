@@ -1,9 +1,7 @@
-from kipr import msleep, disable_servos, enable_servos, enable_servo, get_servo_position, set_servo_position
-from createserial.commands import open_create, reset_create, create_dd
-from createserial.serial import open_serial, close_serial
-from createserial.shutdown import shutdown_create_in
-from common import servo
-from common.utilities import wait_for_button
+from kipr import msleep, disable_servos, enable_servos
+from createserial.commands import create_dd
+import servo
+from utilities import wait_for_button
 from constants.servos import Claw, Wrist, Arm
 
 
