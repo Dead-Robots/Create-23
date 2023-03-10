@@ -1,8 +1,9 @@
 from kipr import msleep, disable_servos, enable_servos
 from createserial.commands import create_dd
 import servo
-from utilities import wait_for_button
+from utilities import wait_for_button, arm_resting
 from constants.servos import Claw, Wrist, Arm
+from drive import drive
 
 
 def init():
@@ -27,12 +28,6 @@ def power_on_self_test():
     servo.move(Wrist.DOWN, 1)
     servo.move(Arm.DOWN, 1)
     wait_for_button()
-
-
-def drive(left_speed, right_speed, duration):
-    create_dd(-5 * right_speed, -5 * left_speed)
-    msleep(duration)
-    create_dd(0, 0)
 
 
 def go_to_first_cube():
@@ -198,8 +193,4 @@ def go_to_fourth_block():
     drive(-40, -40, 500)
 
 
-def arm_resting():
-    # wait_for_button()
-    servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.DOWN, 1)
-    servo.move(Arm.DOWN, 3)
+
