@@ -24,21 +24,21 @@ def power_on_self_test():
     servo.move(Arm.UP, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
+    servo.move(Claw.CLOSED, 1)
     servo.move(Wrist.UP, 1)
     servo.move(Wrist.DOWN, 1)
     servo.move(Arm.DOWN, 1)
+    servo.move(Claw.OPEN, 1)
     wait_for_button()
 
 
 def go_to_first_cube():
     print('first block')
+    drive(40, 0, 230)
+    msleep(100)
     servo.move(Arm.HIGHEST, 1)
     servo.move(Wrist.CUBE1, 1)
     servo.move(Claw.OPEN, 1)
-
-    # turning
-    drive(40, 0, 230)
-    msleep(100)
 
     drive(50, 50, 2000)
     msleep(100)
@@ -47,23 +47,19 @@ def go_to_first_cube():
     drive(40, 40, 1300)
     msleep(200)
     drive(-40, -40, 1350)
-    wait_for_button()
     msleep(100)
     drive(40, -40, 850)
     msleep(100)
 
     drive(50, 50, 1500)
-    msleep(1000)
+    msleep(100)
     # grab cube
     # backing up
     drive(-50, -45, 1000)
-    servo.move(Wrist.UP, 1)
-    servo.move(Arm.UP, 1)
-    msleep(1000)
-    servo. move(Arm.CUBE1, 1)
+    servo.move(Wrist.CUBE1, 1)
+    servo.move(Arm.CUBE1, 1)
     msleep(1000)
     servo.move(Claw.CLOSED, 1)
-    # move(680, 1, ARM)
     msleep(2000)
     servo.move(Arm.UP, 1)
     msleep(1000)
@@ -73,17 +69,17 @@ def go_to_analysis_lab1():
     print('analysis lab1')
     # backing up
     drive(-25, -25, 500)
+    msleep(200)
     # rotate
-    drive(30, -30, 1700)
+    drive(30, -30, 2000)
     msleep(500)
-    drive(25, 25, 500)
-    msleep(500)
+    drive(-25, -25, 250)
     put_block()
 
 
 def put_block():
-    servo.move(Wrist.UP, 1)
-    servo.move(Arm.DOWN, 1)
+    servo.move(Wrist.DOWN, 1)
+    servo.move(Arm.CUBE1_DOWN, 1)
     servo.move(Claw.OPEN, 1)
     msleep(1000)
 
@@ -92,37 +88,40 @@ def go_to_second_cube():
     print('second block')
     # backing up away from 1st cube
     drive(-25, -25, 750)
+    msleep(100)
     # arm up
-    servo.move(Arm.UNKNOWN, 1)
+    servo.move(Arm.HIGHEST, 1)
     # turning
-    drive(0, 40, 700)
+    drive(0, 40, 1100)
+    msleep(100)
     # going straight
-    drive(40, 40, 2100)
+    drive(40, 40, 2000)
+    msleep(100)
 
     # turn towards 2nd cube
     drive(-40, 40, 900)
-
+    msleep(100)
     # square up
-    drive(50, 50, 2500)
+    drive(50, 50, 1500)
     msleep(2000)
     # grab cube
     # backing up
     drive(-50, -45, 1000)
     # place wrist and arm
-    servo.move(Arm.HIGH, 1)
-    servo.move(Wrist.HIGH, 1)
-    drive(40, 40, 750)
+    servo.move(Arm.CUBE2, 1)
+    servo.move(Wrist.CUBE2, 1)
+    drive(40, 40, 400)
     msleep(500)
+    wait_for_button()
     # grab cube
     servo. move(Claw.CLOSED, 1)
-    servo.move(Wrist.UP, 1)
+    servo.move(Wrist.HIGH, 1)
     # turning
-    drive(-40, 40, 1875)
-    drive(20, 20, 1200)
+    drive(-40, 40, 1600)
+    msleep(100)
     # place block
-
-    servo.move(Wrist.CUBE2, 1)
-    servo.move(Arm.CUBE2, 2)
+    servo.move(Wrist.CUBE2_DOWN, 1)
+    servo.move(Arm.CUBE2_DOWN, 2)
     servo.move(Claw.OPEN, 1)
     # grab cube
 

@@ -14,7 +14,7 @@ def wait_for_button():
 
 
 def arm_resting():
-    # wait_for_button()
+    wait_for_button()
     servo.move(Claw.OPEN, 1)
     servo.move(Wrist.DOWN, 1)
     servo.move(Arm.DOWN, 3)
