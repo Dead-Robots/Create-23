@@ -7,7 +7,7 @@ from utilities import arm_resting
 
 def main():
     init()
-    power_on_self_test()
+    # power_on_self_test()
     go_to_first_cube()
     go_to_analysis_lab1()
     go_to_second_cube()
