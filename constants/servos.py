@@ -63,6 +63,13 @@ class Arm(ServoEnum):
         green=1800
     )
 
+    START = ROBOT.choose(
+        red=0,
+        blue=0,
+        yellow=1800,
+        green=0
+    )
+
 
 class Claw(ServoEnum):
     port = CLAW
@@ -85,6 +92,13 @@ class Claw(ServoEnum):
 class Wrist(ServoEnum):
     port = WRIST
 
+    START = ROBOT.choose(
+        red=0,
+        blue=0,
+        yellow=1700,
+        green=0
+    )
+
     UP = ROBOT.choose(
         red=0,
         blue=0,
@@ -102,7 +116,7 @@ class Wrist(ServoEnum):
     DOWN = ROBOT.choose(
         red=790,
         blue=500,
-        yellow=290,
+        yellow=500,
         green=500
     )
 
