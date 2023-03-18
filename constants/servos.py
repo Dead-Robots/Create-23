@@ -7,11 +7,11 @@ from constants.ports import *
 class Arm(ServoEnum):
     port = ARM
 
-    DOWN = ROBOT.choose(
-        red=1890,
-        blue=150,
-        yellow=1970,
-        green=150
+    CUBE1 = ROBOT.choose(
+        red=1140,
+        blue=760,
+        yellow=1160,
+        green=760
     )
 
     CUBE1_DOWN = ROBOT.choose(
@@ -22,7 +22,7 @@ class Arm(ServoEnum):
     )
 
     CUBE2 = ROBOT.choose(
-        red=450,
+        red=390,
         blue=600,
         yellow=0,
         green=600
@@ -35,11 +35,18 @@ class Arm(ServoEnum):
         green=600
     )
 
-    CUBE1 = ROBOT.choose(
-        red=1140,
-        blue=760,
-        yellow=1160,
-        green=760
+    CUBE3_DOWN = ROBOT.choose(
+        red=1110,
+        blue=600,
+        yellow=1640,
+        green=600
+    )
+    CUBE4_DOWN = ROBOT.choose(
+        # not set yet
+        red=1110,
+        blue=600,
+        yellow=1640,
+        green=600
     )
 
     UP = ROBOT.choose(
@@ -47,6 +54,13 @@ class Arm(ServoEnum):
         blue=1000,
         yellow=400,
         green=1000
+    )
+
+    DOWN = ROBOT.choose(
+        red=1890,
+        blue=150,
+        yellow=1970,
+        green=150
     )
 
     HIGH = ROBOT.choose(
@@ -106,11 +120,11 @@ class Wrist(ServoEnum):
         green=0
     )
 
-    CUBE1 = ROBOT.choose(
-        red=1330,
-        blue=160,
-        yellow=1060,
-        green=160
+    HIGH = ROBOT.choose(
+        red=1340,
+        blue=1270,
+        yellow=1270,
+        green=1270
     )
 
     DOWN = ROBOT.choose(
@@ -120,8 +134,15 @@ class Wrist(ServoEnum):
         green=500
     )
 
+    CUBE1 = ROBOT.choose(
+        red=1330,
+        blue=160,
+        yellow=1060,
+        green=160
+    )
+
     CUBE2 = ROBOT.choose(
-        red=2040,
+        red=2047,
         blue=650,
         yellow=2047,
         green=650
@@ -134,9 +155,21 @@ class Wrist(ServoEnum):
         green=600
     )
 
-    HIGH = ROBOT.choose(
-        red=1340,
-        blue=1270,
-        yellow=1270,
-        green=1270
+    CUBE3_DOWN = ROBOT.choose(
+        red=1370,
+        blue=600,
+        yellow=1640,
+        green=600
     )
+
+    CUBE4_DOWN = ROBOT.choose(
+        # not set yet
+        red=1370,
+        blue=600,
+        yellow=1640,
+        green=600
+    )
+
+
+
+
