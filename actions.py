@@ -17,9 +17,9 @@ def init():
 
 
 def shutdown():
-    servo.move(Wrist.DOWN, 1)
+    servo.move(Arm.START, 1)
+    servo.move(Wrist.START, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Arm.DOWN, 1)
     msleep(1000)
     disable_servos()
 
@@ -74,7 +74,6 @@ def go_to_first_cube():
     servo.move(Wrist.CUBE1, 1)
     servo.move(Arm.CUBE1, 1)
     msleep(1000)
-    wait_for_button()
     servo.move(Claw.CLOSED, 1)
     msleep(2000)
     servo.move(Arm.UP, 1)
@@ -93,8 +92,12 @@ def go_to_analysis_lab1():
     while not on_black_left():
         pass
     drive(0, 0, 0)
-    msleep(500)
-    drive(40, -40, 925)
+    msleep(100)
+    untimed_drive(-10, -10)
+    while on_black_left():
+        pass
+    msleep(100)
+    drive(40, -40, 875)
     drive(40, 40, 325)
     put_block()
     drive(-40, -40, 500)
@@ -115,11 +118,11 @@ def go_to_second_cube():
     # rotate 90 degrees right
     drive(40, -40, 950)
     # move forwards
-    drive(40, 40, 1400)
+    drive(40, 40, 1500)
     # rotate 90 degrees right
-    drive(40, -40, 975)
+    drive(40, -40, 900)
     # square up
-    drive(50, 50, 1500)
+    drive(50, 50, 1600)
     msleep(2000)
     # grab cube
     # backing up
@@ -136,15 +139,34 @@ def go_to_second_cube():
 
 def go_to_analysis_lab2():
     print('analysis lab2')
-    drive(-40, -40, 500)
-    # turning
-    drive(-40, 40, 1700)
-    msleep(100)
-    drive(40, 40, 400)
+    # drive(-40, -40, 500)
+    # # turning
+    # drive(40, -40, 1700)
+    # msleep(100)
+    # drive(40, 40, 400)
     # place block
+    drive(-25, -25, 1400)
+    msleep(200)
+    # rotate
+    drive(40, -40, 850)
+    # drive(40, 40, 3000)
+    untimed_drive(42, 40)
+    while not on_black_left():
+        pass
+    drive(0, 0, 0)
+    msleep(500)
+    untimed_drive(-10, -10)
+    while on_black_left():
+        pass
+    msleep(100)
+    drive(40, -40, 950)
+    drive(40, 40, 325)
+
     servo.move(Wrist.CUBE2_DOWN, 1)
     servo.move(Arm.CUBE2_DOWN, 2)
     servo.move(Claw.OPEN, 1)
+
+    wait_for_button()
     # grab cube
 
 

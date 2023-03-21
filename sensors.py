@@ -6,3 +6,4 @@ def on_black_left():
         return True
     else:
         return False
+

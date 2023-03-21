@@ -10,16 +10,15 @@ def main():
     init()
     start_position()
     # power_on_self_test()
-    # go_to_first_cube()
-    # go_to_analysis_lab1()
-    # go_to_second_cube()
-    # go_to_analysis_lab2()
-    go_to_third_cube()
-    go_to_analysis_lab3()
-    go_to_fourth_block()
-    go_to_analysis_lab4()
-    arm_resting()
-
+    go_to_first_cube()
+    go_to_analysis_lab1()
+    go_to_second_cube()
+    go_to_analysis_lab2()
+    # go_to_third_cube()
+    # go_to_analysis_lab3()
+    # go_to_fourth_block()
+    # go_to_analysis_lab4()
+    start_position()
 
     # shutdown()
 
@@ -29,3 +28,4 @@ if __name__ == '__main__':
     with CreateConnection():
         main()
     shutdown()
+
