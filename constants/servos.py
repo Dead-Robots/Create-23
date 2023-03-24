@@ -9,28 +9,28 @@ class Arm(ServoEnum):
 
     CUBE1 = ROBOT.choose(
         red=1140,
-        blue=760,
+        blue=960,
         yellow=1160,
         green=760
     )
 
     CUBE1_DOWN = ROBOT.choose(
         red=1650,
-        blue=150,
+        blue=1700,
         yellow=2000,
         green=150
     )
 
     CUBE2 = ROBOT.choose(
         red=390,
-        blue=600,
+        blue=0,
         yellow=0,
         green=600
     )
 
     CUBE2_DOWN = ROBOT.choose(
         red=1400,
-        blue=600,
+        blue=1230,
         yellow=1640,
         green=600
     )
@@ -51,35 +51,35 @@ class Arm(ServoEnum):
 
     UP = ROBOT.choose(
         red=630,
-        blue=1000,
+        blue=600,
         yellow=400,
         green=1000
     )
 
     DOWN = ROBOT.choose(
         red=1890,
-        blue=150,
+        blue=2040,
         yellow=1970,
         green=150
     )
 
     HIGH = ROBOT.choose(
         red=1400,
-        blue=1400,
+        blue=600,
         yellow=1400,
         green=1400
     )
 
     HIGHEST = ROBOT.choose(
         red=0,
-        blue=1800,
+        blue=0,
         yellow=0,
         green=1800
     )
 
     START = ROBOT.choose(
         red=0,
-        blue=0,
+        blue=2040,
         yellow=1800,
         green=0
     )
@@ -90,14 +90,14 @@ class Claw(ServoEnum):
 
     OPEN = ROBOT.choose(
         red=200,
-        blue=200,
+        blue=675,
         yellow=360,
         green=200
     )
 
     CLOSED = ROBOT.choose(
         red=1300,
-        blue=1000,
+        blue=1820,
         yellow=1000,
         green=1000
     )
@@ -129,28 +129,28 @@ class Wrist(ServoEnum):
 
     DOWN = ROBOT.choose(
         red=790,
-        blue=500,
+        blue=0,
         yellow=500,
         green=500
     )
 
     CUBE1 = ROBOT.choose(
         red=1330,
-        blue=160,
+        blue=480,
         yellow=1060,
         green=160
     )
 
     CUBE2 = ROBOT.choose(
         red=2047,
-        blue=650,
+        blue=1660,
         yellow=2047,
         green=650
     )
 
     CUBE2_DOWN = ROBOT.choose(
         red=1040,
-        blue=600,
+        blue=340,
         yellow=630,
         green=600
     )

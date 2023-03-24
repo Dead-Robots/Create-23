@@ -3,6 +3,7 @@ from createserial.commands import create_dd
 import servo
 from utilities import wait_for_button
 from constants.servos import Claw, Wrist, Arm
+from sensors import on_black_left, on_black_right
 
 
 def drive(left_speed, right_speed, duration):
@@ -13,6 +14,17 @@ def drive(left_speed, right_speed, duration):
 
 def untimed_drive(left_speed, right_speed):
     create_dd(-5 * right_speed, -5 * left_speed)
+
+def square_up_tophats(left_speed, right_speed):
+    untimed_drive(left_speed, right_speed)
+    while not on_black_left() or not on_black_right():
+        if on_black_left():
+            left_speed = 0
+            untimed_drive(left_speed, right_speed)
+        if on_black_right():
+            right_speed = 0
+            untimed_drive(left_speed, right_speed)
+
 
 
 

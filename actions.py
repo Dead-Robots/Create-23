@@ -3,7 +3,7 @@ from createserial.commands import create_dd
 import servo
 from utilities import wait_for_button, arm_resting
 from constants.servos import Claw, Wrist, Arm
-from drive import drive, untimed_drive
+from drive import drive, untimed_drive, square_up_tophats
 from common import ROBOT
 from sensors import on_black_left
 
@@ -44,6 +44,9 @@ def power_on_self_test():
     wait_for_button()
 
 
+def drive_straight_test():
+    square_up_tophats(30, 30)
+
 def go_to_first_cube():
     print('first block')
 
@@ -54,23 +57,23 @@ def go_to_first_cube():
     servo.move(Claw.OPEN, 1)
 
     # drive(50, 50, 2000)
-    ROBOT.run(drive, red=(50, 50, 2000), yellow=(50, 50, 2000))
+    ROBOT.run(drive, red=(50, 50, 2000), yellow=(50, 50, 2000), blue=(50, 50, 2000))
     msleep(100)
-    drive(-40, 40, 900)
+    ROBOT.run(drive, yellow=(-40, 40, 900), blue=(-40, 40, 1000))
     msleep(100)
     # first square up
-    drive(40, 40, 1300)
+    ROBOT.run(drive, yellow=(40, 40, 1300), blue = (40, 40, 1500))
     msleep(100)
-    drive(-40, -40, 1200)
+    ROBOT.run(drive, yellow=(-40, -40, 1200), blue=(-40, -40, 1400))
     msleep(100)
     drive(40, -40, 850)
     msleep(100)
     # second square up
-    drive(50, 50, 1500)
+    drive(50, 50, 1550)
     msleep(500)
     # grab cube
     # backing up
-    drive(-50, -45, 900)
+    ROBOT.run(drive, yellow=(-50, -45, 900), blue=(-50, -50, 1000))
     servo.move(Wrist.CUBE1, 1)
     servo.move(Arm.CUBE1, 1)
     msleep(1000)
@@ -98,7 +101,7 @@ def go_to_analysis_lab1():
         pass
     msleep(100)
     drive(40, -40, 875)
-    drive(40, 40, 325)
+    ROBOT.run(drive, yellow=(40, 40, 325), blue=(0, 0, 0))
     put_block()
     drive(-40, -40, 500)
 
