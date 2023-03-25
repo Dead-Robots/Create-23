@@ -17,13 +17,14 @@ def untimed_drive(left_speed, right_speed):
 
 def square_up_tophats(left_speed, right_speed):
     untimed_drive(left_speed, right_speed)
-    while not on_black_left() or not on_black_right():
+    while left_speed!=0 or right_speed!=0:
         if on_black_left():
             left_speed = 0
             untimed_drive(left_speed, right_speed)
         if on_black_right():
             right_speed = 0
             untimed_drive(left_speed, right_speed)
+    untimed_drive(0, 0)
 
 
 
