@@ -17,7 +17,7 @@ def main():
     go_to_analysis_lab2()
     go_to_third_cube()
     go_to_analysis_lab3()
-    # go_to_fourth_block()
+    go_to_fourth_block()
     # go_to_analysis_lab4()
     start_position()
 
