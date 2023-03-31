@@ -3,7 +3,7 @@ from createserial.commands import create_dd
 import servo
 from utilities import wait_for_button, arm_resting
 from constants.servos import Claw, Wrist, Arm
-from drive import drive, untimed_drive, square_up_tophats
+from drive import drive, untimed_drive, square_up_tophats, square_up_white
 from common import ROBOT
 from sensors import on_black_left
 
@@ -23,7 +23,7 @@ def shutdown():
     msleep(1000)
     disable_servos()
 
-
+# start box position
 def start_position():
     servo.move(Arm.START, 1)
     servo.move(Wrist.START, 1)
@@ -51,59 +51,43 @@ def go_to_first_cube():
     print('first block')
 
     drive(40, 0, 230)
-    # msleep(100)
     servo.move(Arm.HIGHEST, 1, 2)
     servo.move(Wrist.CUBE1, 0)
     servo.move(Claw.OPEN, 0)
 
-    # drive(50, 50, 2000)
     ROBOT.run(drive, red=(50, 50, 2000), yellow=(60, 60, 2000), blue=(50, 50, 2000))
-    # msleep(100)
     ROBOT.run(drive, yellow=(-40, 40, 900), blue=(-40, 40, 1000))
-    # msleep(100)
     # first square up
     ROBOT.run(drive, yellow=(40, 40, 1300), blue = (40, 40, 1500))
-    # msleep(100)
     ROBOT.run(drive, yellow=(-40, -40, 1250), blue=(-40, -40, 1400))
-    # msleep(100)
     drive(40, -40, 850)
-    # msleep(100)
     # second square up
     drive(50, 50, 1550)
-    # msleep(500)
 
     # backing up
     ROBOT.run(drive, yellow=(-50, -45, 900), blue=(-50, -50, 1000))
     # grab cube
     servo.move(Wrist.CUBE1, 1)
     servo.move(Arm.CUBE1, 1)
-    # msleep(500)
     servo.move(Claw.CLOSED, 1)
     msleep(500)
     servo.move(Arm.UP, 1)
-    # msleep(500)
 
 
 def go_to_analysis_lab1():
     print('analysis lab1')
     # backing up
     drive(-25, -25, 450)
-    # msleep(200)
-    # rotate
+    # rotate towards analysis lab
     drive(40, -40, 800)
-    # drive(40, 40, 3000)
     drive(66, 60, 2000)
     # wait_for_button()
     square_up_tophats(42, 40)
-    drive(0, 0, 0)
-    # msleep(100)
-    untimed_drive(-10, -10)
-    while on_black_left():
-        pass
-    # msleep(100)
-    drive(-25, -25, 300)
+    square_up_white(-5, -5)
+    drive(-25, -25, 400)
     drive(40, -40, 875)
     square_up_tophats(15, 15)
+    square_up_white(-5, -5)
     put_block()
     drive(-40, -40, 500)
 
@@ -136,7 +120,6 @@ def go_to_second_cube():
     servo.move(Arm.CUBE2, 1)
     servo.move(Wrist.CUBE2, 1, 2)
     drive(40, 40, 800)
-    # msleep(100)
     # grab cube
     servo.move(Claw.CLOSED, 1)
     servo.move(Wrist.HIGH, 1)
@@ -145,53 +128,30 @@ def go_to_second_cube():
 
 def go_to_analysis_lab2():
     print('analysis lab2')
-    # backing up
-    # msleep(200)
     # rotate
     drive(40, -40, 900)
-    # drive(40, 40, 3000)
     square_up_tophats(42, 40)
+    square_up_white(-5, -5)
     drive(0, 0, 0)
-    # msleep(100)
     untimed_drive(-10, -10)
     while on_black_left():
         pass
-    # msleep(100)
     drive(-25, -25, 300)
     drive(40, -40, 875)
     square_up_tophats(15, 15)
-    # # drive(-40, -40, 500)
-    # # # turning
-    # # drive(40, -40, 1700)
-    # # msleep(100)
-    # # drive(40, 40, 400)
-    # # place block
-    # drive(-25, -25, 1400)
-    # msleep(200)
-    # # rotate
-    # drive(40, -40, 850)
-    # # drive(40, 40, 3000)
-    # untimed_drive(42, 40)
-    # while not on_black_left():
-    #     pass
-    # drive(0, 0, 0)
-    # msleep(500)
-    # untimed_drive(-10, -10)
-    # while on_black_left():
-    #     pass
-    # msleep(100)
-    # drive(40, -40, 950)
-    # drive(40, 40, 325)
-    # graeb cube
+    square_up_white(-5, -5)
     drive(-25, -25, 650)
     servo.move(Wrist.CUBE2_DOWN, 1)
     servo.move(Arm.CUBE2_DOWN, 2)
+    # deliver second log
     servo.move(Claw.OPEN, 1)
     drive(-40, -40, 500)
     servo.move(Arm.HIGHEST, 1)
     drive(25, 25, 500)
     drive(-40, 40, 900)
     square_up_tophats(15, 15)
+    square_up_white(-5, -5)
+
 
 
 def go_to_third_cube():
@@ -208,14 +168,9 @@ def go_to_third_cube():
     # backing up
     drive(-50, -50, 600)
     # place wrist and arm
-    # servo.move(Arm.CUBE2, 1)
-    # servo.move(Wrist.CUBE2, 1)
-    # servo.move(Claw.CLOSED, 1)
-    # servo.move(Arm.HIGHEST, 1)
     servo.move(Arm.CUBE2, 1)
     servo.move(Wrist.CUBE2, 1, 2)
     drive(40, 40, 800)
-    # msleep(100)
     # grab cube
     servo.move(Claw.CLOSED, 1)
     servo.move(Wrist.HIGH, 1)
@@ -225,18 +180,14 @@ def go_to_third_cube():
 
 def go_to_analysis_lab3():
     print("analysis lab 3")
-    # turning
-    # drive(-40, 40, 1350)
-    # msleep(100)
-    # # go straight
-    # drive(60, 60, 1015)
     drive(-25, -25, 900)
     drive(-40, 40, 950)
     square_up_tophats(42, 40)
+    square_up_white(-5, -5)
     drive(25, 25, 1850)
     drive(-40, 40, 900)
     square_up_tophats(15, 15)
-    #drive(25, 25, 850)
+    square_up_white(-5, -5)
     drive(-25, -25, 825)
     msleep(100)
     servo.move(Wrist.CUBE3_DOWN, 1)
@@ -244,81 +195,48 @@ def go_to_analysis_lab3():
     servo.move(Arm.CUBE3_DOWN, 1)
     msleep(100)
     servo.move(Claw.OPEN, 1)
-    wait_for_button()
 
-
-    # # turn again
-    # drive(-40, 40, 600)
-    # # go straight
-    # drive(40, 40, 900)
-    # msleep(2000)
 
 def go_to_fourth_block():
     drive(-25, -25, 600)
     servo.move(Arm.HIGHEST, 1, 2)
+    drive(25, 25, 600)
     drive(-40, 40, 900)
     square_up_tophats(15, 15)
-    drive(42, 40, 4400)
+    square_up_white(-5, -5)
+    drive(42, 40, 4200)
     msleep(100)
     servo.move(Arm.HIGHEST, 1)
     msleep(100)
     drive(-40, 40, 850)
     msleep(100)
-    drive(50, 50, 1200)
-    msleep(100)
+    drive(50, 50, 1550)
+
     # backing up
-    drive(-50, -50, 600)
-    # place wrist and arm
-    # servo.move(Arm.CUBE2, 1)
-    # servo.move(Wrist.CUBE2, 1)
-    # servo.move(Claw.CLOSED, 1)
-    # servo.move(Arm.HIGHEST, 1)
-    servo.move(Arm.CUBE1, 1)
-    servo.move(Wrist.CUBE1, 1, 2)
-    drive(40, 40, 800)
-    # msleep(100)
+    ROBOT.run(drive, yellow=(-50, -45, 900), blue=(-50, -50, 1000))
     # grab cube
+    servo.move(Wrist.CUBE1, 1)
+    servo.move(Arm.CUBE1, 1)
     servo.move(Claw.CLOSED, 1)
+    msleep(500)
+    servo.move(Arm.HIGHEST, 1)
     servo.move(Wrist.HIGH, 1)
-    drive(-25, -25, 1200)
-    # servo.move(Arm.HIGHEST, 1)
-    # # backup
-    # drive(-40, -40, 1000)
-    # msleep(100)
-    # drive(-50, 50, 1150)
-    # msleep(100)
-    # drive(50, 50, 3250)
-    # msleep(100)
-    # drive(-40, -40, 1300)
-    # msleep(100)
-    # drive(-40, 40, 900)
-    # msleep(100)
-    # drive(50, 50, 1000)
-    # drive(-50, -50, 900)
-    # servo.move(Wrist.CUBE1, 1)
-    # servo.move(Arm.CUBE1, 1)
-    # msleep(1000)
-    # servo.move(Claw.CLOSED, 1)
-    # msleep(1000)
-    # servo.move(Arm.HIGHEST, 1)
-    # msleep(1000)
+    drive(-25, -25, 450)
 
 def go_to_analysis_lab4():
     print("analysis lab 4")
-    drive(-40, 40, 1000)
+    drive(-40, 40, 950)
+    square_up_tophats(42, 40)
+    square_up_white(-5, -5)
+    drive(25, 25, 1850)
+    drive(-40, 40, 900)
+    square_up_tophats(15, 15)
+    square_up_white(-5, -5)
+    drive(-25, -25, 825)
     msleep(100)
-    wait_for_button()
-    # go straight
-    drive(60, 60, 1015)
+    servo.move(Wrist.CUBE4_DOWN, 1)
     msleep(100)
+    servo.move(Arm.CUBE4_DOWN, 1)
+    msleep(100)
+    servo.move(Claw.OPEN, 1)
     wait_for_button()
-    # servo.move(Wrist.CUBE4_DOWN, 1)
-    # msleep(100)
-    # servo.move(Arm.CUBE4_DOWN, 1)
-    # msleep(100)
-    # servo.move(Claw.OPEN, 1)
-
-
-
-
-

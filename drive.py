@@ -26,8 +26,14 @@ def square_up_tophats(left_speed, right_speed):
             untimed_drive(left_speed, right_speed)
     untimed_drive(0, 0)
 
-
-
-
-
+def square_up_white(left_speed, right_speed):
+    untimed_drive(left_speed, right_speed)
+    while left_speed!=0 or right_speed!=0:
+        if not on_black_left():
+            left_speed = 0
+            untimed_drive(left_speed, right_speed)
+        if not on_black_right():
+            right_speed = 0
+            untimed_drive(left_speed, right_speed)
+    untimed_drive(0, 0)
 
