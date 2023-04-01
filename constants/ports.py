@@ -1,7 +1,7 @@
 # servo ports
 CLAW = 0
 WRIST = 1
-ARM = 3
+ARM = 2
 
 # sensor ports
 RIGHT_TOPHAT = 0

@@ -9,42 +9,42 @@ class Arm(ServoEnum):
 
     CUBE1 = ROBOT.choose(
         red=1140,
-        blue=960,
+        blue=1000,
         yellow=1160,
         green=760
     )
 
     CUBE1_DOWN = ROBOT.choose(
         red=1650,
-        blue=1700,
+        blue=1750,
         yellow=2000,
         green=150
     )
 
     CUBE2 = ROBOT.choose(
         red=390,
-        blue=0,
+        blue=80,
         yellow=0,
         green=600
     )
 
     CUBE2_DOWN = ROBOT.choose(
         red=1400,
-        blue=1230,
+        blue=1500,
         yellow=1640,
         green=600
     )
 
     CUBE3_DOWN = ROBOT.choose(
         red=1110,
-        blue=600,
+        blue=1000,
         yellow=1100,
         green=600
     )
     CUBE4_DOWN = ROBOT.choose(
         # not set yet
         red=1110,
-        blue=600,
+        blue=680,
         yellow=690,
         green=600
     )
@@ -79,7 +79,7 @@ class Arm(ServoEnum):
 
     START = ROBOT.choose(
         red=0,
-        blue=2040,
+        blue=1860,
         yellow=1800,
         green=0
     )
@@ -97,7 +97,7 @@ class Claw(ServoEnum):
 
     CLOSED = ROBOT.choose(
         red=1300,
-        blue=1820,
+        blue=1900,
         yellow=1000,
         green=1000
     )
@@ -136,28 +136,28 @@ class Wrist(ServoEnum):
 
     CUBE1 = ROBOT.choose(
         red=1330,
-        blue=480,
+        blue=680,
         yellow=1060,
         green=160
     )
 
     CUBE2 = ROBOT.choose(
         red=2047,
-        blue=1660,
+        blue=1710,
         yellow=2047,
         green=650
     )
 
     CUBE2_DOWN = ROBOT.choose(
         red=1040,
-        blue=340,
+        blue=220,
         yellow=630,
         green=600
     )
 
     CUBE3_DOWN = ROBOT.choose(
         red=1370,
-        blue=600,
+        blue=680,
         yellow=1080,
         green=600
     )
@@ -165,11 +165,7 @@ class Wrist(ServoEnum):
     CUBE4_DOWN = ROBOT.choose(
         # not set yet
         red=1370,
-        blue=600,
+        blue=900,
         yellow=1500,
         green=600
     )
-
-
-
-
