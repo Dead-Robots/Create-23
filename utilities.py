@@ -13,6 +13,14 @@ def wait_for_button():
     msleep(1000)
 
 
+def start_button():
+    # stop_motors()
+    print("Press button to start.")
+    while not push_button():
+        pass
+    msleep(1000)
+
+
 def arm_resting():
     wait_for_button()
     servo.move(Claw.OPEN, 1)
