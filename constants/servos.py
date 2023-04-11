@@ -16,14 +16,14 @@ class Arm(ServoEnum):
 
     CUBE1_DOWN = ROBOT.choose(
         red=1850,
-        blue=1760,
+        blue=1840,
         yellow=2000,
         green=150
     )
 
     CUBE2 = ROBOT.choose(
         red=120,
-        blue=80,
+        blue=50,
         yellow=0,
         green=600
     )
@@ -32,6 +32,13 @@ class Arm(ServoEnum):
         red=1380,
         blue=1500,
         yellow=1640,
+        green=600
+    )
+
+    CUBE3 = ROBOT.choose(
+        red=120,
+        blue=50,
+        yellow=0,
         green=600
     )
 
@@ -138,6 +145,13 @@ class Wrist(ServoEnum):
         blue=680,
         yellow=1060,
         green=160
+    )
+
+    CUBE1_DOWN = ROBOT.choose(
+        red=340,
+        blue=0,
+        yellow=500,
+        green=500
     )
 
     CUBE2 = ROBOT.choose(
