@@ -2,9 +2,9 @@ from kipr import msleep, disable_servos, enable_servos
 import servo
 from utilities import wait_for_button, start_button
 from constants.servos import Claw, Wrist, Arm
-from drive import drive, untimed_drive, square_up_tophats, square_up_white
+from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
 from common import ROBOT
-from sensors import on_black_left, look_for_second_cube, look_for_third_cube
+from sensors import on_black_left, look_for_second_cube, look_for_third_cube, calibrate_gyro
 
 
 # wait_for_button
@@ -141,6 +141,7 @@ def go_to_second_cube():
     servo.move(Arm.HIGHEST, 1, 2)
     msleep(300)
     servo.move(Wrist.HIGH, 1, 2)
+    wait(2000)
     drive(-25, -25, 1300)
 
 
@@ -156,6 +157,10 @@ def go_to_analysis_lab2():
         pass
     drive(-25, -25, 300)
     ROBOT.run(drive, yellow=(40, -40, 875), blue=(40, -40, 875), red=(38, -40, 865))
+    second_cube_down()
+
+
+def second_cube_down():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
     ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 500))
@@ -204,6 +209,10 @@ def go_to_analysis_lab3():
     square_up_white(-5, -5)
     drive(25, 25, 1850)
     drive(-40, 40, 900)
+    third_cube_down()
+
+
+def third_cube_down():
     square_up_tophats(15, 15)
     look_for_second_cube()
     square_up_white(-5, -5)
@@ -213,7 +222,7 @@ def go_to_analysis_lab3():
     servo.move(Wrist.CUBE3_DOWN, 1)
     msleep(100)
     servo.move(Arm.CUBE3_DOWN, 1)
-    msleep(250)
+    msleep(400)
     servo.move(Claw.OPEN, 1)
 
 
@@ -253,6 +262,10 @@ def go_to_analysis_lab4():
     square_up_white(-5, -5)
     ROBOT.run(drive, yellow=(25, 25, 1850), blue=(25, 25, 1850), red=(25, 25, 1850))
     drive(-40, 40, 900)
+    fourth_cube_down()
+
+
+def fourth_cube_down():
     square_up_tophats(15, 15)
     look_for_third_cube()
     square_up_white(-5, -5)
@@ -264,5 +277,13 @@ def go_to_analysis_lab4():
     msleep(250)
     servo.move(Claw.OPEN, 1)
     drive(-25, -25, 500)
+
+
+def test_turn_for_gyro():
+    wait_for_button()
+    msleep(500)
+    calibrate_gyro()
+    wait_for_button()
+    gyro_turn(-30, 30, 360)
 
     # TODO: Change code for red robot, we didn't get to it today 4/3/23

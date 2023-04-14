@@ -1,5 +1,5 @@
 from constants.ports import *
-from kipr import analog
+from kipr import analog, gyro_z, msleep
 
 
 def on_black_left():
@@ -14,6 +14,22 @@ def on_black_right():
         return True
     else:
         return False
+
+
+gyro_offset = 0
+
+
+def gyroscope():
+    return gyro_z() - gyro_offset
+
+
+def calibrate_gyro():
+    total = 0
+    for x in range(50):
+        total = total + gyro_z()
+        msleep(10)
+    global gyro_offset
+    gyro_offset = total / 50
 
 
 def look_for_second_cube():

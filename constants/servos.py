@@ -44,7 +44,7 @@ class Arm(ServoEnum):
 
     CUBE3_DOWN = ROBOT.choose(
         red=935,
-        blue=1010,
+        blue=1300,
         yellow=1100,
         green=600
     )
