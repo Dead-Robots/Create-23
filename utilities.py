@@ -7,7 +7,7 @@ from constants.servos import Claw, Wrist, Arm
 
 def wait_for_button():
     # stop_motors()
-    print("Waiting for button")
+    print('waiting for button')
     while not push_button():
         pass
     msleep(1000)
@@ -15,7 +15,7 @@ def wait_for_button():
 
 def start_button():
     # stop_motors()
-    print("Press button to start.")
+    print("START-UP COMPLETE. Press button to start the run.")
     while not push_button():
         pass
     msleep(1000)

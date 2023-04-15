@@ -37,14 +37,18 @@ def look_for_second_cube():
     et_value = analog(LOWER_ET)
     if et_value > 1550:
         print('block here')
+        return True
     else:
-        print('block missing')
+        print('2nd block missing')
+        return False
 
 
 def look_for_third_cube():
     print('looking for third cube')
     et_value = analog(UPPER_ET)
     if et_value > 1550:
-        print('block here')
+        print('2nd block here')
+        return True
     else:
-        print('block missing')
+        print('3rd block missing')
+        return False
