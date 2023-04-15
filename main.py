@@ -8,8 +8,8 @@ from utilities import wait_for_button
 
 
 def main():
-    test_turn_for_gyro()
-    exit(0)
+    # test_turn_for_gyro()
+    # exit(0)
     init()
     start_position()
     # drive_straight_test()
