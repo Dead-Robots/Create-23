@@ -102,7 +102,7 @@ class Claw(ServoEnum):
     )
 
     CLOSED = ROBOT.choose(
-        red=2000,
+        red=2100,
         blue=1900,
         yellow=1000,
         green=1000
@@ -141,22 +141,22 @@ class Wrist(ServoEnum):
     )
 
     CUBE1 = ROBOT.choose(
-        red=1160,
+        red=1150,
         blue=680,
         yellow=1060,
         green=160
     )
 
     CUBE1_DOWN = ROBOT.choose(
-        red=340,
+        red=140,
         blue=0,
         yellow=500,
         green=500
     )
 
     CUBE2 = ROBOT.choose(
-        red=1925,
-        blue=1650,
+        red=2047,
+        blue=1710,
         yellow=2047,
         green=650
     )
@@ -176,7 +176,7 @@ class Wrist(ServoEnum):
     )
 
     CUBE3_DOWN = ROBOT.choose(
-        red=1566,
+        red=1240,
         blue=680,
         yellow=1080,
         green=600

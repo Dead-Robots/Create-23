@@ -20,7 +20,7 @@ def init():
     servo.move(Wrist.DOWN, 1)
     servo.move(Claw.OPEN, 1)
     servo.move(Arm.DOWN, 1)
-    # # shutdown_create_in(119)
+    # shutdown_create_in(119)
 
 
 def shutdown():
@@ -84,7 +84,7 @@ def go_to_first_cube():
     # first square up
     print('squaring up')
     ROBOT.run(drive, yellow=(40, 40, 1300), blue=(40, 40, 1700), red=(40, 40, 1700))
-    ROBOT.run(drive, yellow=(-40, -40, 1250), blue=(-40, -40, 1350), red=(-40, -40, 1250))
+    ROBOT.run(drive, yellow=(-40, -40, 1250), blue=(-40, -40, 1350), red=(-40, -40, 1200))
     drive(40, -40, 850)
     # second square up
     drive(50, 50, 1550)
@@ -144,7 +144,7 @@ def go_to_second_cube():
     msleep(100)
     # grab cube
     # backing up
-    ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(-25, -25, 300))
+    ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(-25, -25, 400))
     # place wrist and arm
     servo.move(Arm.CUBE2, 1, 2)
     # grab cube
@@ -185,7 +185,7 @@ def second_cube_down():
 def place_second_cube():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 500))
+    ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 550))
     servo.move(Wrist.CUBE2_DOWN, 1, 2)
     servo.move(Arm.CUBE2_DOWN, 1)
     msleep(250)
@@ -204,8 +204,7 @@ def go_to_third_cube():
     drive(50, 50, 1200)
     msleep(100)
     # backing up
-    drive(-50, -50, 600)
-    # place wrist and arm
+    ROBOT.run(drive, yellow=(-50, -50, 600), blue=(-50, -50, 600), red=(-50, -50, 700))    # place wrist and arm
     servo.move(Arm.CUBE2, 1)
     servo.move(Wrist.CUBE3, 1, 2)
     drive(40, 40, 800)
@@ -235,7 +234,7 @@ def third_cube_down():
 def place_third_cube():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(-25, -25, 835), blue=(-25, -25, 745), red=(-25, -25, 835))
+    ROBOT.run(drive, yellow=(-25, -25, 835), blue=(-25, -25, 745), red=(-25, -25, 800))
     # delivery
     msleep(100)
     servo.move(Wrist.CUBE3_DOWN, 1)
