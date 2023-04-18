@@ -156,7 +156,7 @@ class Wrist(ServoEnum):
 
     CUBE2 = ROBOT.choose(
         red=2047,
-        blue=1710,
+        blue=1650,
         yellow=2047,
         green=650
     )

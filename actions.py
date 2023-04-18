@@ -15,11 +15,13 @@ def init():
     msleep(1000)
     calibrate_gyro()
     print('Calibration Complete')
+    print('Push button to set arm, wrist, claw')
     wait_for_button()
-    enable_servos()
-    servo.move(Wrist.DOWN, 1)
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.DOWN, 1)
+    start_position()
+    # enable_servos()
+    # servo.move(Wrist.DOWN, 1)
+    # servo.move(Claw.OPEN, 1)
+    # servo.move(Arm.DOWN, 1)
     # shutdown_create_in(119)
 
 
@@ -80,12 +82,13 @@ def go_to_first_cube():
     servo.move(Wrist.CUBE1, 0)
     print('going forward')
     ROBOT.run(drive, red=(50, 50, 2000), yellow=(60, 60, 2000), blue=(60, 60, 2000))
-    ROBOT.run(drive, yellow=(-40, 40, 900), blue=(-40, 38, 1000), red=(-40, 40, 1000))
+    gyro_turn(-40, 40, 92)
+    # ROBOT.run(drive, yellow=(-40, 40, 900), blue=(-40, 38, 1000), red=(-40, 40, 1000))
     # first square up
     print('squaring up')
     ROBOT.run(drive, yellow=(40, 40, 1300), blue=(40, 40, 1700), red=(40, 40, 1700))
     ROBOT.run(drive, yellow=(-40, -40, 1250), blue=(-40, -40, 1350), red=(-40, -40, 1200))
-    drive(40, -40, 850)
+    gyro_turn(40, -40, 81)
     # second square up
     drive(50, 50, 1550)
     # backing up
@@ -112,7 +115,8 @@ def go_to_analysis_lab1():
     square_up_tophats(42, 40)
     square_up_white(-5, -5)
     drive(-25, -25, 400)
-    drive(40, -40, 875)
+    gyro_turn(40, -40, 81)
+    # drive(40, -40, 875)
     place_first_cube()
 
 
@@ -134,9 +138,10 @@ def go_to_second_cube():
     servo.move(Arm.HIGHEST, 1, 2)
     servo.move(Wrist.CUBE2, 1, 2)
     # rotate 90 degrees right
-    drive(40, -40, 950)
+    gyro_turn(40, -40, 81)
+    # drive(40, -40, 950)
     # move forwards
-    drive(40, 40, 1200)
+    drive(40, 40, 1050)
     # rotate 90 degrees right
     drive(40, -40, 850)
     # square up
@@ -160,7 +165,8 @@ def go_to_second_cube():
 def go_to_analysis_lab2():
     print('analysis lab2')
     # rotate
-    drive(40, -40, 900)
+    # drive(40, -40, 900)
+    gyro_turn(40, -40, 81)
     square_up_tophats(42, 40)
     square_up_white(-5, -5)
     drive(0, 0, 0)
@@ -196,10 +202,11 @@ def place_second_cube():
 def go_to_third_cube():
     print('third block')
     # towards cube 3
-    ROBOT.run(drive, yellow=(42, 40, 2200), blue=(40, 40, 2700), red=(40, 40, 2700))
+    ROBOT.run(drive, yellow=(42, 40, 2200), blue=(40, 40, 2750), red=(40, 40, 2700))
     servo.move(Arm.HIGHEST, 1)
     msleep(100)
-    drive(-40, 40, 850)
+    gyro_turn(-40, 40, 81)
+    # drive(-40, 40, 850)
     msleep(100)
     drive(50, 50, 1200)
     msleep(100)
