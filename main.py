@@ -9,9 +9,8 @@ from utilities import wait_for_button
 
 def main():
     init()
+    power_on_self_test()
     start_position()
-    # drive_straight_test()
-    # power_on_self_test()
     go_to_first_cube()
     go_to_analysis_lab1()
     go_to_second_cube()

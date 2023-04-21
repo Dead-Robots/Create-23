@@ -5,6 +5,7 @@ from constants.servos import Claw, Wrist, Arm
 from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
 from common import ROBOT, light
 from sensors import on_black_left, look_for_second_cube, look_for_third_cube, calibrate_gyro
+from createserial.shutdown import shutdown_create_in
 
 
 # wait_for_button
@@ -32,7 +33,7 @@ def start_position():
     servo.move(Arm.START, 1)
     servo.move(Claw.OPEN, 1)
     light.wait_4_light(2)
-    # start_button()
+    shutdown_create_in(119)
 
 
 def end_position():
@@ -44,12 +45,15 @@ def end_position():
 
 def power_on_self_test():
     enable_servos()
+    square_up_tophats(10, 10)
+    msleep(200)
+    square_up_white(-10, -10)
     servo.move(Arm.UP, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Wrist.UP, 1)
-    servo.move(Wrist.DOWN, 1)
+    servo.move(Wrist.START, 1)
     servo.move(Arm.DOWN, 1)
     servo.move(Claw.OPEN, 1)
     start_button()
@@ -76,7 +80,6 @@ def go_to_first_cube():
     print('going forward')
     ROBOT.run(drive, red=(50, 50, 2000), yellow=(60, 60, 2000), blue=(60, 60, 2000))
     gyro_turn(-40, 40, 92)
-    # ROBOT.run(drive, yellow=(-40, 40, 900), blue=(-40, 38, 1000), red=(-40, 40, 1000))
     # first square up
     print('squaring up')
     ROBOT.run(drive, yellow=(40, 40, 1300), blue=(40, 40, 1700), red=(40, 40, 1700))
@@ -102,13 +105,11 @@ def go_to_analysis_lab1():
     ROBOT.run(drive, yellow=(-25, -25, 450), blue=(-25, -25, 450), red=(-25, -25, 425))
     # rotate towards analysis lab
     gyro_turn(40, -40, 81)
-    # ROBOT.run(drive, yellow=(40, -40, 800), blue=(40, -40, 850), red=(40, -40, 850))
     ROBOT.run(drive, yellow=(66, 60, 2000), blue=(60, 60, 2000), red=(58, 60, 2000))
     square_up_tophats(42, 40)
     square_up_white(-5, -5)
     drive(-25, -25, 400)
     gyro_turn(40, -40, 81)
-    # drive(40, -40, 875)
     place_first_cube()
 
 
@@ -131,7 +132,6 @@ def go_to_second_cube():
     servo.move(Wrist.CUBE2, 1, 2)
     # rotate 90 degrees right
     gyro_turn(40, -40, 81)
-    # drive(40, -40, 950)
     # move forwards
     drive(40, 40, 1050)
     # rotate 90 degrees right
@@ -157,7 +157,6 @@ def go_to_second_cube():
 def go_to_analysis_lab2():
     print('analysis lab2')
     # rotate
-    # drive(40, -40, 900)
     gyro_turn(40, -40, 81)
     square_up_tophats(42, 40)
     square_up_white(-5, -5)
@@ -198,7 +197,6 @@ def go_to_third_cube():
     servo.move(Arm.HIGHEST, 1)
     msleep(100)
     gyro_turn(-40, 40, 81)
-    # drive(-40, 40, 850)
     msleep(100)
     drive(50, 50, 1200)
     msleep(100)
@@ -249,7 +247,6 @@ def go_to_fourth_block():
     servo.move(Arm.HIGHEST, 1, 2)
     drive(25, 25, 600)
     gyro_turn(-40, 40, 81)
-    # drive(-40, 40, 900)
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
     ROBOT.run(drive, yellow=(42, 40, 4200), blue=(60, 60, 3175), red=(60, 60, 3100))
@@ -257,7 +254,6 @@ def go_to_fourth_block():
     servo.move(Arm.HIGHEST, 1)
     msleep(100)
     gyro_turn(-40, 40, 81)
-    # drive(-40, 40, 850)
     msleep(100)
     drive(50, 50, 1550)
     # backing up
@@ -275,13 +271,11 @@ def go_to_fourth_block():
 def go_to_analysis_lab4():
     print("analysis lab 4")
     gyro_turn(-40, 40, 81)
-    # ROBOT.run(drive, yellow=(-40, 40, 950), blue=(-40, 40, 930), red=(-40, 40, 930))
     ROBOT.run(drive, yellow=(40, 40, 3500), blue=(60, 60, 2200), red=(60, 60, 2200))  # yellow untested
     square_up_tophats(40, 40)  # yellow is 42, 40
     square_up_white(-5, -5)
     ROBOT.run(drive, yellow=(25, 25, 1850), blue=(25, 25, 1850), red=(25, 25, 1850))
     gyro_turn(-40, 40, 81)
-
     cube_down()
 
 
