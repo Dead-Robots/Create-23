@@ -15,7 +15,7 @@ def wait_for_button():
 
 def start_button():
     # stop_motors()
-    print("START-UP COMPLETE. Press button to start the run.")
+    print("START-UP COMPLETE. Aim robot and Press button to start the run.")
     while not push_button():
         pass
     msleep(1000)

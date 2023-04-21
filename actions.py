@@ -3,7 +3,7 @@ import servo
 from utilities import wait_for_button, start_button
 from constants.servos import Claw, Wrist, Arm
 from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
-from common import ROBOT
+from common import ROBOT, light
 from sensors import on_black_left, look_for_second_cube, look_for_third_cube, calibrate_gyro
 
 
@@ -15,14 +15,6 @@ def init():
     msleep(1000)
     calibrate_gyro()
     print('Calibration Complete')
-    print('Push button to set arm, wrist, claw')
-    wait_for_button()
-    start_position()
-    # enable_servos()
-    # servo.move(Wrist.DOWN, 1)
-    # servo.move(Claw.OPEN, 1)
-    # servo.move(Arm.DOWN, 1)
-    # shutdown_create_in(119)
 
 
 def shutdown():
@@ -39,7 +31,8 @@ def start_position():
     servo.move(Wrist.START, 1)
     servo.move(Arm.START, 1)
     servo.move(Claw.OPEN, 1)
-    start_button()
+    light.wait_4_light(2)
+    # start_button()
 
 
 def end_position():
@@ -110,7 +103,6 @@ def go_to_analysis_lab1():
     # rotate towards analysis lab
     gyro_turn(40, -40, 81)
     # ROBOT.run(drive, yellow=(40, -40, 800), blue=(40, -40, 850), red=(40, -40, 850))
-    wait(2000)
     ROBOT.run(drive, yellow=(66, 60, 2000), blue=(60, 60, 2000), red=(58, 60, 2000))
     square_up_tophats(42, 40)
     square_up_white(-5, -5)
@@ -256,17 +248,18 @@ def go_to_fourth_block():
     drive(-25, -25, 600)
     servo.move(Arm.HIGHEST, 1, 2)
     drive(25, 25, 600)
-    drive(-40, 40, 900)
+    gyro_turn(-40, 40, 81)
+    # drive(-40, 40, 900)
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
     ROBOT.run(drive, yellow=(42, 40, 4200), blue=(60, 60, 3175), red=(60, 60, 3100))
     msleep(100)
     servo.move(Arm.HIGHEST, 1)
     msleep(100)
-    drive(-40, 40, 850)
+    gyro_turn(-40, 40, 81)
+    # drive(-40, 40, 850)
     msleep(100)
     drive(50, 50, 1550)
-
     # backing up
     ROBOT.run(drive, yellow=(-50, -45, 900), blue=(-50, -50, 850), red=(-50, -50, 850))
     # grab cube
@@ -281,12 +274,14 @@ def go_to_fourth_block():
 
 def go_to_analysis_lab4():
     print("analysis lab 4")
-    ROBOT.run(drive, yellow=(-40, 40, 950), blue=(-40, 40, 930), red=(-40, 40, 930))
+    gyro_turn(-40, 40, 81)
+    # ROBOT.run(drive, yellow=(-40, 40, 950), blue=(-40, 40, 930), red=(-40, 40, 930))
     ROBOT.run(drive, yellow=(40, 40, 3500), blue=(60, 60, 2200), red=(60, 60, 2200))  # yellow untested
     square_up_tophats(40, 40)  # yellow is 42, 40
     square_up_white(-5, -5)
     ROBOT.run(drive, yellow=(25, 25, 1850), blue=(25, 25, 1850), red=(25, 25, 1850))
-    drive(-40, 40, 900)
+    gyro_turn(-40, 40, 81)
+
     cube_down()
 
 
