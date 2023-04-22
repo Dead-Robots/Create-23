@@ -9,83 +9,83 @@ class Arm(ServoEnum):
 
     CUBE1 = ROBOT.choose(
         red=955,
-        blue=1000,
+        blue=200+1000,
         yellow=1160,
         green=760
     )
 
     CUBE1_DOWN = ROBOT.choose(
         red=1850,
-        blue=1840,
+        blue=160+1840,
         yellow=2000,
         green=150
     )
 
     CUBE2 = ROBOT.choose(
         red=10,
-        blue=50,
+        blue=160+50,
         yellow=0,
         green=600
     )
 
     CUBE2_DOWN = ROBOT.choose(
         red=1380,
-        blue=1500,
+        blue=160+1500,
         yellow=1640,
         green=600
     )
 
     CUBE3 = ROBOT.choose(
         red=10,
-        blue=50,
+        blue=160+50,
         yellow=0,
         green=600
     )
 
     CUBE3_DOWN = ROBOT.choose(
         red=935,
-        blue=1050,
+        blue=160+1050,
         yellow=1100,
         green=600
     )
     CUBE4_DOWN = ROBOT.choose(
         red=600,
-        blue=690,
+        blue=160+690,
         yellow=690,
         green=600
     )
 
     UP = ROBOT.choose(
         red=630,
-        blue=600,
+        blue=160+600,
         yellow=400,
         green=1000
     )
 
     DOWN = ROBOT.choose(
         red=1890,
-        blue=2040,
+        blue=160+2040,
         yellow=1970,
         green=150
     )
 
     HIGH = ROBOT.choose(
         red=1400,
-        blue=600,
+        blue=160+600,
         yellow=1400,
         green=1400
     )
 
     HIGHEST = ROBOT.choose(
         red=0,
-        blue=0,
+        blue=160+0,
         yellow=0,
         green=1800
     )
 
     START = ROBOT.choose(
         red=1900,
-        blue=1860,
+        blue=160+1860,
         yellow=1800,
         green=0
     )

@@ -58,7 +58,8 @@ def test_et(et_port):
     print("testing et in port", et_port)
     if analog(et_port) > 1550:
         print("et in port", et_port, "already sees object")
-        exit(1)
+    while analog(et_port) > 1550:
+        pass
     while analog(et_port) < 1550:
         pass
     while analog(et_port) > 1550:
