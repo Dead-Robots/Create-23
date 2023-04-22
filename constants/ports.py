@@ -1,5 +1,7 @@
 # servo ports
-CLAW = 0
+from common import ROBOT
+
+CLAW = ROBOT.choose(blue=0, yellow=0, red=3)
 WRIST = 1
 ARM = 2
 
