@@ -2,9 +2,10 @@ from kipr import msleep, disable_servos, enable_servos
 import servo
 from utilities import wait_for_button
 from constants.servos import Claw, Wrist, Arm
+from constants import ports
 from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
 from common import ROBOT, light
-from sensors import on_black_left, look_for_second_cube, look_for_third_cube, calibrate_gyro
+from sensors import on_black_left, look_for_second_cube, look_for_third_cube, calibrate_gyro, test_et
 from createserial.shutdown import shutdown_create_in
 
 
@@ -48,10 +49,15 @@ def power_on_self_test():
     msleep(200)
     square_up_white(-10, -10)
     servo.move(Arm.UP, 1)
+    # test ETs
+    test_et(ports.LOWER_ET)
+    test_et(ports.UPPER_ET)
+    # test claw
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.UP, 1)
-    servo.move(Wrist.START, 1)
+    servo.move(Wrist.HIGH, 1)
+    servo.move(Wrist.DOWN, 1)
+    servo.move(Wrist.START, 1, 2)
     servo.move(Arm.DOWN, 1)
     print("self test complete!")
     wait_for_button("Aim robot and push button to calibrate light sensor.")
