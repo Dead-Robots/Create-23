@@ -95,14 +95,14 @@ class Claw(ServoEnum):
     port = CLAW
 
     OPEN = ROBOT.choose(
-        red=745,
+        red=700,
         blue=675,
         yellow=360,
         green=200
     )
 
     CLOSED = ROBOT.choose(
-        red=2100,
+        red=1700,
         blue=1900,
         yellow=1000,
         green=1000

@@ -141,7 +141,7 @@ def go_to_second_cube():
     # rotate 90 degrees right
     drive(40, -40, 850)
     # square up
-    drive(50, 50, 1600)
+    ROBOT.run(drive, yellow=(50, 50, 1600), blue=(50, 50, 1600), red=(50, 50, 1430))
     msleep(100)
     # backing up
     ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(0, 0, 0))
