@@ -137,9 +137,8 @@ def go_to_second_cube():
     # square up
     drive(50, 50, 1600)
     msleep(100)
-    # grab cube
     # backing up
-    ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(-25, -25, 400))
+    ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(0, 0, 0))
     # place wrist and arm
     servo.move(Arm.CUBE2, 1, 2)  # red messes up
     # grab cube
