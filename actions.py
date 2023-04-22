@@ -1,6 +1,6 @@
 from kipr import msleep, disable_servos, enable_servos
 import servo
-from utilities import wait_for_button, start_button
+from utilities import wait_for_button
 from constants.servos import Claw, Wrist, Arm
 from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
 from common import ROBOT, light
@@ -8,11 +8,9 @@ from sensors import on_black_left, look_for_second_cube, look_for_third_cube, ca
 from createserial.shutdown import shutdown_create_in
 
 
-# wait_for_button
-
 def init():
-    print('Press button to calibrate gyro, do not move robot.')
-    wait_for_button()
+    # print('Press button to calibrate gyro, do not move robot.')
+    wait_for_button("press button to cal gyros, DO NOT MOVE ROBOT!")
     msleep(1000)
     calibrate_gyro()
     print('Calibration Complete')
@@ -29,9 +27,9 @@ def shutdown():
 # start box position
 def start_position():
     enable_servos()
+    servo.move(Claw.OPEN, 1)
     servo.move(Wrist.START, 1)
     servo.move(Arm.START, 1)
-    servo.move(Claw.OPEN, 1)
     light.wait_4_light(2)
     shutdown_create_in(119)
 
@@ -44,6 +42,7 @@ def end_position():
 
 
 def power_on_self_test():
+    wait_for_button("Push button to run self test.")
     enable_servos()
     square_up_tophats(10, 10)
     msleep(200)
@@ -51,12 +50,11 @@ def power_on_self_test():
     servo.move(Arm.UP, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Claw.CLOSED, 1)
     servo.move(Wrist.UP, 1)
     servo.move(Wrist.START, 1)
     servo.move(Arm.DOWN, 1)
-    servo.move(Claw.OPEN, 1)
-    start_button()
+    print("self test complete!")
+    wait_for_button("Aim robot and push button to calibrate light sensor.")
 
 
 def drive_straight_test():
@@ -105,7 +103,7 @@ def go_to_analysis_lab1():
     ROBOT.run(drive, yellow=(-25, -25, 450), blue=(-25, -25, 450), red=(-25, -25, 425))
     # rotate towards analysis lab
     gyro_turn(40, -40, 81)
-    ROBOT.run(drive, yellow=(66, 60, 2000), blue=(60, 60, 2000), red=(58, 60, 2000))
+    ROBOT.run(drive, yellow=(66, 60, 2000), blue=(60, 60, 2000), red=(62, 60, 2000))
     square_up_tophats(42, 40)
     square_up_white(-5, -5)
     drive(-25, -25, 400)
@@ -116,7 +114,7 @@ def go_to_analysis_lab1():
 def place_first_cube():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 150), red=(-30, -30, 200))
+    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 150), red=(-30, -30, 100))
     servo.move(Wrist.DOWN, 1, 2)
     servo.move(Arm.CUBE1_DOWN, 1)
     msleep(500)
@@ -143,7 +141,7 @@ def go_to_second_cube():
     # backing up
     ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(-25, -25, 400))
     # place wrist and arm
-    servo.move(Arm.CUBE2, 1, 2)
+    servo.move(Arm.CUBE2, 1, 2)  # red messes up
     # grab cube
     servo.move(Claw.CLOSED, 1, 2)
     msleep(450)
@@ -277,6 +275,7 @@ def go_to_analysis_lab4():
     ROBOT.run(drive, yellow=(25, 25, 1850), blue=(25, 25, 1850), red=(25, 25, 1850))
     gyro_turn(-40, 40, 81)
     cube_down()
+    drive(-25, -25, 500)
 
 
 def cube_down():
@@ -298,7 +297,6 @@ def place_fourth_cube():
     servo.move(Arm.CUBE4_DOWN, 1)
     msleep(250)
     servo.move(Claw.OPEN, 1)
-    drive(-25, -25, 500)
 
 
 def gyro_turning():
@@ -308,4 +306,4 @@ def gyro_turning():
     wait_for_button()
     gyro_turn(-30, 30, 360)
 
-    # TODO: Change code for red robot, we didn't get to it today 4/3/23
+    # TODO: Change code for red robot 2nd cube delivery, we didn't finish it today 4/21/23

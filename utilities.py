@@ -5,17 +5,8 @@ import servo
 from constants.servos import Claw, Wrist, Arm
 
 
-def wait_for_button():
-    # stop_motors()
-    print('waiting for button')
-    while not push_button():
-        pass
-    msleep(1000)
-
-
-def start_button():
-    # stop_motors()
-    print("START-UP COMPLETE. Aim robot and Press button to start the run.")
+def wait_for_button(say="waiting for button"):
+    print(say)
     while not push_button():
         pass
     msleep(1000)
