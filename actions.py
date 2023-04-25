@@ -123,7 +123,7 @@ def place_first_cube():
     gyro_turn(40, -40, 81)
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 150), red=(-30, -30, 100))  # blue -30, -30, 150
+    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 125), red=(-30, -30, 100))  # blue -30, -30, 150
     msleep(500)
     servo.move(Claw.OPEN, 1, 2)
     msleep(400)
@@ -142,7 +142,7 @@ def go_to_second_cube():
     # rotate 90 degrees right
     drive(40, -40, 850)
     # square up
-    ROBOT.run(drive, yellow=(50, 50, 1600), blue=(50, 50, 1600), red=(50, 50, 1430))
+    ROBOT.run(drive, yellow=(50, 50, 1600), blue=(50, 50, 1600), red=(50, 50, 1250))
     msleep(100)
     # backing up
     ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(0, 0, 0))
