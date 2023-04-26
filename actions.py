@@ -123,7 +123,7 @@ def place_first_cube():
     gyro_turn(40, -40, 81)
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 125), red=(-30, -30, 100))  # blue -30, -30, 150
+    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 125), red=(-30, -30, 125))  # blue -30, -30, 150
     msleep(500)
     servo.move(Claw.OPEN, 1, 2)
     msleep(400)
@@ -254,7 +254,7 @@ def go_to_fourth_block():
     gyro_turn(-40, 40, 81)
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(42, 40, 4200), blue=(60, 60, 3175), red=(63, 60, 3100))
+    ROBOT.run(drive, yellow=(42, 40, 4200), blue=(60, 60, 3175), red=(64, 60, 3100))
     msleep(100)
     servo.move(Arm.HIGHEST, 1)
     msleep(100)
