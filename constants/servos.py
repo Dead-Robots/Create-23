@@ -114,77 +114,77 @@ class Wrist(ServoEnum):
 
     START = ROBOT.choose(
         red=0,
-        blue=0,
+        blue=100+0,
         yellow=1700,
         green=0
     )
 
     UP = ROBOT.choose(
         red=0,
-        blue=0,
+        blue=100+0,
         yellow=0,
         green=0
     )
 
     HIGH = ROBOT.choose(
         red=1270,
-        blue=1270,
+        blue=100+1270,
         yellow=1270,
         green=1270
     )
 
     DOWN = ROBOT.choose(
         red=0,
-        blue=0,
+        blue=100+0,
         yellow=500,
         green=500
     )
 
     SWEEP = ROBOT.choose(
         red=0,
-        blue=100,
+        blue=100+100,
         yellow=600,
         green=600
     )
 
     CUBE1 = ROBOT.choose(
         red=680,
-        blue=680,
+        blue=100+680,
         yellow=1060,
         green=160
     )
 
     CUBE1_DOWN = ROBOT.choose(
         red=0,
-        blue=0,
+        blue=100+0,
         yellow=500,
         green=500
     )
 
     CUBE2 = ROBOT.choose(
         red=1550,
-        blue=1650,
+        blue=100+1650,
         yellow=2047,
         green=650
     )
 
     CUBE2_DOWN = ROBOT.choose(
         red=220,
-        blue=220,
+        blue=100+220,
         yellow=630,
         green=600
     )
 
     CUBE3 = ROBOT.choose(
         red=1550,
-        blue=1650,
+        blue=100+1650,
         yellow=2047,
         green=650
     )
 
     CUBE3_DOWN = ROBOT.choose(
         red=680,
-        blue=680,
+        blue=100+680,
         yellow=1080,
         green=600
     )
@@ -192,7 +192,7 @@ class Wrist(ServoEnum):
     CUBE4_DOWN = ROBOT.choose(
         # not set yet
         red=900,
-        blue=900,
+        blue=100+900,
         yellow=1500,
         green=600
     )
