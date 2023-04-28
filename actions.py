@@ -55,8 +55,10 @@ def power_on_self_test():
     # test claw
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.HIGH, 1)
-    servo.move(Wrist.DOWN, 1)
+    servo.move(Wrist.HIGH, 1, 2)
+    servo.move(Wrist.DOWN, 1, 2)
+    servo.move(Wrist.HIGH, 1, 2)
+    servo.move(Wrist.DOWN, 1, 2)
     servo.move(Wrist.START, 1, 2)
     servo.move(Arm.DOWN, 1)
     print("self test complete!")
@@ -145,7 +147,7 @@ def go_to_second_cube():
     ROBOT.run(drive, yellow=(50, 50, 1600), blue=(50, 50, 1600), red=(50, 50, 1250))
     msleep(100)
     # backing up
-    ROBOT.run(drive, yellow=(0, 0, 600), blue=(0, 0, 600), red=(0, 0, 0))
+    ROBOT.run(drive, yellow=(0, 0, 600), blue=(-25, -25, 150), red=(-25, -25, 150))
     # place wrist and arm
     servo.move(Arm.CUBE2, 1, 2)  # red messes up
     # grab cube
@@ -176,7 +178,7 @@ def go_to_analysis_lab2():
 
 def second_cube_down():
     place_second_cube()
-    drive(-40, -40, 500)
+    ROBOT.run(drive, yellow=(-40, -40, 0), blue=(-40, -40, 500), red=(-40, -40, 500))
     servo.move(Arm.HIGHEST, 1, 2)
     drive(25, 25, 500)
     drive(-40, 40, 900)
@@ -187,7 +189,7 @@ def second_cube_down():
 def place_second_cube():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 550))
+    ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 600))
     servo.move(Wrist.CUBE2_DOWN, 1, 2)
     servo.move(Arm.CUBE2_DOWN, 1)
     msleep(250)
