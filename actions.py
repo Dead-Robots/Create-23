@@ -140,7 +140,7 @@ def go_to_second_cube():
     # rotate 90 degrees right
     gyro_turn(40, -40, 81)
     # move forwards
-    drive(40, 40, 1050)
+    ROBOT.run(drive, yellow=(40, 40, 1050), blue=(40, 40, 1150), red=(50, 50, 1050))
     # rotate 90 degrees right
     drive(40, -40, 850)
     # square up
