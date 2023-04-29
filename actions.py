@@ -125,7 +125,7 @@ def place_first_cube():
     gyro_turn(40, -40, 81)
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(0, 0, 175), blue=(-30, -30, 100), red=(-30, -30, 0))  # blue -30, -30, 150
+    ROBOT.run(drive, yellow=(0, 0, 175), blue=(30, 30, 50), red=(-30, -30, 0))  # blue -30, -30, 150
     msleep(500)
     servo.move(Claw.OPEN, 1, 2)
     msleep(400)
@@ -189,7 +189,7 @@ def second_cube_down():
 def place_second_cube():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 600))
+    ROBOT.run(drive, yellow=(-25, -25, 650), blue=(-25, -25, 600), red=(-25, -25, 675))
     servo.move(Wrist.CUBE2_DOWN, 1, 2)
     servo.move(Arm.CUBE2_DOWN, 1)
     msleep(250)
@@ -238,7 +238,7 @@ def third_cube_down():
 def place_third_cube():
     square_up_tophats(15, 15)
     square_up_white(-5, -5)
-    ROBOT.run(drive, yellow=(-25, -25, 835), blue=(-25, -25, 745), red=(-25, -25, 800))
+    ROBOT.run(drive, yellow=(-25, -25, 835), blue=(-25, -25, 645), red=(-25, -25, 800))
     # delivery
     msleep(100)
     servo.move(Wrist.CUBE3_DOWN, 1)

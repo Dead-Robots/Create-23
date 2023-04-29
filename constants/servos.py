@@ -155,7 +155,7 @@ class Wrist(ServoEnum):
     )
 
     CUBE1_DOWN = ROBOT.choose(
-        red=0,
+        red=100,
         blue=100+0,
         yellow=500,
         green=500
