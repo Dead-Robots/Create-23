@@ -1,7 +1,7 @@
 from kipr import msleep, disable_servos, enable_servos
 import servo
 from utilities import wait_for_button
-from constants.servos import Claw, Wrist, Arm
+from constants.servos import Claw, Wrist, Arm, translate_arm, translate_claw
 from constants import ports
 from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
 from common import ROBOT, light
@@ -18,9 +18,9 @@ def init():
 
 
 def shutdown():
-    servo.move(Arm.START, 1)
-    servo.move(Wrist.START, 1)
-    servo.move(Claw.OPEN, 1)
+    # servo.move(Arm.START, 1)
+    # servo.move(Wrist.START, 1)
+    # servo.move(Claw.OPEN, 1)
     msleep(1000)
     disable_servos()
 
@@ -76,9 +76,26 @@ def wait(duration):
     print('waiting')
 
 
+def get_first_ring():
+    enable_servos()
+    servo.move(Arm.ZERO, 2)
+    # make sure the claw is open before trying to grab the ring
+    servo.move(Claw.TWENTY, 5, 2)
+    wait_for_button("ready to start")
+    # try getting the arm in the right position to pick up the ring
+    servo.move(Arm.HUNDRED_FIFTEEN, 3)
+    # need the wrist to be perpendicular to the board
+    servo.move(Wrist.ZERO)
+    # need to close claw in order to grab the ring
+    servo.move(Claw.HUNDRED_TEN, 3)
+    wait_for_button("is the arm in the position?")
+    servo.move(Arm.FORTY, 0)
+    wait_for_button("has the robot lifted ring?")
+    # exit(0)
+
+
 def go_to_first_cube():
     print('first block')
-
     drive(40, 0, 230)
     servo.move(Claw.CLOSED, 0, 2)
     servo.move(Arm.HIGHEST, 1, 2)

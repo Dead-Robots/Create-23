@@ -2,26 +2,27 @@
 from createserial.connection import CreateConnection
 from actions import init, shutdown, go_to_first_cube, power_on_self_test, go_to_analysis_lab1, go_to_second_cube, \
     go_to_analysis_lab2, go_to_third_cube, go_to_analysis_lab3, go_to_fourth_block, go_to_analysis_lab4, \
-    start_position, end_position, gyro_turning
+    start_position, end_position, gyro_turning, get_first_ring
 from common import ROBOT
 from utilities import wait_for_button
 
 
 def main():
     init()
-    power_on_self_test()
-    start_position()
-    go_to_first_cube()
-    go_to_analysis_lab1()
-    go_to_second_cube()
-    go_to_analysis_lab2()
-    go_to_third_cube()
-    go_to_analysis_lab3()
-    go_to_fourth_block()
-    go_to_analysis_lab4()
-    end_position()
+    # power_on_self_test()
+    get_first_ring()
+    # start_position()
+    # go_to_first_cube()
+    # go_to_analysis_lab1()
+    # go_to_second_cube()
+    # go_to_analysis_lab2()
+    # go_to_third_cube()
+    # go_to_analysis_lab3()
+    # go_to_fourth_block()
+    # go_to_analysis_lab4()
+    # end_position()
 
-    # shutdown()
+    shutdown()
 
 
 if __name__ == '__main__':
