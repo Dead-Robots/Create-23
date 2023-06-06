@@ -37,6 +37,9 @@ class Arm(ServoEnum):
     HUNDRED_TWENTY_FIVE = translate_arm(125)
     HUNDRED_THIRTY = translate_arm(130)
     HUNDRED_FIFTEEN = translate_arm(115)
+    ONE_THIRTY_EIGHT = translate_arm(138)
+    ONE_THIRTY_SIX = translate_arm(136)
+    ONE_SEVENTY = translate_arm(170)
     # HUNDRED_THIRTY_FIVE = translate_arm(135)
     # HUNDRED_FORTY = translate_arm(140)
 
@@ -51,10 +54,13 @@ class Claw(ServoEnum):
     ZERO = translate_claw(0)
     NINETY = translate_claw(90)
     FORTY = translate_claw(40)
+    OPEN = translate_claw(25)
+    CLOSED = translate_claw(105)
 
 
 class Wrist(ServoEnum):
     port = WRIST
+    translation_function = translate_wrist
     ZERO = translate_wrist(0)
-
+    NEGATIVE_SIX = translate_wrist(-6)
 

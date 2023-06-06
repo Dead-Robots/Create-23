@@ -1,20 +1,52 @@
+from createserial import encoders
+from createserial.constants import Opcode
+from createserial.serial import query_create
 from kipr import msleep, disable_servos, enable_servos
 import servo
+from common.gyro_movements import gyro_init, gyro_turn
 from utilities import wait_for_button
 from constants.servos import Claw, Wrist, Arm, translate_arm, translate_claw
 from constants import ports
-from drive import drive, untimed_drive, square_up_tophats, square_up_white, gyro_turn
+from drive import drive, untimed_drive, square_up_tophats, square_up_white, stop_motors
 from common import ROBOT, light
-from sensors import on_black_left, look_for_second_cube, look_for_third_cube, calibrate_gyro, test_et
+from sensors import on_black_left, look_for_second_cube, look_for_third_cube, test_et
 from createserial.shutdown import shutdown_create_in
 
 
 def init():
     # print('Press button to calibrate gyro, do not move robot.')
-    wait_for_button("press button to cal gyros, DO NOT MOVE ROBOT!")
-    msleep(1000)
-    calibrate_gyro()
-    print('Calibration Complete')
+    # wait_for_button("press button to cal gyros, DO NOT MOVE ROBOT!")
+    # msleep(1000)
+    enable_servos()
+    gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.094, 0.983, 0.1, 0.3, 0.0)
+    # print('Calibration Complete')
+
+
+def move_rings():
+    # red ring
+    servo.move(Claw.OPEN, 1)
+    servo.move(Arm.ONE_THIRTY_SIX, 1)
+    servo.move(Wrist.NEGATIVE_SIX, 1)
+    msleep(500)
+    servo.move(Claw.CLOSED, 1)
+    msleep(500)
+    servo.move(Arm.FORTY, 2)
+    # turn and place it down
+    gyro_turn(-30, 30, 45, True)
+    servo.move(Arm.ONE_SEVENTY, 2)
+    servo.move(Claw.OPEN, 2)
+    servo.move(Arm.ZERO, 1)
+    gyro_turn(30, -30, 45, True)
+
+
+def get_bumps():
+    data = query_create([Opcode.QUERY_LIST, 1, 7], 1)
+    return data != b'\x00'
+
+
+def get_encoder_values():
+    left, right = encoders.values
+    return -1 * left, -1 * right
 
 
 def shutdown():
