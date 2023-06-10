@@ -28,6 +28,7 @@ def translate_wrist(angle):
 class Arm(ServoEnum):
     port = ARM
     translation_function = translate_arm
+    END_POSITION = 1550
     HUNDRED = translate_arm(100)
     ZERO = translate_arm(0)
     NINETY = translate_arm(90)
@@ -42,6 +43,11 @@ class Arm(ServoEnum):
     ONE_SEVENTY = translate_arm(170)
     # HUNDRED_THIRTY_FIVE = translate_arm(135)
     # HUNDRED_FORTY = translate_arm(140)
+    RING_DROP = 1500
+    RING_UP = 700
+    RED_RING = 1125
+    ORANGE_RING = 1250
+    YELLOW_RING = 1350
 
 
 class Claw(ServoEnum):
@@ -54,8 +60,11 @@ class Claw(ServoEnum):
     ZERO = translate_claw(0)
     NINETY = translate_claw(90)
     FORTY = translate_claw(40)
-    OPEN = translate_claw(25)
+    OPEN = 2047
     CLOSED = translate_claw(105)
+    RED_RING = 1400
+    ORANGE_RING = 1425
+    YELLOW_RING = 1450
 
 
 class Wrist(ServoEnum):
@@ -63,4 +72,8 @@ class Wrist(ServoEnum):
     translation_function = translate_wrist
     ZERO = translate_wrist(0)
     NEGATIVE_SIX = translate_wrist(-6)
+    RING_DROP = 1750
+    RED_RING = 1875
+    ORANGE_RING = 1750
+    YELLOW_RING = 1700
 
