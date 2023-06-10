@@ -29,6 +29,9 @@ def init():
     # print('Calibration Complete')
 
 
+
+
+
 def move_rings():
     servo.move(Claw.OPEN, 1)
     servo.move(Arm.RING_UP, 1)
