@@ -46,35 +46,41 @@ def push_rings():
     gyro_turn(30, -30, 66, True)
     servo.move(Arm.PUSH_RINGS)
     servo.move(Wrist.PUSH_RINGS)
-    drive(30, 30, 1500)
-    gyro_turn(0, 30, 20, True)
-    drive(15, 15, 2000)
-    drive(-15, -13, 1500)
-    # red ring
+    drive(35, 30, 1500)
+    gyro_turn(0, 30, 57, True)
+    drive(35, 30, 1300)
+    drive(-35, -30, 700)
+    # red ring grab
     servo.move(Arm.RED_RING, 1)
     servo.move(Wrist.RED_RING, 1)
-    drive(15, 15, 300)
+    drive(35, 30, 150)
     msleep(500)
     servo.move(Claw.RED_RING, 1)
     msleep(500)
     servo.move(Arm.RING_UP, 1)
     # turn and place it down
-    gyro_turn(-30, 30, 40, True)
-    drive(30, 30, 2500)
-    gyro_turn(15, 0, 10, True)
-    drive(-15, -15, 1000)
+    gyro_turn(-30, 30, 30, True)
+    drive(31, 30, 1350)
+    # gyro_turn(15, 0, 10, True)
+    # drive(-17, -15, 1500)
     servo.move(Wrist.RING_DROP, 1)
     servo.move(Arm.RING_DROP, 1)
+    gyro_turn(30, -30, 5, True)
     servo.move(Claw.OPEN, 1)
-    drive(-15, -13, 350)
+    servo.move(Arm.ONE_THIRTY_EIGHT, 1)
+    servo.move(Wrist.PUSH_RINGS, 1)
+    # turn and push the rings towards the other end
+    gyro_turn(30, -30, 80, True)
+    drive(-35, -30, 750)
+    gyro_turn(30, -30, 10, True)
 
     # turn and raise arm for second ring, then back up
-    servo.move(Arm.ZERO, 1)
-    gyro_turn(45, -45, 90, True)
-    drive(-30, -26, 1000)
-    # put arm amd wrist in position
-    servo.move(Wrist.PUSH_RINGS, 1)
-    servo.move(Arm.PUSH_RINGS, 1)
+    # servo.move(Arm.ZERO, 1)
+    # gyro_turn(45, -45, 90, True)
+    # drive(-30, -26, 1000)
+    # # put arm amd wrist in position
+    # servo.move(Wrist.PUSH_RINGS, 1)
+    # servo.move(Arm.PUSH_RINGS, 1)
 
 
 def move_rings():
@@ -277,12 +283,4 @@ def place_first_cube():
     msleep(400)
     drive(-40, -40, 450)
 
-
-
-
-
-
-
-
-
-    # TODO: Change code for red robot 2nd cube delivery, we didn't finish it today 4/21/23
+# TODO: Change code for red robot 2nd cube delivery, we didn't finish it today 4/21/23
