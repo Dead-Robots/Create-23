@@ -1,14 +1,15 @@
 #!/usr/local/bin/python3.10 -u
 from createserial.connection import CreateConnection
 from actions import init, shutdown, power_on_self_test, start_position, end_position, get_first_ring, move_rings, \
-    push_rings, testing
+    push_rings, testing, get_red_ring, deliver_red_ring
 from common import ROBOT
 from utilities import wait_for_button
 
 
 def main():
     init()
-    push_rings()
+    get_red_ring()
+    deliver_red_ring()
     # get_first_ring()
     # move_rings()
 

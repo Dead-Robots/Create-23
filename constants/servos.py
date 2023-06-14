@@ -49,6 +49,9 @@ class Arm(ServoEnum):
     RED_RING = 1150
     ORANGE_RING = 1250
     YELLOW_RING = 1350
+    SIXTY = translate_arm(60)
+    SEVENTY = translate_arm(70)
+    SIXTY_FIVE = translate_arm(65)
 
 
 class Claw(ServoEnum):
@@ -74,9 +77,10 @@ class Wrist(ServoEnum):
     translation_function = translate_wrist
     ZERO = translate_wrist(0)
     NEGATIVE_SIX = translate_wrist(-6)
-    RING_DROP = 1700
-    RED_RING = 1875
-    ORANGE_RING = 1750
-    YELLOW_RING = 1700
-    PUSH_RINGS = 1330
+    RING_DROP = 1325
+    RED_RING = 1300  # was 1875
+    ORANGE_RING = 1375
+    YELLOW_RING = 1325
+    PUSH_RINGS = 855
+    PUSH_CUBE = 1650
 

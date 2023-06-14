@@ -6,8 +6,8 @@ WRIST = 1
 ARM = 2
 
 # sensor ports
-RIGHT_TOPHAT = 0
-LEFT_TOPHAT = 1
+RIGHT_TOPHAT = 1
+LEFT_TOPHAT = 0
 
 
 # et ports
