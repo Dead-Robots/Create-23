@@ -32,13 +32,13 @@ def init():
 
 def testing():
     servo.move(Arm.NINETY, 1)
-    servo.move(Wrist.ZERO, 1)
+    # servo.move(Wrist.ZERO, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.PUSH_RINGS, 1)
+    # servo.move(Wrist.PUSH_RINGS, 1)
     square_up_tophats(15, 15)
     square_up_white(-15, -15)
-    servo.move(Arm.PUSH_RINGS, 1)
+    servo.move(Arm.ONE_THIRTY_EIGHT, 1)
     wait_for_button("end of self test")
 
 
@@ -51,33 +51,53 @@ def get_red_ring():
     # square up on black line
     square_up_rings()
     # turn 90 degrees to get red ring
-    gyro_turn(40, -40, 84)
+    gyro_turn(40, -40, 85)
     # put arm wrist and claw in position to get the red ring
     servo.move(Arm.RED_RING, 1)
-    servo.move(Wrist.RED_RING, 1)
     servo.move(Claw.OPEN, 1)
     # drive forwards
-    drive(42, 40, 2700)
+    # drive(42, 40, 2700)
+    straight_drive_distance(40, 28)
     msleep(500)
     # pick up red ring
     servo.move(Claw.RED_RING, 1)
     msleep(500)
     servo.move(Arm.SIXTY, 1)
-    wait_for_button()
 
 
 def deliver_red_ring():
     # turn after grabbing the red ring
     drive(-42, -40, 1650)
     # put wrist into position to shove the cube over
-    servo.move(Wrist.PUSH_CUBE, 1)
     # turn towards the cube
     gyro_turn(-40, 40, 82)
     # drive until the cube goes over the edge
-    drive(41, 40, 2600)
+    drive(41, 40, 3200)
     msleep(200)
+    # back up
+    drive(-30, -30, 1000)
+    # drop ring on tower
+    servo.move(Claw.OPEN, 1)
+    msleep(300)
     # back up so arm doesn't hit the cube stand
     drive(-42, -40, 2000)
+
+
+def get_yellow_ring():
+    # turn to get yellow
+    gyro_turn(30, -30, 85, True)
+    # put arm wrist and claw in position to get the yellow ring
+    servo.move(Arm.YELLOW_RING, 1)
+    servo.move(Claw.OPEN, 1)
+    # drive forwards
+    drive(42, 40, 2400)
+    msleep(500)
+    # pick up red ring
+    servo.move(Claw.YELLOW_RING, 1)
+    msleep(500)
+    servo.move(Arm.SIXTY, 1)
+    # back up so we don't break
+    drive(-30, -30, 1500)
 
 
 def push_rings():
@@ -187,7 +207,7 @@ def get_bumps():
 
 
 def get_encoder_values():
-    left, right = Encoders.values
+    left, right = encoders.values
     return -1 * left, -1 * right
 
 
@@ -196,8 +216,8 @@ def shutdown():
     # servo.move(Wrist.START, 1)
     # servo.move(Claw.OPEN, 1)
     msleep(1000)
-    servo.move(Arm.PUSH_RINGS, 1)
     servo.move(Wrist.PUSH_RINGS, 1)
+    servo.move(Arm.PUSH_RINGS, 1)
     disable_servos()
 
 
