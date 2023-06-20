@@ -3,6 +3,8 @@ from math import copysign
 
 from kipr import msleep
 from createserial.commands import create_dd
+
+from common.gyro_movements import straight_drive
 from sensors import on_black_left, on_black_right, gyroscope
 
 
@@ -60,3 +62,9 @@ def gyro_turn_with_slow_down(left_speed, right_speed, angle):
     slow_angle = angle - fast_angle
     gyro_turn(left_speed, right_speed, fast_angle)
     gyro_turn(int(copysign(10, left_speed)), int(copysign(10, right_speed)), slow_angle)
+
+
+def straight_drive_black(speed):
+    def see_white():
+        return not on_black_left() and not on_black_right()
+    straight_drive(speed, see_white)
