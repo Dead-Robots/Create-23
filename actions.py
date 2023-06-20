@@ -111,7 +111,7 @@ def get_yellow_ring():
     # put claw in position to get yellow ring
     servo.move(Claw.OPEN, 1)
     # drive forwards
-    straight_drive_distance(40, 15)
+    straight_drive_distance(40, 16)
     # put claw in position to get yellow ring
     servo.move(Claw.YELLOW_RING, 1)
     # put arm in position to get yellow ring
@@ -143,11 +143,35 @@ def deliver_yellow_ring():
     straight_drive_distance(-40, 5)
     # put arm down to deliver the yellow ring onto the tape
     servo.move(Arm.YELLOW_RING_DOWN, 1)
-    # move forward 
+    # move forward
     straight_drive_distance(15, 2)
     # open the claw to release the ring
     servo.move(Claw.OPEN, 1)
-
+    # raise arm
+    servo.move(Arm.END_POSITION, 1)
+    # turn right
+    gyro_turn(40, -40, 90)
+    # square up
+    square_up_tophats(-15, -15)
+    # drive back
+    straight_drive_distance(-40, 20)
+    # turn right
+    gyro_turn(40, -40, 90)
+    # square up
+    square_up_tophats(15, 15)
+    # straight drive
+    straight_drive_distance(40, 8)
+    # turn left
+    gyro_turn(-40, 40, 90)
+    # move arm
+    servo.move(Arm.GREEN_RING, 1)
+    # drive towards the ring stack
+    straight_drive_distance(40, 8)
+    # close claw to pick up the green ring
+    servo.move(Claw.YELLOW_RING, 1)
+    # raise arm after picking up green ring
+    servo.move(Arm.DELIVER_RED_RING, 1)
+    
 
 def push_rings():
     # right motor is too strong

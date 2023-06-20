@@ -58,6 +58,7 @@ class Arm(ServoEnum):
     RED_RING_2 = translate_arm(60)
     RED_RING_DOWN = translate_arm(81)
     YELLOW_RING_DOWN = translate_arm(145)
+    GREEN_RING = translate_arm(134)
 
 
 class Claw(ServoEnum):
