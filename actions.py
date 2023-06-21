@@ -31,6 +31,9 @@ def init():
     global encoders
     encoders = Encoders()
     post.post_core(servo_test, test_motor, test_sensors, calibration_function=calibrate)
+    # wait_for_button()
+    # gyro_turn(-40, 40, 180)
+    # wait_for_button()
     # print('Calibration Complete')
 
 
@@ -118,8 +121,6 @@ def get_yellow_ring():
     servo.move(Arm.YELLOW_RING, 1)
     # raise arm
     servo.move(Arm.DELIVER_RED_RING, 1)
-    # back up
-    straight_drive_distance(-40, 10)
 
 
 def deliver_yellow_ring():
@@ -127,8 +128,10 @@ def deliver_yellow_ring():
     servo.move(Arm.ZERO, 1)
     # turn 90 degrees left
     gyro_turn(-40, 40, 90)
+    # square up
+    square_up_white(15, 15)
     # drive straight
-    straight_drive_distance(40, 10)
+    straight_drive_distance(40, 8)
     # turn 90 degrees right
     gyro_turn(40, -40, 90)
     # drive until black line
@@ -140,13 +143,15 @@ def deliver_yellow_ring():
     # pivot to face the gray tape
     gyro_turn(0, 40, 90)
     # back up so we don't break
-    straight_drive_distance(-40, 5)
+    straight_drive_distance(-40, 4.5)
     # put arm down to deliver the yellow ring onto the tape
     servo.move(Arm.YELLOW_RING_DOWN, 1)
-    # move forward
-    straight_drive_distance(15, 2)
+    # move forwards
+    straight_drive_distance(40, 3)
     # open the claw to release the ring
     servo.move(Claw.OPEN, 1)
+    # back up again
+    straight_drive_distance(-40, 2)
     # raise arm
     servo.move(Arm.END_POSITION, 1)
     # turn right
@@ -160,7 +165,7 @@ def deliver_yellow_ring():
     # square up
     square_up_tophats(15, 15)
     # straight drive
-    straight_drive_distance(40, 8)
+    straight_drive_distance(40, 9)
     # turn left
     gyro_turn(-40, 40, 90)
     # move arm
@@ -171,6 +176,17 @@ def deliver_yellow_ring():
     servo.move(Claw.YELLOW_RING, 1)
     # raise arm after picking up green ring
     servo.move(Arm.DELIVER_RED_RING, 1)
+
+
+def green_ring_left():
+    # turn left
+    gyro_turn(-30, 30, 90)
+    # deliver green ring
+    servo.move(Arm.YELLOW_RING_DOWN, 1)
+    # move forward towards the tape
+    straight_drive_distance(40, 13)
+    # open claw
+    servo.move(Claw.OPEN, 1)
     
 
 def push_rings():
