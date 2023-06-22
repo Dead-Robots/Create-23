@@ -210,18 +210,20 @@ def deliver_yellow_ring():
     square_up_white(-15, -15)
     # pivot to face the gray tape
     gyro_turn(0, 40, 90)
+
     # back up so we don't break
-    straight_drive_distance(-40, 4.5)
-    # put arm down to deliver the yellow ring onto the tape
-    servo.move(Arm.YELLOW_RING_DOWN, 1)
-    # move forwards
-    straight_drive_distance(40, 3)
+    # straight_drive_distance(-40, 4.5)
+    # # put arm down to deliver the yellow ring onto the tape
+    # servo.move(Arm.YELLOW_RING_DOWN, 1)
+
+    # # move forwards
+    straight_drive_distance(40, 8)
     # open the claw to release the ring
     servo.move(Claw.OPEN, 1)
     # back up again
-    straight_drive_distance(-40, 2)
-    # raise arm
-    servo.move(Arm.END_POSITION, 1)
+    straight_drive_distance(-40, 7)
+    # # raise arm
+    # servo.move(Arm.END_POSITION, 1)
     # turn right
     gyro_turn(40, -40, 90)
     # square up
@@ -273,20 +275,20 @@ def green_ring_left():
     # close claw to pick up the green ring
     servo.move(Claw.YELLOW_RING, 1)
     # raise arm after picking up green ring
-    servo.move(Arm.DELIVER_RED_RING, 1)
+    servo.move(Arm.ZERO, 1)
     # back up a little bit
     straight_drive_distance(-40, 1)
     # turn left
     gyro_turn(-30, 30, 90)
-    # deliver green ring
-    servo.move(Arm.YELLOW_RING_DOWN, 1)
+    # # deliver green ring
+    # servo.move(Arm.YELLOW_RING_DOWN, 1)
     # move forward towards the tape
-    straight_drive_distance(40, 13)
+    straight_drive_distance(40, 24)
     # open claw
     servo.move(Claw.OPEN, 1)
     # COPY AND PASTE INTO GREEN RING RIGHT WHEN YOU MAKE THE FUNCTION
     # move backwards to get the blue ring
-    straight_drive_distance(-40, 13)
+    straight_drive_distance(-40, 18)
     # bring arm up
     servo.move(Arm.DELIVER_RED_RING, 1)
     # turn towards the ring stack

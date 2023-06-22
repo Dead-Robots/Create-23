@@ -20,6 +20,7 @@ def main():
     get_yellow_ring()
     deliver_yellow_ring()
     green_ring_left()
+    wait_for_button()
     blue_ring_right()
     # get_first_ring()
     # move_rings()
