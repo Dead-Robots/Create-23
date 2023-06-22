@@ -48,7 +48,7 @@ class Arm(ServoEnum):
     RING_UP = 700
 
     RED_RING = translate_arm(113)
-    # ORANGE_RING = 1250
+    ORANGE_RING = translate_arm(120)
     YELLOW_RING = translate_arm(126)
 
     SIXTY = translate_arm(60)
@@ -57,8 +57,9 @@ class Arm(ServoEnum):
     DELIVER_RED_RING = translate_arm(77)
     RED_RING_2 = translate_arm(60)
     RED_RING_DOWN = translate_arm(81)
-    YELLOW_RING_DOWN = translate_arm(145)
+    YELLOW_RING_DOWN = translate_arm(143)
     GREEN_RING = translate_arm(134)
+    BLUE_RING = translate_arm(140)
 
 
 class Claw(ServoEnum):
