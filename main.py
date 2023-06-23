@@ -1,10 +1,9 @@
 #!/usr/local/bin/python3.10 -u
 from createserial.connection import CreateConnection
-from actions import init, shutdown, power_on_self_test, start_position, end_position, get_first_ring, move_rings, \
-    push_rings, servo_test, get_red_ring, deliver_red_ring, get_yellow_ring, deliver_yellow_ring, green_ring_left, \
-    get_orange_ring, deliver_orange_ring, blue_ring_left, blue_ring_right
+from actions import init, shutdown, get_red_ring, deliver_red_ring, \
+    get_yellow_ring, deliver_yellow_ring, green_ring_left, get_orange_ring, deliver_orange_ring, blue_ring_left,\
+    blue_ring_right
 from common import ROBOT
-from common.gyro_movements import calibrate_straight_drive_distance
 from utilities import wait_for_button
 
 
@@ -20,7 +19,6 @@ def main():
     get_yellow_ring()
     deliver_yellow_ring()
     green_ring_left()
-    wait_for_button()
     blue_ring_right()
     # get_first_ring()
     # move_rings()

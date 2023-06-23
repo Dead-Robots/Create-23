@@ -28,7 +28,7 @@ def translate_wrist(angle):
 class Arm(ServoEnum):
     port = ARM
     translation_function = translate_arm
-    END_POSITION = 1550
+    END_POSITION = translate_arm(143)
     HUNDRED = translate_arm(100)
     ZERO = translate_arm(0)
     NINETY = translate_arm(90)

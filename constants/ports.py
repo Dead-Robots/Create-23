@@ -3,7 +3,7 @@ from common import ROBOT
 
 CLAW = ROBOT.choose(blue=0, yellow=0, red=0, green=0)
 WRIST = 1
-ARM = 2
+ARM = 3
 
 # sensor ports
 RIGHT_TOPHAT = 0
