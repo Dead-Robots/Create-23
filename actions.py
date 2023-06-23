@@ -7,11 +7,11 @@ from kipr import msleep, disable_servos, enable_servos
 import servo
 from common.gyro_movements import gyro_init, gyro_turn, straight_drive_distance, calibrate_straight_drive_distance
 from utilities import wait_for_button
-from constants.servos import Claw, Wrist, Arm, translate_arm, translate_claw
+from constants.servos import Claw, Arm
 from constants import ports
 from drive import drive, untimed_drive, square_up_tophats, square_up_white, stop_motors, straight_drive_black
 from common import ROBOT, light, post
-from sensors import on_black_left, look_for_second_cube, look_for_third_cube, test_et
+from sensors import test_et
 from createserial.shutdown import shutdown_create_in
 
 encoders: Optional[Encoders] = None
@@ -25,7 +25,7 @@ def init():
     if ROBOT.is_red:
         gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 1.0, 0.094, 0.04, 0.7, 0.0)
     elif ROBOT.is_green:
-        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.983, 0.094, 0.1, 0.3, 0.0)
+        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.990, 0.095, 0.1, 0.3, 0.0)
     else:
         raise Exception("Set up this color plz")
     global encoders
@@ -43,13 +43,11 @@ def calibrate():
 
 def servo_test():
     servo.move(Arm.NINETY, 1)
-    # servo.move(Wrist.ZERO, 1)
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    # servo.move(Wrist.PUSH_RINGS, 1)
     square_up_tophats(15, 15)
     square_up_white(-15, -15)
-    servo.move(Arm.ONE_THIRTY_EIGHT, 1)
+    servo.move(Arm.REST_POSITION, 1)
     wait_for_button("End of self test, press button to continue run.")
 
 
@@ -125,7 +123,7 @@ def get_orange_ring():
 
 def deliver_orange_ring():
     # lift arm straight up
-    servo.move(Arm.ZERO, 1)
+    servo.move(Arm.STRAIGHT_UP, 1)
     # turn 90 degrees left
     gyro_turn(-50, 50, 90)
     # square up
@@ -193,7 +191,7 @@ def get_yellow_ring():
 
 def deliver_yellow_ring():
     # lift arm straight up
-    servo.move(Arm.ZERO, 1)
+    servo.move(Arm.STRAIGHT_UP, 1)
     # turn 90 degrees left
     gyro_turn(-50, 50, 90)
     # square up
@@ -274,7 +272,7 @@ def green_ring_left():
     # close claw to pick up the green ring
     servo.move(Claw.YELLOW_RING, 1)
     # raise arm after picking up green ring
-    servo.move(Arm.ZERO, 1)
+    servo.move(Arm.STRAIGHT_UP, 1)
     # back up a little bit
     straight_drive_distance(-40, 0.5)
     # turn left
@@ -299,7 +297,7 @@ def green_ring_left():
     # close claw
     servo.move(Claw.YELLOW_RING, 1)
     # raise arm
-    servo.move(Arm.ZERO, 1)
+    servo.move(Arm.STRAIGHT_UP, 1)
     # back up
     straight_drive_distance(-40, 5)
 
@@ -321,107 +319,6 @@ def blue_ring_left():
     straight_drive_distance(40, 13)
     # open claw
     servo.move(Claw.OPEN, 1)
-    
-
-def push_rings():
-    # right motor is too strong
-    servo.move(Claw.OPEN, 1)
-    gyro_turn(30, -30, 66, True)
-    servo.move(Arm.PUSH_RINGS)
-    servo.move(Wrist.PUSH_RINGS)
-    drive(35, 30, 1500)
-    gyro_turn(0, 30, 57, True)
-    drive(35, 30, 1300)
-    drive(-35, -30, 700)
-    # red ring grab
-    servo.move(Arm.RED_RING, 1)
-    servo.move(Wrist.RED_RING, 1)
-    drive(35, 30, 150)
-    msleep(500)
-    servo.move(Claw.RED_RING, 1)
-    msleep(500)
-    servo.move(Arm.RING_UP, 1)
-    # turn and place it down
-    gyro_turn(-30, 30, 30, True)
-    drive(31, 30, 1350)
-    # gyro_turn(15, 0, 10, True)
-    # drive(-17, -15, 1500)
-    servo.move(Wrist.RING_DROP, 1)
-    servo.move(Arm.RING_DROP, 1)
-    gyro_turn(30, -30, 5, True)
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.ONE_THIRTY_EIGHT, 1)
-    servo.move(Wrist.PUSH_RINGS, 1)
-    # turn and push the rings towards the other end
-    gyro_turn(30, -30, 80, True)
-    drive(-35, -30, 750)
-    gyro_turn(30, -30, 10, True)
-
-    # turn and raise arm for second ring, then back up
-    # servo.move(Arm.ZERO, 1)
-    # gyro_turn(45, -45, 90, True)
-    # drive(-30, -26, 1000)
-    # # put arm amd wrist in position
-    # servo.move(Wrist.PUSH_RINGS, 1)
-    # servo.move(Arm.PUSH_RINGS, 1)
-
-
-def move_rings():
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.RING_UP, 1)
-    servo.move(Wrist.ZERO, 1)
-    wait_for_button("Push button to start.")
-
-    # red ring
-    servo.move(Wrist.RED_RING, 1)
-    servo.move(Arm.RED_RING, 1)
-    msleep(500)
-    servo.move(Claw.RED_RING, 1)
-    msleep(500)
-    servo.move(Arm.RING_UP, 1)
-    # turn and place it down
-    gyro_turn(-30, 30, 90, True)
-    servo.move(Wrist.RING_DROP, 1)
-    servo.move(Arm.RING_DROP, 1)
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.RING_UP, 1)
-    gyro_turn(30, -30, 90, True)
-
-    # orange ring
-    servo.move(Wrist.ORANGE_RING, 1)
-    servo.move(Arm.ORANGE_RING, 1)
-    drive(-30, -30, 50)
-    stop_motors()
-    msleep(500)
-    servo.move(Claw.ORANGE_RING, 1)
-    msleep(500)
-    servo.move(Arm.RING_UP, 1)
-    # turn and place it down
-    gyro_turn(-30, 30, 90, True)
-    servo.move(Wrist.RING_DROP, 1)
-    servo.move(Arm.RING_DROP, 1)
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.RING_UP, 1)
-    gyro_turn(30, -30, 90, True)
-
-    # yellow ring
-    servo.move(Wrist.YELLOW_RING, 1)
-    servo.move(Arm.YELLOW_RING, 1)
-    drive(-30, -30, 100)
-    stop_motors()
-    msleep(500)
-    servo.move(Claw.YELLOW_RING, 1)
-    msleep(500)
-    servo.move(Arm.RING_UP, 1)
-    # turn and place it down
-    gyro_turn(-30, 30, 90, True)
-    servo.move(Wrist.RING_DROP, 1)
-    servo.move(Arm.RING_DROP, 1)
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.RING_UP, 1)
-    gyro_turn(30, -30, 90, True)
-    drive(30, 30, 100)
-    stop_motors()
 
 
 def get_bumps():
@@ -436,11 +333,9 @@ def get_encoder_values():
 
 def shutdown():
     # servo.move(Arm.START, 1)
-    # servo.move(Wrist.START, 1)
     # servo.move(Claw.OPEN, 1)
     msleep(1000)
-    servo.move(Wrist.PUSH_RINGS, 1)
-    servo.move(Arm.END_POSITION, 1)
+    servo.move(Arm.REST_POSITION, 1)
     disable_servos()
 
 
@@ -448,14 +343,12 @@ def shutdown():
 def start_position():
     enable_servos()
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.START, 1)
     servo.move(Arm.START, 1)
     light.wait_4_light(2)
     shutdown_create_in(119)
 
 
 def end_position():
-    servo.move(Wrist.START, 1)
     servo.move(Arm.START, 1)
     servo.move(Claw.OPEN, 1)
     print('done with program')
@@ -474,11 +367,6 @@ def power_on_self_test():
     # test claw
     servo.move(Claw.CLOSED, 1)
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.HIGH, 1, 2)
-    servo.move(Wrist.DOWN, 1, 2)
-    servo.move(Wrist.HIGH, 1, 2)
-    servo.move(Wrist.DOWN, 1, 2)
-    servo.move(Wrist.START, 1, 2)
     servo.move(Arm.DOWN, 1)
     print("self test complete!")
     wait_for_button("Aim robot and push button to calibrate light sensor.")
@@ -493,5 +381,4 @@ def wait(duration):
     drive(0, 0, duration)
     msleep(100)
     print('waiting')
-
 

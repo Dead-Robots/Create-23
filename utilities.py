@@ -2,7 +2,7 @@
 from kipr import msleep, push_button
 
 import servo
-from constants.servos import Claw, Wrist, Arm
+from constants.servos import Claw, Arm
 
 
 def wait_for_button(say="waiting for button"):
@@ -15,5 +15,4 @@ def wait_for_button(say="waiting for button"):
 def arm_resting():
     wait_for_button()
     servo.move(Claw.OPEN, 1)
-    servo.move(Wrist.DOWN, 1)
     servo.move(Arm.DOWN, 3)

@@ -4,21 +4,14 @@ from constants.ports import *
 
 
 def translate_arm(angle):
-    position = int(angle / 175 * 2047 + 175)
+    position = int(angle / 175 * 2047 + ROBOT.choose(red=175, green=-139))
     if position < 0 or position > 2047:
         raise Exception("Resulting position invalid " + str(position) + " " + str(angle))
     return position
 
 
 def translate_claw(angle):
-    position = int(angle / 175 * 2047 + 1450)  # was 200
-    if position < 0 or position > 2047:
-        raise Exception("Resulting position invalid " + str(position) + " " + str(angle))
-    return position
-
-
-def translate_wrist(angle):
-    position = int(angle / 175 * 2047 + 156)
+    position = int(angle / 175 * 2047 + ROBOT.choose(red=1450, green=1560))
     if position < 0 or position > 2047:
         raise Exception("Resulting position invalid " + str(position) + " " + str(angle))
     return position
@@ -28,9 +21,9 @@ def translate_wrist(angle):
 class Arm(ServoEnum):
     port = ARM
     translation_function = translate_arm
-    END_POSITION = translate_arm(143)
+    REST_POSITION = translate_arm(143)
     HUNDRED = translate_arm(100)
-    ZERO = translate_arm(0)
+    STRAIGHT_UP = translate_arm(15)
     NINETY = translate_arm(90)
     FORTY = translate_arm(40)
     HUNDRED_TEN = translate_arm(110)
@@ -71,16 +64,3 @@ class Claw(ServoEnum):
     # ORANGE_RING = 1425
     YELLOW_RING = translate_claw(27)
     # CLOSED_RING_STAND = translate_claw(100)
-
-
-class Wrist(ServoEnum):
-    port = WRIST
-    translation_function = translate_wrist
-    ZERO = translate_wrist(0)
-    NEGATIVE_SIX = translate_wrist(-6)
-    RING_DROP = 1325
-    RED_RING = 1300  # was 1875
-    ORANGE_RING = 1375
-    YELLOW_RING = 1130
-    PUSH_RINGS = 855
-    PUSH_CUBE = 1650
