@@ -22,7 +22,7 @@ def untimed_drive(left_speed, right_speed):
     create_dd(-5 * right_speed, -5 * left_speed)
 
 
-def square_up_tophats(left_speed, right_speed):
+def square_up_black(left_speed, right_speed):
     untimed_drive(left_speed, right_speed)
     while left_speed != 0 or right_speed != 0:
         if on_black_left():
