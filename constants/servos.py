@@ -4,7 +4,7 @@ from constants.ports import *
 
 
 def translate_arm(angle):
-    position = int(angle / 175 * 2047 + ROBOT.choose(red=47, green=132))
+    position = int(angle / 175 * 2047 + ROBOT.choose(red=47, green=122))
     if position < 0 or position > 2047:
         raise Exception("Resulting position invalid " + str(position) + " " + str(angle))
     return position
@@ -24,6 +24,7 @@ class Arm(ServoEnum):  # please keep in order :)
 
     # Driving positions
     STRAIGHT_UP = translate_arm(15)
+    UP = translate_arm(25)
     DRIVING_RELAXED = translate_arm(143)
     REST_POSITION = translate_arm(153)
 
@@ -31,17 +32,17 @@ class Arm(ServoEnum):  # please keep in order :)
     NINETY = translate_arm(90)
 
     # Pickup Values
-    RED_RING_PICKUP = translate_arm(ROBOT.choose(red=107, green=108))
-    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=120, green=115))
-    YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=126, green=126))
+    RED_RING_PICKUP = translate_arm(ROBOT.choose(red=107, green=113))
+    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=120, green=122))
+    YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=126, green=128))
     GREEN_RING_PICKUP = translate_arm(134)
     BLUE_RING_PICKUP = translate_arm(140)
 
     # Delivery Values
-    SHORT_RING_UP = translate_arm(66)
-    SHORT_RING_DOWN = translate_arm(75)
-    DELIVER_SHORT_RING = translate_arm(77)
-    TALL_RING_DELIVERY = translate_arm(143)
+    SHORT_RING_UP = translate_arm(54)
+    SHORT_RING_DOWN = translate_arm(85)
+    DELIVER_SHORT_RING = translate_arm(74)
+    TALL_RING_DELIVERY = translate_arm(15)
 
 
 class Claw(ServoEnum):

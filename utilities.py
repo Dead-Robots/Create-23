@@ -8,7 +8,7 @@ from constants.servos import Claw, Arm
 def wait_for_button(say="waiting for button"):
     print(say)
     while not push_button():
-        pass
+        msleep(50)
     msleep(1000)
 
 
