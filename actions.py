@@ -71,7 +71,7 @@ def get_red_ring():
 
 def deliver_red_ring():
     # back up after grabbing the red ring
-    straight_drive_distance(-40, 17)
+    straight_drive_distance(-40, 17.5)
     # turn towards the cube
     gyro_turn(-40, 40, 75)
     # drive until the cube goes over the edge
@@ -89,12 +89,6 @@ def deliver_red_ring():
 
     straight_drive_distance(-20, 4)
 
-    # # back up to get the orange ring
-    # straight_drive_distance(-50, 10)
-    # # square up to get into a repeatable position
-    # square_up_black(-30, -30)
-    # square_up_white(15, 15)
-
 
 def square_up_rings():
     square_up_black(35, 30)
@@ -107,34 +101,24 @@ def get_orange_ring():
     straight_drive_distance(70, 24, False)
     straight_drive_black(30)
     square_up_rings()
+    straight_drive_distance(-30, 3)
+    gyro_turn(40, -40, 90)
+    # straight_drive_black(10)
+    square_up_black(20, 20)
+    square_up_white(-10, -10)
     stop_motors()
-    gyro_turn(25, -25, 72)
+    straight_drive_distance(-30, 5)
+    gyro_turn(-25, 25, 33)
     servo.move(Arm.ORANGE_RING_PICKUP, 1)
-    msleep(200)
-    straight_drive_distance(30, 2)
+    msleep(500)
+    straight_drive_distance(10, 2)
     servo.move(Claw.CLOSED, 0)
     msleep(200)
-
-    # straight_drive_distance(20, 2)
-    # # turn to get orange ring
-    # gyro_turn(30, -30, 90)
-    # # put arm in position to get the orange ring
-    # servo.move(Arm.ORANGE_RING_PICKUP, 1)
-    # # put claw in position to get orange ring
-    # servo.move(Claw.OPEN, 1)
-    # # drive forwards
-    # straight_drive_distance(60, 19)
-    # # put claw in position to get orange ring
-    # servo.move(Claw.YELLOW_RING, 1)
-    # # put arm in position to get orange ring
-    # servo.move(Arm.ORANGE_RING_PICKUP, 1)
-    # # raise arm
-    # servo.move(Arm.DELIVER_SHORT_RING, 1)
 
 
 def deliver_orange_ring():
     servo.move(Arm.DELIVER_SHORT_RING, 1)
-    gyro_turn(-25, 25, 72)
+    gyro_turn(-25, 25, 66)
     square_up_rings()
     gyro_turn(20, 0, 3)
     straight_drive_distance(20, 0.5, False)
@@ -147,7 +131,6 @@ def deliver_orange_ring():
     gyro_turn(-30, 30, 92)
     straight_drive_distance(40, 12, False)
     stop_motors()
-
     # raise arm to release the cube
     servo.move(Arm.SHORT_RING_UP, 1)
     # back up
@@ -156,66 +139,8 @@ def deliver_orange_ring():
     servo.move(Arm.SHORT_RING_DOWN, 1)
     # drop ring on tower
     servo.move(Claw.OPEN, 1)
-
-    straight_drive_distance(-40, 5)
-
-    # # lift arm straight up
-    # servo.move(Arm.STRAIGHT_UP, 1)
-    # # turn 90 degrees left
-    # gyro_turn(-50, 50, 90)
-    # # square up
-    # square_up_white(15, 15)
-    # # drive straight
-    # straight_drive_distance(30, 8)
-    # # turn 90 degrees right
-    # gyro_turn(50, -50, 90)
-    # # drive until black line
-    # straight_drive_black(40)
-    # # square up on black
-    # square_up_black(15, 15)
-    # # square up on white
-    # square_up_white(-15, -15)
-    # # straight drive down to the last cube
-    # straight_drive_distance(30, 32)
-    # # turn towards the cube
-    # gyro_turn(-50, 50, 90)
-    # straight_drive_distance(-30, 8)
-    # wait_for_button()
-    # # put arm into position
-    # servo.move(Arm.DELIVER_SHORT_RING, 1)
-    # # drive until the cube goes over the edge
-    # straight_drive_distance(30, 17)
-    # # raise arm to release the cube
-    # servo.move(Arm.SHORT_RING_UP, 1)
-    # # back up
-    # straight_drive_distance(-30, 4)
-    # # lower arm back down
-    # servo.move(Arm.SHORT_RING_DOWN, 1)
-    # # drop ring on tower
-    # servo.move(Claw.OPEN, 1)
-    # wait_for_button()
-    # # back up so we don't break... opps :p
-    # straight_drive_distance(-30, 7)
-    # wait_for_button("1")
-    # # turn 90 degrees left
-    # gyro_turn(-50, 50, 90)
-    # servo.move(Arm.STRAIGHT_UP)
-    # wait_for_button("2")
-    # # square up on black
-    # straight_drive_black(30)
-    # square_up_white(20, 20)
-    # wait_for_button()
-    # straight_drive_distance(20, 4)
-    # wait_for_button()
-    # gyro_turn(-30, 30, 90)
-    # wait_for_button("'Grabbing'")
-    # drive_until_bump(-30)
-    # wait_for_button("did the bump work? prob not")
-    # servo.move(Claw.OPEN)
-    # wait(250)
-    # servo.move(Arm.YELLOW_RING_PICKUP)
-    # wait(250)
-    # gyro_turn(30, -30, 180)
+    servo.move(Arm.STRAIGHT_UP, 1)
+    straight_drive_distance(-40, 4)
 
 
 def get_yellow_ring():
@@ -227,7 +152,7 @@ def get_yellow_ring():
     stop_motors()
     gyro_turn(-25, 25, 65)
     servo.move(Arm.YELLOW_RING_PICKUP, 1)
-    straight_drive_distance(30, 3)
+    straight_drive_distance(30, 5)
     servo.move(Claw.YELLOW_RING, 1)
     straight_drive_distance(-20, 1.5)
 
@@ -250,17 +175,26 @@ def get_yellow_ring():
 
 
 def deliver_yellow_ring():
-    servo.move(Arm.TALL_RING_DELIVERY)
+    servo.move(Arm.TALL_RING_DELIVERY, 1)
     gyro_turn(20, -20, 5, False)
     gyro_turn(40, -40, 5, False)
-    gyro_turn(60, -60, 124, False)
-    gyro_turn(40, -40, 5, False)
-    gyro_turn(20, -20, 5)
-    straight_drive_distance(30, 19, False)
+    gyro_turn(40, -40, 70, False)
+    straight_drive_black(10)
+    square_up_white(-5, -5)
+    straight_drive_distance(30, 6)
+    gyro_turn(40, -40, 90, False)
+    stop_motors()
+    # drive towards botgal
+    straight_drive_distance(30, 7.5)
+    servo.move(Arm.YELLOW_RING_DELIVERY, 1)
+    straight_drive_distance(30, 5)
+    # straight_drive_distance(-15, 1, False)
     stop_motors()
     servo.move(Claw.OPEN, 1)
     msleep(500)
-    straight_drive_distance(-5, 12, False)
+    servo.move(Arm.STRAIGHT_UP, 1)
+    msleep(500)
+    straight_drive_distance(-3, 12, False)
     stop_motors()
     msleep(200)
 
@@ -312,6 +246,56 @@ def deliver_yellow_ring():
     # gyro_turn(-50, 50, 90)
 
 
+def green_ring_left():
+    # move arm all the way up
+    servo.move(Arm.STRAIGHT_UP, 1)
+    # turn 180 degrees to grab the green ring
+    gyro_turn(-40, 40, 180)
+    # back up
+    straight_drive_distance(-30, 2.5)
+    # put arm into position to grab green ring
+    servo.move(Arm.GREEN_RING_PICKUP, 1)
+
+
+
+
+    # # move arm
+    # servo.move(Arm.GREEN_RING_PICKUP, 1)
+    # # drive towards the ring stack
+    # straight_drive_distance(40, 9)
+    # # close claw to pick up the green ring
+    # servo.move(Claw.YELLOW_RING, 1)
+    # # raise arm after picking up green ring
+    # servo.move(Arm.STRAIGHT_UP, 1)
+    # # back up a little bit
+    # straight_drive_distance(-40, 0.5)
+    # # turn left
+    # gyro_turn(-30, 30, 90)
+    # # deliver green ring??
+    # # servo.move(Arm.YELLOW_RING_DOWN, 1)
+    # # move forward towards the tape
+    # straight_drive_distance(40, 24)
+    # # open claw
+    # servo.move(Claw.OPEN, 1)
+    # # COPY AND PASTE INTO GREEN RING RIGHT WHEN YOU MAKE THE FUNCTION
+    # # move backwards to get the blue ring
+    # straight_drive_distance(-40, 24)
+    # # bring arm up
+    # servo.move(Arm.DELIVER_SHORT_RING, 1)
+    # # turn towards the ring stack
+    # gyro_turn(30, -30, 90)
+    # # put arm into position
+    # servo.move(Arm.BLUE_RING_PICKUP, 1)
+    # # move forwards
+    # straight_drive_distance(40, 3)
+    # # close claw
+    # servo.move(Claw.YELLOW_RING, 1)
+    # # raise arm
+    # servo.move(Arm.STRAIGHT_UP, 1)
+    # # back up
+    # straight_drive_distance(-40, 5)
+
+
 def blue_ring_right():
     gyro_turn(-40, 40, 90)
     # square up
@@ -336,44 +320,6 @@ def blue_ring_right():
     servo.move(Claw.OPEN, 1)
     # back up to prevent from damaging claw
     straight_drive_distance(-40, 10)
-
-
-def green_ring_left():
-    # move arm
-    servo.move(Arm.GREEN_RING_PICKUP, 1)
-    # drive towards the ring stack
-    straight_drive_distance(40, 9)
-    # close claw to pick up the green ring
-    servo.move(Claw.YELLOW_RING, 1)
-    # raise arm after picking up green ring
-    servo.move(Arm.STRAIGHT_UP, 1)
-    # back up a little bit
-    straight_drive_distance(-40, 0.5)
-    # turn left
-    gyro_turn(-30, 30, 90)
-    # deliver green ring??
-    # servo.move(Arm.YELLOW_RING_DOWN, 1)
-    # move forward towards the tape
-    straight_drive_distance(40, 24)
-    # open claw
-    servo.move(Claw.OPEN, 1)
-    # COPY AND PASTE INTO GREEN RING RIGHT WHEN YOU MAKE THE FUNCTION
-    # move backwards to get the blue ring
-    straight_drive_distance(-40, 24)
-    # bring arm up
-    servo.move(Arm.DELIVER_SHORT_RING, 1)
-    # turn towards the ring stack
-    gyro_turn(30, -30, 90)
-    # put arm into position
-    servo.move(Arm.BLUE_RING_PICKUP, 1)
-    # move forwards
-    straight_drive_distance(40, 3)
-    # close claw
-    servo.move(Claw.YELLOW_RING, 1)
-    # raise arm
-    servo.move(Arm.STRAIGHT_UP, 1)
-    # back up
-    straight_drive_distance(-40, 5)
 
 
 def blue_ring_left():

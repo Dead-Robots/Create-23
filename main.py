@@ -20,7 +20,7 @@ def main():
     deliver_orange_ring()
     get_yellow_ring()
     deliver_yellow_ring()
-    # green_ring_left()
+    green_ring_left()
     # blue_ring_right()
     print(str(time.time()-start_time) + " seconds elapsed.")
     shutdown()
