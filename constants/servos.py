@@ -33,9 +33,9 @@ class Arm(ServoEnum):  # please keep in order :)
 
     # Pickup Values
     RED_RING_PICKUP = translate_arm(ROBOT.choose(red=107, green=113))
-    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=105, green=122))
+    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=75, green=122))
     YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=126, green=128))
-    GREEN_RING_PICKUP = translate_arm(134)
+    GREEN_RING_PICKUP = translate_arm(140)
     BLUE_RING_PICKUP = translate_arm(140)
 
     # Delivery Values
