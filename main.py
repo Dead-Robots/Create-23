@@ -9,6 +9,7 @@ from actions import init, shutdown, get_red_ring, \
 from common import ROBOT
 from common.gyro_movements import gyro_turn_test, straight_drive_distance
 from drive import square_up_black
+from utilities import wait_for_button
 
 
 def main():
