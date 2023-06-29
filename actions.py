@@ -45,7 +45,6 @@ def servo_test():
     square_up_white(-15, -15)
     servo.move(Arm.REST_POSITION, 1)
     servo.move(Claw.CLOSED, 1)
-    wait_for_button("End of self test, press button to continue to options.")
 
 
 def test_motor():
@@ -64,14 +63,14 @@ def get_red_ring():
     gyro_turn(-20, 20, 7)
     servo.move(Claw.OPEN, 0)
     servo.move(Arm.RED_RING_PICKUP, 1)
-    straight_drive_distance(30, 15.5)
+    straight_drive_distance(30, 15)
     servo.move(Claw.RED_RING, 1)
     servo.move(Arm.DELIVER_SHORT_RING, 1)
 
 
 def deliver_red_ring():
     # back up after grabbing the red ring
-    straight_drive_distance(-40, 17.5)
+    straight_drive_distance(-40, 17)
     # turn towards the cube
     gyro_turn(-40, 40, 75)
     # drive until the cube goes over the edge
@@ -110,8 +109,10 @@ def get_orange_ring():
     stop_motors()
     straight_drive_distance(-30, 5)
     gyro_turn(-25, 25, 33)
+    straight_drive_distance(-30, 2)
     servo.move(Arm.ORANGE_RING_PICKUP, 1)
     msleep(500)
+    straight_drive_distance(30, 2, False)
     straight_drive_distance(10, 2)
     servo.move(Claw.CLOSED, 0)
     msleep(200)
@@ -157,10 +158,10 @@ def get_yellow_ring():
     # put arm into position to grab ring
     straight_drive_distance(-30, 2)
     servo.move(Arm.YELLOW_RING_PICKUP, 1)
-    straight_drive_distance(30, 3.5)
+    straight_drive_distance(30, 4)
     # grab ring
     servo.move(Claw.YELLOW_RING, 1)
-    straight_drive_distance(-20, 2.5)
+    straight_drive_distance(-20, 3)
 
 
 def deliver_yellow_ring():
@@ -173,7 +174,7 @@ def deliver_yellow_ring():
     square_up_white(-4, -4)
     square_up_black(4, 4)
     straight_drive_distance(30, 6.1)
-    gyro_turn(40, -40, 92, True)
+    gyro_turn(40, -40, 94, True)
     # drive towards botgal and square up
     straight_drive_distance(30, 7)
     # drive(30, 30, 1450)
@@ -220,13 +221,12 @@ def green_ring_left():
     # turn right
     gyro_turn(40, -40, 60)
     # square up on black
-    wait_for_button()
     square_up_black(30, 30)
     square_up_white(-15, -15)
     square_up_black(5, 5)
     square_up_white(-5, -5)
     # move forwards
-    straight_drive_distance(40, 22)
+    straight_drive_distance(40, 22.5)
     # turn right towards tower
     gyro_turn(40, -40, 90)
     # move forwards
