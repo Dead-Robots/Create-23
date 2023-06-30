@@ -64,7 +64,7 @@ def gyro_turn_with_slow_down(left_speed, right_speed, angle):
     gyro_turn(int(copysign(10, left_speed)), int(copysign(10, right_speed)), slow_angle)
 
 
-def straight_drive_black(speed):
+def straight_drive_black(speed, stop_when_finished=True):
     def see_white():
-        return not on_black_left() and not on_black_right()
-    straight_drive(speed, see_white)
+        return not (on_black_left() or on_black_right())
+    straight_drive(speed, see_white, stop_when_finished)
