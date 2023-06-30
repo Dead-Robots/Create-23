@@ -4,6 +4,10 @@ from common import ROBOT
 CLAW = ROBOT.choose(blue=0, yellow=0, red=0, green=0)
 ARM = ROBOT.choose(blue=0, yellow=0, red=2, green=2)
 
+
+# motor ports
+RAKE = ROBOT.choose(blue=0, yellow=0, red=2, green=2)
+
 # sensor ports
 RIGHT_TOPHAT = 0
 LEFT_TOPHAT = 1

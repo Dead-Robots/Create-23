@@ -7,6 +7,7 @@ from kipr import msleep, disable_servos, enable_servos, motor_power
 import servo
 from common.gyro_movements import gyro_init, gyro_turn, straight_drive_distance, calibrate_straight_drive_distance, \
     straight_drive
+from constants.ports import RAKE
 from utilities import wait_for_button
 from constants.servos import Claw, Arm
 from drive import drive, untimed_drive, square_up_black, square_up_white, stop_motors, straight_drive_black
@@ -23,7 +24,7 @@ def init():
     servo.move(Arm.REST_POSITION)
     servo.move(Claw.CLOSED)
     if ROBOT.is_red:
-        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.95, 0.11, 0.04, 0.7, 0.0)
+        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.99, 0.11, 0.04, 0.7, 0.0)
     elif ROBOT.is_green:
         gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.990, 0.095, 0.1, 0.3, 0.0)
     else:
@@ -77,10 +78,12 @@ def deliver_red_ring():
     straight_drive_distance(40, 28, False)
     stop_motors()
     msleep(200)
+    wait_for_button()
     # raise arm to release the cube
     servo.move(Arm.SHORT_RING_UP, 1)
     # back up
     straight_drive_distance(-30, 4)
+    wait_for_button()
     # lower arm back down
     servo.move(Arm.SHORT_RING_DOWN, 1)
     # drop ring on tower
@@ -326,3 +329,17 @@ def wait(duration):
 
 def drive_until_bump(speed):
     straight_drive(speed, get_bumps, condition_is=False)
+
+
+def encryption_key_low():
+    straight_drive_distance(-20, .6, True)
+    motor_power(RAKE, -30)
+    msleep(1000)
+    straight_drive_distance(-20, 3.2, True)
+
+
+def encryption_key_mid():
+    # straight_drive_distance(-20, .6, True)
+    motor_power(RAKE, -30)
+    msleep(1000)
+    straight_drive_distance(-20, 3.2, True)
