@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3.10 -u
 from createserial.connection import CreateConnection
-from kipr import msleep
+from kipr import msleep, motor_power
 import time
 import servo
 from actions import init, shutdown, get_red_ring, \
@@ -22,7 +22,7 @@ def main():
     get_yellow_ring()
     deliver_yellow_ring()
     deliver_tall_rings(left_green)
-    print(str(time.time()-start_time) + " seconds elapsed.")
+    print(str(time.time() - start_time) + " seconds elapsed.")
     shutdown()
 
 

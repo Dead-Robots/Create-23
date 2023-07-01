@@ -34,10 +34,10 @@ class Arm(ServoEnum):  # please keep in order :)
 
     # Pickup Values
     RED_RING_PICKUP = translate_arm(ROBOT.choose(red=107, green=116))
-    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=120, green=122))
+    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=120, green=121))
     YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=126, green=130))
     GREEN_RING_PICKUP = translate_arm(ROBOT.choose(red=140, green=139))
-    BLUE_RING_PICKUP = translate_arm(ROBOT.choose(red=149, green=149))
+    BLUE_RING_PICKUP = translate_arm(ROBOT.choose(red=149, green=146.5))
 
     # Delivery Values
     SHORT_RING_UP = translate_arm(54)
@@ -51,7 +51,7 @@ class Claw(ServoEnum):
     port = CLAW
     translation_function = translate_claw
 
-    OPEN = translate_claw(-23)
+    OPEN = translate_claw(-35)
     CLOSED = translate_claw(14)
     RED_RING = translate_claw(20)
     YELLOW_RING = translate_claw(27)
