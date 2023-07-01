@@ -1,11 +1,14 @@
 import time
 from math import copysign
-
-from kipr import msleep
+from time import sleep
 from createserial.commands import create_dd
 
 from common.gyro_movements import straight_drive
 from sensors import on_black_left, on_black_right, gyroscope
+
+
+def msleep(milliseconds):
+    sleep(milliseconds/1000)
 
 
 def drive(left_speed, right_speed, duration):
@@ -14,8 +17,10 @@ def drive(left_speed, right_speed, duration):
     create_dd(0, 0)
 
 
-def stop_motors():
+def stop_motors(stop_time=None):
     create_dd(0, 0)
+    if stop_time is not None:
+        msleep(stop_time)
 
 
 def untimed_drive(left_speed, right_speed):

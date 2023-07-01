@@ -23,6 +23,7 @@ class Arm(ServoEnum):  # please keep in order :)
     translation_function = translate_arm
 
     # Driving positions
+    START = 2047
     STRAIGHT_UP = translate_arm(15)
     UP = translate_arm(25)
     DRIVING_RELAXED = translate_arm(143)
