@@ -4,8 +4,7 @@ from kipr import msleep
 import time
 import servo
 from actions import init, shutdown, get_red_ring, \
-    get_yellow_ring, deliver_yellow_ring, green_ring, get_orange_ring, deliver_orange_ring, blue_ring, \
-    blue_ring, deliver_red_ring
+    get_yellow_ring, deliver_yellow_ring, deliver_tall_rings, get_orange_ring, deliver_orange_ring, deliver_red_ring
 from common import ROBOT
 from common.gyro_movements import gyro_turn_test, straight_drive_distance
 from drive import square_up_black
@@ -22,8 +21,7 @@ def main():
     deliver_orange_ring()
     get_yellow_ring()
     deliver_yellow_ring()
-    green_ring(left_green)
-    # blue_ring(left_green)
+    deliver_tall_rings(left_green)
     print(str(time.time()-start_time) + " seconds elapsed.")
     shutdown()
 

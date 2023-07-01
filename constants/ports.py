@@ -11,3 +11,6 @@ LEFT_TOPHAT = 1
 # # et ports
 # LOWER_ET = 4
 # UPPER_ET = 5
+
+# motor ports
+RAKE = 2

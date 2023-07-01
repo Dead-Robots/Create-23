@@ -1,6 +1,7 @@
+#!/usr/local/bin/python3.10 -u
 from typing import Optional
-from kipr import camera_open_black, camera_update, msleep, get_object_area, get_object_center_x, get_object_count, \
-    push_button
+from kipr import *
+from time import time
 
 # gameboard.conf
 NOODLE = 0
@@ -11,7 +12,6 @@ COLOR_PROXIMITY = 40
 
 left_tower: Optional[int] = None
 right_tower: Optional[int] = None
-
 
 """
 HOW TO CALIBRATE CAMERA
@@ -42,7 +42,7 @@ def init_camera():
         print("no update")
     else:
         print("update")
-    for i in range(5):  # update camera 5x over 5 seconds
+    for i in range(30):  # update camera 5x over 5 seconds
         camera_update()
         msleep(100)
 
@@ -84,10 +84,8 @@ def color_proximity(color):
 
 
 def get_tower_color(left_bound, right_bound, min_area=40):
-    # determines what color block is below the red noodle
-    for i in range(10):
-        camera_update()
-        msleep(100)
+    # Determines what color block is below the red noodle
+    camera_update()
     # print("noodle area:", get_object_area(NOODLE, 0))
     if get_object_count(NOODLE) > 0 and get_object_area(NOODLE, 0) > 30:
         for color in [GREEN, BLUE]:
@@ -116,15 +114,23 @@ def card_scan():
             right_tower = GREEN
         else:
             right_tower = BLUE
-        print("TOWER COLORS")
-        print("left tower:", color_define(left_tower))
-        print("right tower:", color_define(right_tower))
+        # print("TOWER COLORS")
+        print("LEFT TOWER:", color_define(left_tower))
+        # print("right tower:", color_define(right_tower))
 
 
 def scan_continuously():
+    scan_end = 0
     while not push_button():
-        card_scan()
-        msleep(1000)
+        if time() - scan_end > 1:
+            card_scan()
+            scan_end = time()
     print("FINAL TOWER CARD COLORS")
-    print("left tower:", color_define(left_tower))
-    print("right tower:", color_define(right_tower))
+    print("LEFT TOWER:", color_define(left_tower))
+    # print("right tower:", color_define(right_tower))
+
+
+# Press the green button in the gutter to run the script.
+# if __name__ == '__main__':
+#     init_camera()
+#     wait_4_light(0, function=card_scan, function_every=1)
