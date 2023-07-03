@@ -43,15 +43,14 @@ def initial_setup():
     print("Gyro calibration complete.")
     motor_power(3, 100)
     enable_servos()
+    motor_power(RAKE, -40)
+    msleep(1500)
+    motor_power(RAKE, -15)
     servo.move(Arm.DRIVING_RELAXED, 1)
     servo.move(Claw.CLOSED, 0)
     servo.move(Arm.START, 1)
     global encoders
     encoders = Encoders()
-    motor_power(RAKE, -50)
-    msleep(1500)
-    motor_power(RAKE, -20)
-    msleep(1000)
     clear_motor_position_counter(RAKE)
     global rake_manager
     # light.wait_4_light(2)
@@ -74,7 +73,7 @@ def test_motor():
     msleep(1000)
     rake_manager.position = 800
     msleep(1000)
-    rake_manager.position = 0
+    rake_manager.position = 100
     msleep(1000)
 
 
@@ -85,49 +84,54 @@ def test_sensors():
 
 def get_red_ring():
     rake_manager.position = 400
-    servo.move(Arm.DRIVING_RELAXED, 1)
+    servo.move(Arm.DRIVING_RELAXED, 1, 2)
+    msleep(200)
     gyro_turn(40, 0, 5, False)
-    gyro_turn(60, 0, 49, False)
+    gyro_turn(70, 0, 49, False)
     gyro_turn(40, 0, 5, False)
     square_up_black(25, 25)
     square_up_white(-10, -10)
     square_up_black(10, 10)
     square_up_white(20, 20)
-    stop_motors(300)
+    stop_motors(100)
     gyro_turn(-20, 20, 7, False)
-    stop_motors(300)
+    stop_motors()
+    servo.move(Arm.RED_RING_PICKUP, 1, 2)
     servo.move(Claw.OPEN, 0)
-    servo.move(Arm.RED_RING_PICKUP, 1)
-    straight_drive_distance(50, 14.5, False)
-    stop_motors(600)
+    msleep(200)
+    straight_drive_distance(50, 14, False)
+    stop_motors(500)
     servo.move(Claw.CLOSED, 0)
-    servo.move(Arm.DELIVER_SHORT_RING, 1)
+    servo.move(Arm.DELIVER_SHORT_RING, 1, 2)
+    msleep(200)
 
 
 def deliver_red_ring():
     # back up after grabbing the red ring
-    straight_drive_distance(-50, 16.5, False)
-    stop_motors(300)
+    straight_drive_distance(-50, 16, False)
+    stop_motors(200)
     # turn towards the cube
-    gyro_turn(-40, 40, 77, False)
-    stop_motors(300)
+    gyro_turn(-40, 40, 76, False)
+    stop_motors(200)
     # drive until the cube goes over the edge
     straight_drive_distance(40, 2, False)
     straight_drive_distance(60, 20, False)
     straight_drive_distance(40, 6, False)
     # move the encryption key arm into place
     rake_manager.position = 200
-    stop_motors(300)
+    stop_motors()
     # raise arm to release the cube
-    servo.move(Arm.SHORT_RING_UP, 1)
+    servo.move(Arm.SHORT_RING_UP, 1, 2)
+    msleep(200)
     # back up and pull encryption key
     straight_drive_distance(-40, 3.5, False)
     rake_manager.position = 900
     stop_motors(200)
     straight_drive_distance(-20, 0.5, False)
-    stop_motors(200)
+    stop_motors()
     # lower arm for delivery
-    servo.move(Arm.SHORT_RING_DOWN, 1)
+    servo.move(Arm.SHORT_RING_DOWN, 1, 2)
+    msleep(300)
     # drop ring on tower
     servo.move(Claw.OPEN, 1)
     # back away from tower
@@ -137,30 +141,32 @@ def deliver_red_ring():
 
 def get_orange_ring():
     gyro_turn(40, -40, 85, False)
-    stop_motors(600)
+    stop_motors(300)
     straight_drive_distance(30, 1.5, False)
-    straight_drive_distance(70, 24, False)
+    straight_drive_distance(70, 25, False)
     straight_drive_black(40, False)
     square_up_black(20, 20)
     square_up_white(-10, -10)
     square_up_black(5, 5)
-    gyro_turn(30, -30, 72, False)
-    stop_motors(300)
+    stop_motors(100)
+    gyro_turn(30, -30, 74, False)
+    stop_motors(400)
     straight_drive_distance(-40, 3, False)
-    stop_motors(300)
-    servo.move(Arm.ORANGE_RING_PICKUP, 1)
+    stop_motors()
+    servo.move(Arm.ORANGE_RING_PICKUP, 1, 2)
     msleep(200)
     straight_drive_distance(30, 5, False)
-    stop_motors(200)
+    stop_motors(300)
     servo.move(Claw.CLOSED, 0)
-    msleep(200)
+    msleep(100)
 
 
 def deliver_orange_ring():
-    servo.move(Arm.DELIVER_SHORT_RING, 1)
+    servo.move(Arm.DELIVER_SHORT_RING, 1, 2)
+    msleep(100)
     straight_drive_distance(-30, 2.5)
-    gyro_turn(-30, 30, 70, False)
-    stop_motors(300)
+    gyro_turn(-30, 30, 72, False)
+    stop_motors(200)
     square_up_white(-20, -20)
     square_up_black(20, 20)
     square_up_white(-10, -10)
@@ -176,22 +182,26 @@ def deliver_orange_ring():
     straight_drive_distance(20, 1, False)
     stop_motors(200)
     gyro_turn(-40, 40, 92, False)
-    stop_motors(400)
+    stop_motors(200)
     straight_drive_distance(40, 12, False)
     stop_motors()
     # raise arm to release the cube
-    servo.move(Arm.SHORT_RING_UP, 1)
+    servo.move(Arm.SHORT_RING_UP, 1, 2)
     rake_manager.position = 300
+    msleep(100)
     # back up
-    straight_drive_distance(-30, 4.8, False)
+    straight_drive_distance(-40, 4.8, False)
     rake_manager.position = 900
-    stop_motors(200)
+    stop_motors()
     # lower arm back down
-    servo.move(Arm.SHORT_RING_DOWN, 1)
+    servo.move(Arm.SHORT_RING_DOWN, 1, 2)
+    msleep(100)
     # drop ring on tower
     servo.move(Claw.OPEN, 1)
-    straight_drive_distance(-40, 4.2, False)
-    stop_motors(300)
+    straight_drive_distance(-40, 4, False)
+    stop_motors()
+    servo.move(Arm.STRAIGHT_UP, 1, 2)
+    msleep(400)
 
 
 def get_yellow_ring():
@@ -207,94 +217,96 @@ def get_yellow_ring():
     stop_motors(200)
     # put arm into position to grab ring
     straight_drive_distance(-40, 2, False)
-    stop_motors(200)
-    servo.move(Arm.YELLOW_RING_PICKUP, 1)
-    straight_drive_distance(30, 4.5, False)
+    stop_motors()
+    servo.move(Arm.YELLOW_RING_PICKUP, 1, 2)
+    msleep(100)
+    straight_drive_distance(40, 5.5, False)
     # grab ring
     stop_motors(200)
     servo.move(Claw.YELLOW_RING, 0)
-    straight_drive_distance(-30, 3.5, False)
+    straight_drive_distance(-40, 4.5, False)
     stop_motors(200)
 
 
 def deliver_yellow_ring():
-    servo.move(Arm.TALL_RING_DELIVERY, 1)
+    servo.move(Arm.TALL_RING_DELIVERY, 1, 2)
+    msleep(100)
     gyro_turn(20, -20, 5, False)
     gyro_turn(40, -40, 67, False)
-    stop_motors(300)
+    stop_motors(200)
     straight_drive_distance(-40, 1, False)
     square_up_black(30, 30)
-    square_up_white(-10, -10)
-    msleep(500)
-    square_up_black(8, 8)
-    square_up_white(-6, -6)
-    square_up_black(4, 4)
+    square_up_white(-12, -12)
+    square_up_black(10, 10)
+    square_up_white(-8, -8)
+    square_up_black(6, 6)
     straight_drive_distance(40, 6.1, False)
-    stop_motors(300)
+    stop_motors(200)
     gyro_turn(40, -40, 92, False)
-    stop_motors(300)
+    stop_motors(200)
     # drive towards botgal and square up
     straight_drive_distance(40, 7, False)
-    # drive(30, 30, 1450)
-    servo.move(Arm.YELLOW_RING_DELIVERY, 1)
+    servo.move(Arm.YELLOW_RING_DELIVERY, 1, 2)
+    msleep(100)
     straight_drive_distance(40, 8, False)
     stop_motors()
     # deliver botgal
-    straight_drive_distance(-30, 1, False)
-    stop_motors(300)
+    straight_drive_distance(-30, 0.7, False)
+    stop_motors(200)
     servo.move(Claw.OPEN, 1)
-    msleep(300)
-    rake_manager.position = 500
+    msleep(200)
+    rake_manager.position = 475
     # put arm all the way up
-    servo.move(Arm.STRAIGHT_UP, 1)
+    servo.move(Arm.STRAIGHT_UP, 1, 2)
+    msleep(100)
     # drive backwards
-    straight_drive_distance(-15, 4.3, False)
+    straight_drive_distance(-30, 4.6, False)
     stop_motors()
     rake_manager.position = 900
     servo.move(Claw.CLOSED, 0)
     msleep(100)
-    straight_drive_distance(40, 4.5, False)
+    straight_drive_distance(40, 2, False)
+    straight_drive_distance(20, 2.5, False)
     straight_drive_distance(-40, 1, False)
     servo.move(Claw.OPEN, 0)
     straight_drive_distance(-40, 5, False)
-    stop_motors(300)
+    stop_motors(200)
 
 
 def deliver_tall_rings(left_green):
-    # move arm all the way up
-    servo.move(Arm.STRAIGHT_UP, 1)
     # turn 90 degrees
     gyro_turn(-40, 40, 95, False)
-    stop_motors(300)
+    stop_motors(200)
     # back up
     straight_drive_black(-40, False)
     straight_drive_distance(-40, 2.5, False)
     square_up_black(30, 30)
     square_up_white(-15, -15)
-    msleep(500)
     square_up_black(10, 10)
     square_up_white(-5, -5)
     stop_motors(100)
-    # turn towards green ring
-    gyro_turn(-40, 40, 68, False)
-    stop_motors(300)
+    # turn left towards green ring
+    gyro_turn(-40, 40, 69, False)
+    stop_motors(200)
     # back up
-    straight_drive_distance(-40, 2, False)
-    stop_motors(300)
+    straight_drive_distance(-40, 3, False)
+    stop_motors()
     # put arm into position to grab green ring
-    servo.move(Arm.GREEN_RING_PICKUP, 1)
+    servo.move(Arm.GREEN_RING_PICKUP, 1, 2)
+    msleep(100)
     # move forwards to pick up green ring
-    straight_drive_distance(40, 6.5, False)
-    stop_motors(300)
+    straight_drive_distance(40, 7.5, False)
+    stop_motors(200)
     # grab the green ring
     servo.move(Claw.YELLOW_RING, 0)
     straight_drive_distance(-40, 2, False)
-    stop_motors(300)
+    stop_motors()
     # move the arm up
-    servo.move(Arm.TALL_RING_DELIVERY, 1)
+    servo.move(Arm.TALL_RING_DELIVERY, 1, 2)
+    msleep(100)
     # back up
     straight_drive_distance(-40, 1.5, False)
-    stop_motors(300)
+    stop_motors(200)
     if left_green:
         # turn right
         gyro_turn(40, -40, 65, False)
@@ -308,13 +320,13 @@ def deliver_tall_rings(left_green):
         stop_motors(100)
         # move forwards
         straight_drive_distance(40, 22.5, False)
-        stop_motors(300)
+        stop_motors(200)
         # turn right towards tower
         gyro_turn(40, -40, 88, False)
-        stop_motors(300)
+        stop_motors(200)
         # move forwards
         straight_drive_distance(40, 12, False)
-        stop_motors(300)
+        stop_motors()
         # open claw
         servo.move(Claw.OPEN, 1)
         rake_manager.position = 300
@@ -322,27 +334,30 @@ def deliver_tall_rings(left_green):
         straight_drive_distance(-20, 4.5, False)
         rake_manager.position = 900
         straight_drive_distance(-40, 3.7, False)
-        stop_motors(300)
-
+        stop_motors(200)
         gyro_turn(40, -40, 90, False)
-        stop_motors(300)
+        stop_motors(200)
         straight_drive_distance(50, 12, False)
         straight_drive_black(40, False)
         square_up_white(-15, -15)
         square_up_black(5, 5)
         gyro_turn(40, -40, 74, False)
-        stop_motors(300)
-        straight_drive_distance(-30, 3, False)
         stop_motors(200)
-        servo.move(Arm.BLUE_RING_PICKUP, 1)
-        straight_drive_distance(40, 7, False)
-        stop_motors(300)
+        straight_drive_distance(-40, 3, False)
+        stop_motors()
+        servo.move(Arm.BLUE_RING_PICKUP, 1, 2)
+        msleep(100)
+        straight_drive_distance(40, 4, False)
+        straight_drive_distance(30, 3.5, False)
         servo.move(Claw.YELLOW_RING, 0)
+        servo.move(Arm.REST_POSITION, 1, 2)
+        msleep(100)
         straight_drive_distance(-30, 5, False)
-        stop_motors(200)
-        servo.move(Arm.TALL_RING_DELIVERY, 1)
+        stop_motors()
+        servo.move(Arm.TALL_RING_DELIVERY, 1, 2)
+        msleep(100)
         gyro_turn(-40, 40, 74, False)
-        stop_motors(300)
+        stop_motors(200)
         square_up_black(30, 30)
         square_up_white(-15, -15)
         square_up_black(5, 5)
@@ -350,22 +365,23 @@ def deliver_tall_rings(left_green):
         stop_motors(100)
 
         # move forwards
-        straight_drive_distance(40, 16.8, False)
-        stop_motors(300)
+        straight_drive_distance(40, 18.3, False)
+        stop_motors(200)
         # turn left towards tower
         gyro_turn(-40, 40, 91, False)
-        stop_motors(300)
+        stop_motors(200)
         # move forwards
         straight_drive_distance(40, 12, False)
-        stop_motors(300)
+        stop_motors()
         # open claw
         servo.move(Claw.OPEN, 1)
         # back up so we don't break
-        rake_manager.position = 500
-        straight_drive_distance(-15, 5, False)
+        straight_drive_distance(-15, 0.1, False)
+        rake_manager.position = 475
+        straight_drive_distance(-15, 4.9, False)
         stop_motors(100)
         rake_manager.position = 900
-        straight_drive_distance(-40, 9.1, False)
+        straight_drive_distance(-50, 9.1, False)
         stop_motors(300)
     else:
         # turn left
@@ -394,14 +410,14 @@ def deliver_tall_rings(left_green):
         straight_drive_black(30)
         square_up_white(-15, -15)
         square_up_black(5, 5)
-        gyro_turn(-40, 40, 68)
+        gyro_turn(-40, 40, 67)
         straight_drive_distance(-30, 1)
         servo.move(Arm.BLUE_RING_PICKUP, 1)
         straight_drive_distance(40, 7.5)
         servo.move(Claw.YELLOW_RING, 0)
         straight_drive_distance(-30, 4)
         servo.move(Arm.TALL_RING_DELIVERY, 1)
-        gyro_turn(40, -40, 68)
+        gyro_turn(40, -40, 67)
         square_up_black(30, 30)
         square_up_white(-15, -15)
         square_up_black(5, 5)
@@ -430,8 +446,9 @@ def get_encoder_values():
 
 
 def shutdown():
-    rake_manager.running = False
+    rake_manager.position = 600
     servo.move(Arm.REST_POSITION, 1)
+    rake_manager.running = False
     disable_servos()
 
 
