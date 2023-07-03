@@ -2,12 +2,17 @@
 from typing import Optional
 from kipr import *
 from time import time
+import os
+from enum import IntEnum
+
+
+class TowerColor(IntEnum):
+    NOODLE = 0
+    GREEN = 1
+    BLUE = 2
+
 
 # gameboard.conf
-NOODLE = 0
-GREEN = 1
-BLUE = 2
-
 COLOR_PROXIMITY = 40
 
 left_tower: Optional[int] = None
@@ -47,14 +52,9 @@ def init_camera():
         msleep(100)
 
 
-def color_define(channel):
+def color_define(tower_color):
     # Converts channel number to color
-    if channel == NOODLE:
-        return "NOODLE"
-    elif channel == GREEN:
-        return "GREEN"
-    elif channel == BLUE:
-        return "BLUE"
+    return tower_color.name
 
 
 def find_color(channel, min_area):
@@ -76,9 +76,9 @@ def find_color(channel, min_area):
 
 def color_proximity(color):
     # Tests to see if the center of the colored card is within a certain proximity to the red noodle
-    if abs(get_object_center_x(color, 0) - get_object_center_x(NOODLE, 0)) < COLOR_PROXIMITY:
+    if abs(get_object_center_x(color, 0) - get_object_center_x(TowerColor.NOODLE, 0)) < COLOR_PROXIMITY:
         return True
-    if abs(get_object_center_x(color, 0) - get_object_center_x(NOODLE, 1)) < COLOR_PROXIMITY:
+    if abs(get_object_center_x(color, 0) - get_object_center_x(TowerColor.NOODLE, 1)) < COLOR_PROXIMITY:
         return True
     return False
 
@@ -87,8 +87,8 @@ def get_tower_color(left_bound, right_bound, min_area=40):
     # Determines what color block is below the red noodle
     camera_update()
     # print("noodle area:", get_object_area(NOODLE, 0))
-    if get_object_count(NOODLE) > 0 and get_object_area(NOODLE, 0) > 30:
-        for color in [GREEN, BLUE]:
+    if get_object_count(TowerColor.NOODLE) > 0 and get_object_area(TowerColor.NOODLE, 0) > 30:
+        for color in [TowerColor.GREEN, TowerColor.BLUE]:
             # print(color_define(color), "area:", get_object_area(color, 0))
             # print("get obj center x:", color_define(color), get_object_center_x(color, 0))
             if get_object_area(color, 0) > min_area and color_proximity(color):
@@ -106,14 +106,16 @@ def get_tower_color(left_bound, right_bound, min_area=40):
 def card_scan():
     global left_tower
     global right_tower
-    left_tower = get_tower_color(0, 159)
-    if left_tower is None:
+    temp = get_tower_color(0, 159)
+    if temp is None:
         print("UH OH - MISSING LEFT CARD")
     else:
-        if left_tower == BLUE:
-            right_tower = GREEN
+        left_tower = temp
+        if left_tower == TowerColor.BLUE:
+            right_tower = TowerColor.GREEN
         else:
-            right_tower = BLUE
+            left_tower = TowerColor.GREEN
+            right_tower = TowerColor.BLUE
         # print("TOWER COLORS")
         print("LEFT TOWER:", color_define(left_tower))
         # print("right tower:", color_define(right_tower))
@@ -130,7 +132,19 @@ def scan_continuously():
     # print("right tower:", color_define(right_tower))
 
 
+def load_config():
+    set_camera_config_base_path(os.path.dirname(__file__))
+    camera_load_config("gameboard")
+
+
+def is_left_green():
+    # print(left_tower)
+    return left_tower == TowerColor.GREEN
+
+
 # Press the green button in the gutter to run the script.
 # if __name__ == '__main__':
+#     load_config()
 #     init_camera()
 #     wait_4_light(0, function=card_scan, function_every=1)
+
