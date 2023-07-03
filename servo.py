@@ -1,4 +1,9 @@
-from kipr import msleep, set_servo_position, get_servo_position, disable_servo, enable_servo
+from kipr import set_servo_position, get_servo_position, disable_servo, enable_servo
+from time import sleep
+
+
+def msleep(milliseconds):
+    sleep(milliseconds/1000)
 
 
 def move(new_position, step_time=2, increment=1):

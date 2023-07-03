@@ -27,25 +27,25 @@ def untimed_drive(left_speed, right_speed):
     create_dd(-5 * right_speed, -5 * left_speed)
 
 
-def square_up_black(left_speed, right_speed):
+def square_up_black(left_speed, right_speed, threshold=1500):
     untimed_drive(left_speed, right_speed)
     while left_speed != 0 or right_speed != 0:
-        if on_black_left():
+        if on_black_left(threshold):
             left_speed = 0
             untimed_drive(left_speed, right_speed)
-        if on_black_right():
+        if on_black_right(threshold):
             right_speed = 0
             untimed_drive(left_speed, right_speed)
     untimed_drive(0, 0)
 
 
-def square_up_white(left_speed, right_speed):
+def square_up_white(left_speed, right_speed, threshold=1500):
     untimed_drive(left_speed, right_speed)
     while left_speed != 0 or right_speed != 0:
-        if not on_black_left():
+        if not on_black_left(threshold):
             left_speed = 0
             untimed_drive(left_speed, right_speed)
-        if not on_black_right():
+        if not on_black_right(threshold):
             right_speed = 0
             untimed_drive(left_speed, right_speed)
     untimed_drive(0, 0)
