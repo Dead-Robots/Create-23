@@ -7,6 +7,7 @@ ARM = ROBOT.choose(blue=0, yellow=0, red=2, green=2)
 # sensor ports
 RIGHT_TOPHAT = 0
 LEFT_TOPHAT = 1
+LIGHT = 5
 
 # # et ports
 # LOWER_ET = 4
