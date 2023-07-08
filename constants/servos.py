@@ -33,18 +33,18 @@ class Arm(ServoEnum):  # please keep in order :)
     NINETY = translate_arm(90)
 
     # Pickup Values
-    RED_RING_PICKUP = translate_arm(ROBOT.choose(red=104, green=115))
-    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=111, green=121))
-    YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=118, green=130))
-    GREEN_RING_PICKUP = translate_arm(ROBOT.choose(red=126, green=139))
-    BLUE_RING_PICKUP = translate_arm(ROBOT.choose(red=135, green=146.5))
+    RED_RING_PICKUP = translate_arm(ROBOT.choose(red=103, green=115))
+    ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=112, green=121))
+    YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=121, green=130))
+    GREEN_RING_PICKUP = translate_arm(ROBOT.choose(red=130, green=139))
+    BLUE_RING_PICKUP = translate_arm(ROBOT.choose(red=139, green=146.5))
 
     # Delivery Values
-    SHORT_RING_UP = translate_arm(ROBOT.choose(red=42, green=54))
-    SHORT_RING_DOWN = translate_arm(ROBOT.choose(red=73, green=85))
-    DELIVER_SHORT_RING = translate_arm(ROBOT.choose(red=66, green=78))
-    TALL_RING_DELIVERY = translate_arm(ROBOT.choose(red=9, green=17))
-    YELLOW_RING_DELIVERY = translate_arm(ROBOT.choose(red=20, green=30))
+    SHORT_RING_UP = translate_arm(ROBOT.choose(red=46, green=54))
+    SHORT_RING_DOWN = translate_arm(ROBOT.choose(red=78, green=85))
+    DELIVER_SHORT_RING = translate_arm(ROBOT.choose(red=70, green=78))
+    TALL_RING_DELIVERY = translate_arm(ROBOT.choose(red=13, green=18))
+    YELLOW_RING_DELIVERY = translate_arm(ROBOT.choose(red=24, green=31))
 
 
 class Claw(ServoEnum):
