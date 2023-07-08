@@ -51,11 +51,11 @@ def rake_test():
 def init():
     global start_time
     post.post_core(servo_test, test_motor, test_sensors, initial_setup, calibration_function=calibrate)
-    load_config()
-    init_camera()
-    wait_4_light(LIGHT, function=card_scan, function_every=1)
-    camera_close()
-    shutdown_create_in(119)
+    # load_config()
+    # init_camera()
+    # wait_4_light(LIGHT, function=card_scan, function_every=1)
+    # camera_close()
+    # shutdown_create_in(119)
     start_time = time()
 
 
@@ -174,7 +174,7 @@ def deliver_red_ring():
 
 
 def get_orange_ring():
-    ROBOT.run(gyro_turn, red=(40, -40, 89.5, False), green=(40, -40, 85, False))
+    ROBOT.run(gyro_turn, red=(40, -40, 89.5, False), green=(40, -40, 86, False))
     stop_motors(200)
     straight_drive_distance(30, 1.5, False)
     straight_drive_distance(70, 25, False)
@@ -210,7 +210,7 @@ def get_orange_ring():
 def deliver_orange_ring():
     servo.move(Arm.DELIVER_SHORT_RING, 1, 2)
     msleep(100)
-    straight_drive_distance(-30, 1.5)
+    straight_drive_distance(-30, 0.5)
     ROBOT.run(gyro_turn, red=(-40, 40, 69, False), green=(-40, 40, 58, False))
     stop_motors(200)
     square_up_white(-20, -20)
@@ -223,7 +223,7 @@ def deliver_orange_ring():
     stop_motors(200)
     straight_drive_distance(40, 1, False)
     straight_drive_distance(60, 2, False)
-    ROBOT.run(straight_drive_distance, red=(80, 23.4, False), green=(80, 22.5, False))
+    ROBOT.run(straight_drive_distance, red=(80, 23.4, False), green=(80, 23, False))
     straight_drive_distance(60, 2, False)
     straight_drive_distance(40, 2, False)
     straight_drive_distance(20, 1, False)
@@ -301,7 +301,7 @@ def deliver_yellow_ring():
     straight_drive_distance(40, 7, False)
     servo.move(Arm.YELLOW_RING_DELIVERY, 1, 2)
     msleep(100)
-    straight_drive_distance(40, 8, False)
+    straight_drive_distance(40, 5, False)
     stop_motors()
     # deliver botgal
     straight_drive_distance(-30, 3, False)
@@ -312,9 +312,9 @@ def deliver_yellow_ring():
     stop_motors(200)
     straight_drive_distance(30, 3.2, False)
     stop_motors(600)
-    straight_drive_distance(-20, 0.9, False)
-    stop_motors()
-    servo.move(Claw.OPEN, 1)
+    straight_drive_distance(-20, 0.8, False)
+    stop_motors(100)
+    servo.move(Claw.OPEN, 1, 2)
     msleep(200)
     rake_manager.position = RakePositions.HIGH_KEY
     # put arm all the way up
@@ -504,7 +504,9 @@ def deliver_tall_rings(left_green):
         straight_drive_distance(30, 3.5, False)
         servo.move(Claw.YELLOW_RING, 0)
         stop_motors(200)
-        straight_drive_distance(-30, 6, False)
+        straight_drive_distance(-30, 2, False)
+        straight_drive_distance(-60, 2.5, False)
+        straight_drive_distance(-30, 2, False)
         stop_motors(200)
         servo.move(Arm.TALL_RING_DELIVERY, 1, 2)
         msleep(200)
@@ -517,22 +519,22 @@ def deliver_tall_rings(left_green):
 
         # move forwards
         straight_drive_distance(35, 2, False)
-        straight_drive_distance(70, 17.8, False)
+        straight_drive_distance(70, 16.3, False)
         straight_drive_distance(35, 2, False)
         stop_motors(200)
         # turn right towards tower
         gyro_turn(40, -40, 88, False)
         stop_motors(200)
         # move forwards
-        straight_drive_distance(40, 14, False)
+        straight_drive_distance(40, 13, False)
         stop_motors()
         # open claw
-        rake_manager.position = RakePositions.MIDDLE_KEY
+        rake_manager.position = RakePositions.MIDDLE_KEY + 100
         servo.move(Claw.OPEN, 1)
         # back up so we don't break
-        straight_drive_distance(-15, 0.5, False)
-        rake_manager.position = RakePositions.MIDDLE_KEY_PULL
-        straight_drive_distance(-15, 4.9, False)
+        straight_drive_distance(-15, 1.2, False)
+        rake_manager.position = RakePositions.MIDDLE_KEY_PULL + 30
+        straight_drive_distance(-15, 4.2, False)
         rake_manager.position = RakePositions.REST
         straight_drive_distance(-40, 8.6, False)
         stop_motors(200)

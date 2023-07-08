@@ -33,7 +33,7 @@ class Arm(ServoEnum):  # please keep in order :)
     NINETY = translate_arm(90)
 
     # Pickup Values
-    RED_RING_PICKUP = translate_arm(ROBOT.choose(red=104, green=116))
+    RED_RING_PICKUP = translate_arm(ROBOT.choose(red=104, green=115))
     ORANGE_RING_PICKUP = translate_arm(ROBOT.choose(red=111, green=121))
     YELLOW_RING_PICKUP = translate_arm(ROBOT.choose(red=118, green=130))
     GREEN_RING_PICKUP = translate_arm(ROBOT.choose(red=126, green=139))
@@ -43,8 +43,8 @@ class Arm(ServoEnum):  # please keep in order :)
     SHORT_RING_UP = translate_arm(ROBOT.choose(red=42, green=54))
     SHORT_RING_DOWN = translate_arm(ROBOT.choose(red=73, green=85))
     DELIVER_SHORT_RING = translate_arm(ROBOT.choose(red=66, green=78))
-    TALL_RING_DELIVERY = translate_arm(ROBOT.choose(red=9, green=15))
-    YELLOW_RING_DELIVERY = translate_arm(ROBOT.choose(red=20, green=26))
+    TALL_RING_DELIVERY = translate_arm(ROBOT.choose(red=9, green=17))
+    YELLOW_RING_DELIVERY = translate_arm(ROBOT.choose(red=20, green=30))
 
 
 class Claw(ServoEnum):
