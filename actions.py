@@ -92,11 +92,11 @@ def initial_setup():
 
 
 def servo_test():
-    servo.move(Arm.NINETY, 1)
-    servo.move(Claw.CLOSED, 1)
-    servo.move(Claw.OPEN, 1)
-    servo.move(Arm.DRIVING_RELAXED, 1)
-    servo.move(Claw.CLOSED, 1)
+    servo.move(Arm.NINETY, 1, 2)
+    servo.move(Claw.CLOSED, 1, 3)
+    servo.move(Claw.OPEN, 1, 3)
+    servo.move(Arm.DRIVING_RELAXED, 1, 2)
+    servo.move(Claw.CLOSED, 1, 3)
 
 
 def test_motor():
@@ -109,9 +109,9 @@ def test_motor():
 
 
 def test_sensors():
-    square_up_black(15, 15)
+    square_up_black(30, 30)
     square_up_white(-15, -15)
-    servo.move(Arm.START, 1)
+    servo.move(Arm.START, 1, 2)
 
 
 def get_red_ring():
@@ -131,7 +131,9 @@ def get_red_ring():
     servo.move(Arm.RED_RING_PICKUP, 1, 2)
     servo.move(Claw.OPEN, 0)
     msleep(200)
-    straight_drive_distance(50, 14, False)
+    straight_drive_distance(40, 2, False)
+    straight_drive_distance(70, 6, False)
+    straight_drive_distance(50, 6, False)
     stop_motors(500)
     print(str(round(time()-start_time, 2)) + " seconds elapsed when grabbing red ring.")
     servo.move(Claw.CLOSED, 0)
@@ -237,13 +239,13 @@ def deliver_orange_ring():
     stop_motors()
     # raise arm to release the cube
     servo.move(Arm.SHORT_RING_UP, 1, 2)
-    rake_manager.position = RakePositions.MIDDLE_KEY
+    rake_manager.position = ROBOT.choose(red=RakePositions.MIDDLE_KEY + 180, green=RakePositions.MIDDLE_KEY)
     print(str(round(time()-start_time, 2)) + " seconds elapsed when delivering orange ring.")
     msleep(100)
     # back up
-    straight_drive_distance(-40, 0.5, False)
+    ROBOT.run(straight_drive_distance, red=(-40, 0.8, False), green=(-40, 0.5, False))
     rake_manager.position = RakePositions.MIDDLE_KEY_PULL
-    straight_drive_distance(-40, 4.3, False)
+    ROBOT.run(straight_drive_distance, red=(-40, 4.0, False), green=(-40, 4.3, False))
     rake_manager.position = RakePositions.REST
     stop_motors()
     # lower arm back down
@@ -262,7 +264,7 @@ def get_yellow_ring():
     stop_motors(300)
     print(str(round(time()-start_time, 2)) + " seconds elapsed when leaving orange tower.")
     straight_drive_distance(40, 2, False)
-    straight_drive_distance(70, 16, False)
+    ROBOT.run(straight_drive_distance, red=(70, 19, False), green=(70, 16, False))
     straight_drive_black(30, False)
     square_up_black(20, 20)
     square_up_white(-10, -10)
@@ -341,14 +343,14 @@ def deliver_tall_rings(left_green):
     stop_motors(200)
     # back up
     straight_drive_black(-40, False)
-    straight_drive_distance(-40, 4, False)
+    ROBOT.run(straight_drive_distance, red=(-40, 3, False), green=(-40, 4, False))
     square_up_black(30, 30)
     square_up_white(-15, -15)
     square_up_black(10, 10)
     square_up_white(-5, -5)
     stop_motors(100)
     # turn left towards green ring
-    ROBOT.run(gyro_turn, red=(-40, 40, 63),  green=(-40, 40, 66, False))
+    ROBOT.run(gyro_turn, red=(-40, 40, 63, False),  green=(-40, 40, 66, False))
     stop_motors(200)
     # back up
     straight_drive_distance(-40, 3, False)
@@ -381,7 +383,7 @@ def deliver_tall_rings(left_green):
         stop_motors(100)
         # move forwards
         straight_drive_distance(35, 2, False)
-        ROBOT.run(straight_drive_distance, red=(70, 18.5, False), green=(70, 16, False))
+        ROBOT.run(straight_drive_distance, red=(70, 17.5, False), green=(70, 16, False))
         straight_drive_distance(35, 2, False)
         stop_motors(200)
         # turn right towards tower
@@ -468,7 +470,7 @@ def deliver_tall_rings(left_green):
         stop_motors(100)
         # move forwards
         straight_drive_distance(35, 2, False)
-        straight_drive_distance(70, 13.5, False)
+        ROBOT.run(straight_drive_distance, red=(70, 13.7, False), green=(70, 13.5, False))
         straight_drive_distance(35, 2, False)
         stop_motors(200)
         # turn left towards tower
@@ -491,7 +493,8 @@ def deliver_tall_rings(left_green):
 
         gyro_turn(-40, 40, 90, False)
         stop_motors(200)
-        straight_drive_distance(40, 8, False)
+        straight_drive_distance(30, 2, False)
+        straight_drive_distance(70, 6, False)
         straight_drive_black(30, False)
         square_up_white(-15, -15)
         square_up_black(5, 5)
@@ -521,11 +524,11 @@ def deliver_tall_rings(left_green):
 
         # move forwards
         straight_drive_distance(35, 2, False)
-        ROBOT.run(straight_drive_distance, red=(70, 16.3, False), green=(70, 16.3, False))
+        ROBOT.run(straight_drive_distance, red=(70, 17.6, False), green=(70, 16.3, False))
         straight_drive_distance(35, 2, False)
         stop_motors(200)
         # turn right towards tower
-        ROBOT.run(gyro_turn, red=(40, -40, 89, False), green=(40, -40, 88, False))
+        ROBOT.run(gyro_turn, red=(40, -40, 88, False), green=(40, -40, 88, False))
         stop_motors(200)
         # move forwards
         straight_drive_distance(40, 13, False)
