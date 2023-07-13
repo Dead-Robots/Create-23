@@ -64,6 +64,8 @@ def calibrate():
     servo.move(Arm.STRAIGHT_UP, 1)
     wait_for_button("Press button to begin drive distance calibration.")
     calibrate_straight_drive_distance(11.5, direction=-1, speed=20)
+    wait_for_button("push button to reset arm to start position")
+    servo.move(Arm.START, 1)
 
 
 def initial_setup():
@@ -418,7 +420,7 @@ def deliver_tall_rings(left_green):
         msleep(100)
         straight_drive_distance(40, 4, False)
         straight_drive_distance(30, 3.5, False)
-        servo.move(Claw.YELLOW_RING, 0)
+        servo.move(Claw.BLUE_RING, 0)
         msleep(100)
         straight_drive_distance(-30, 5, False)
         stop_motors()
@@ -508,7 +510,7 @@ def deliver_tall_rings(left_green):
         msleep(200)
         straight_drive_distance(40, 4, False)
         straight_drive_distance(30, 3.5, False)
-        servo.move(Claw.YELLOW_RING, 0)
+        servo.move(Claw.BLUE_RING, 0)
         stop_motors(200)
         straight_drive_distance(-30, 2, False)
         straight_drive_distance(-60, 2.5, False)
