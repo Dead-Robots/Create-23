@@ -4,7 +4,7 @@ from constants.ports import *
 
 
 def translate_arm(angle):
-    position = int(angle / 175 * 2047 + ROBOT.choose(red=150, green=122))
+    position = int(angle / 175 * 2047 + ROBOT.choose(red=150, green=60))
     if position < 0 or position > 2047:
         raise Exception("Resulting position invalid " + str(position) + " " + str(angle))
     return position

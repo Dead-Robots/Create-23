@@ -1,3 +1,4 @@
+import os
 from time import sleep, time
 from typing import Optional
 
@@ -72,7 +73,7 @@ def initial_setup():
     if ROBOT.is_red:
         gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.99, 0.07, 0.03, 0.9, 0.0)
     elif ROBOT.is_green:
-        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.99, 0.095, 0.1, 0.3, 0.0)
+        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.99, 0.095, 0.1, 0.5, 0.0)
     else:
         raise Exception("This robot is not set up to use gyro_init located in main, please set this color up.")
     print("Gyro calibration complete.")
@@ -519,6 +520,8 @@ def deliver_tall_rings(left_green):
         servo.move(Arm.TALL_RING_DELIVERY, 1, 2)
         msleep(200)
         gyro_turn(40, -40, 67, False)
+        stop_motors(200)
+        straight_drive_distance(-30, 2, False)
         stop_motors(200)
         square_up_black(30, 30)
         square_up_white(-15, -15)
