@@ -73,7 +73,7 @@ def initial_setup():
     if ROBOT.is_red:
         gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.99, 0.07, 0.03, 0.9, 0.0)
     elif ROBOT.is_green:
-        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.99, 0.095, 0.1, 0.5, 0.0)
+        gyro_init(untimed_drive, stop_motors, get_encoder_values, get_bumps, 0.987, 0.11, 0.1, 0.5, 0.0)
     else:
         raise Exception("This robot is not set up to use gyro_init located in main, please set this color up.")
     print("Gyro calibration complete.")
@@ -147,7 +147,7 @@ def get_red_ring():
 def deliver_red_ring():
     # back up after grabbing the red ring
     ROBOT.run(straight_drive_distance, red=(-50, 16.3, False), green=(-50, 15.7, False))
-    stop_motors(200)
+    stop_motors(400)
     print(str(round(time()-start_time, 2)) + " seconds elapsed when arriving at red tower.")
     # turn towards the cube
     ROBOT.run(gyro_turn, red=(-40, 40, 74, False), green=(-40, 40, 74, False))
@@ -307,10 +307,10 @@ def deliver_yellow_ring():
     ROBOT.run(gyro_turn, red=(40, -40, 88, False), green=(40, -40, 90, False))
     stop_motors(200)
     # drive towards botgal and square up
-    straight_drive_distance(40, 7, False)
+    straight_drive_distance(40, 8, False)
     servo.move(Arm.YELLOW_RING_DELIVERY, 1, 2)
     msleep(100)
-    straight_drive_distance(40, 5, False)
+    straight_drive_distance(40, 4, False)
     stop_motors()
     # deliver botgal
     straight_drive_distance(-30, 3, False)
@@ -388,7 +388,7 @@ def deliver_tall_rings(left_green):
         stop_motors(100)
         # move forwards
         straight_drive_distance(35, 2, False)
-        ROBOT.run(straight_drive_distance, red=(70, 17.5, False), green=(70, 16, False))
+        ROBOT.run(straight_drive_distance, red=(70, 17.5, False), green=(70, 16.9, False))
         straight_drive_distance(35, 2, False)
         stop_motors(200)
         # turn right towards tower
@@ -540,7 +540,7 @@ def deliver_tall_rings(left_green):
         straight_drive_distance(40, 13, False)
         stop_motors()
         # open claw
-        rake_manager.position = RakePositions.MIDDLE_KEY + 100
+        rake_manager.position = RakePositions.MIDDLE_KEY + 140
         servo.move(Claw.OPEN, 1)
         # back up so we don't break
         straight_drive_distance(-15, 1.2, False)

@@ -26,7 +26,7 @@ from utilities import wait_for_button
 def main():
     init()
     left_green = is_left_green()
-    # print("left is green?", left_green)
+    print("left is green?", left_green)
     get_red_ring()
     deliver_red_ring()
     get_orange_ring()

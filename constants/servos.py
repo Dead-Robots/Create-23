@@ -44,7 +44,7 @@ class Arm(ServoEnum):  # please keep in order :)
     SHORT_RING_DOWN = translate_arm(ROBOT.choose(red=78, green=85))
     DELIVER_SHORT_RING = translate_arm(ROBOT.choose(red=70, green=78))
     TALL_RING_DELIVERY = translate_arm(ROBOT.choose(red=14, green=18))
-    YELLOW_RING_DELIVERY = translate_arm(ROBOT.choose(red=24, green=24))
+    YELLOW_RING_DELIVERY = translate_arm(ROBOT.choose(red=17, green=21))
 
 
 class Claw(ServoEnum):
@@ -55,4 +55,4 @@ class Claw(ServoEnum):
     CLOSED = translate_claw(14)
     RED_RING = translate_claw(20)
     YELLOW_RING = translate_claw(27)
-    BLUE_RING = translate_claw(30)
+    BLUE_RING = translate_claw(ROBOT.choose(red=28, green=27))
